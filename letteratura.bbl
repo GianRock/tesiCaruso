@@ -1,0 +1,96 @@
+\begin{thebibliography}{10}
+
+\bibitem{Allan:2002:TDT:772260}
+James Allan, editor.
+\newblock {\em Topic Detection and Tracking: Event-based Information
+  Organization}.
+\newblock Kluwer Academic Publishers, Norwell, MA, USA, 2002.
+
+\bibitem{DBLP:conf/icwsm/BeckerNG11}
+Hila Becker, Mor Naaman, and Luis Gravano.
+\newblock Beyond trending topics: Real-world event identification on twitter.
+\newblock In {\em Proceedings of the Fifth International Conference on Weblogs
+  and Social Media, Barcelona, Catalonia, Spain, July 17-21, 2011}, 2011.
+
+\bibitem{Castillo:2011:ICT:1963405.1963500}
+Carlos Castillo, Marcelo Mendoza, and Barbara Poblete.
+\newblock Information credibility on twitter.
+\newblock In {\em Proceedings of the 20th International Conference on World
+  Wide Web}, WWW '11, pages 675--684, New York, NY, USA, 2011. ACM.
+
+\bibitem{DBLP:conf/icwsm/HurlockW11}
+Jonathan Hurlock and Max~L. Wilson.
+\newblock Searching twitter: Separating the tweet from the chaff.
+\newblock In {\em Proceedings of the Fifth International Conference on Weblogs
+  and Social Media, Barcelona, Catalonia, Spain, July 17-21, 2011}, 2011.
+
+\bibitem{Lsh}
+Piotr Indyk and Rajeev Motwani.
+\newblock Approximate nearest neighbors: Towards removing the curse of
+  dimensionality.
+\newblock In {\em Proceedings of the Thirtieth Annual ACM Symposium on Theory
+  of Computing}, STOC '98, pages 604--613, New York, NY, USA, 1998. ACM.
+
+\bibitem{Kleinberg:2002:BHS:775047.775061}
+Jon Kleinberg.
+\newblock Bursty and hierarchical structure in streams.
+\newblock In {\em Proceedings of the Eighth ACM SIGKDD International Conference
+  on Knowledge Discovery and Data Mining}, KDD '02, pages 91--101, New York,
+  NY, USA, 2002. ACM.
+
+\bibitem{DBLP:conf/icwsm/LeeEC11}
+Kyumin Lee, Brian~David Eoff, and James Caverlee.
+\newblock Seven months with the devils: {A} long-term study of content
+  polluters on twitter.
+\newblock In {\em Proceedings of the Fifth International Conference on Weblogs
+  and Social Media, Barcelona, Catalonia, Spain, July 17-21, 2011}, 2011.
+
+\bibitem{Luo:2007:RRN:1247480.1247536}
+Gang Luo, Chunqiang Tang, and Philip~S. Yu.
+\newblock Resource-adaptive real-time new event detection.
+\newblock In {\em Proceedings of the 2007 ACM SIGMOD International Conference
+  on Management of Data}, SIGMOD '07, pages 497--508, New York, NY, USA, 2007.
+  ACM.
+
+\bibitem{Papka:1999:ONE:897559}
+R.~Papka.
+\newblock On-line new event detection, clustering, and tracking title2:.
+\newblock Technical report, Amherst, MA, USA, 1999.
+
+\bibitem{Petrovic:2010:SFS:1857999.1858020}
+Sa\v{s}a Petrovi\'{c}, Miles Osborne, and Victor Lavrenko.
+\newblock Streaming first story detection with application to twitter.
+\newblock In {\em Human Language Technologies: The 2010 Annual Conference of
+  the North American Chapter of the Association for Computational Linguistics},
+  HLT '10, pages 181--189, Stroudsburg, PA, USA, 2010. Association for
+  Computational Linguistics.
+
+\bibitem{Phuvipadawat:2010:BND:1913791.1913911}
+Swit Phuvipadawat and Tsuyoshi Murata.
+\newblock Breaking news detection and tracking in twitter.
+\newblock In {\em Proceedings of the 2010 IEEE/WIC/ACM International Conference
+  on Web Intelligence and Intelligent Agent Technology - Volume 03}, WI-IAT
+  '10, pages 120--123, Washington, DC, USA, 2010. IEEE Computer Society.
+
+\bibitem{Salton:1989:ATP:77013}
+Gerard Salton.
+\newblock {\em Automatic Text Processing: The Transformation, Analysis, and
+  Retrieval of Information by Computer}.
+\newblock Addison-Wesley Longman Publishing Co., Inc., Boston, MA, USA, 1989.
+
+\bibitem{Sankaranarayanan:2009:TNT:1653771.1653781}
+Jagan Sankaranarayanan, Hanan Samet, Benjamin~E. Teitler, Michael~D. Lieberman,
+  and Jon Sperling.
+\newblock Twitterstand: News in tweets.
+\newblock In {\em Proceedings of the 17th ACM SIGSPATIAL International
+  Conference on Advances in Geographic Information Systems}, GIS '09, pages
+  42--51, New York, NY, USA, 2009. ACM.
+
+\bibitem{Yang:1998:SRO:290941.290953}
+Yiming Yang, Tom Pierce, and Jaime Carbonell.
+\newblock A study of retrospective and on-line event detection.
+\newblock In {\em Proceedings of the 21st Annual International ACM SIGIR
+  Conference on Research and Development in Information Retrieval}, SIGIR '98,
+  pages 28--36, New York, NY, USA, 1998. ACM.
+
+\end{thebibliography}

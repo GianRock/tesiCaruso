@@ -1,0 +1,163 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.5 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \sortlist{ynt}{ynt}
+    \entry{Allan:2002:TDT:772260}{book}{}
+      \name{editor}{1}{}{%
+        {{hash=2c6b824b86026680c8aa76f03c0b4056}{Allan}{A\bibinitperiod}{James}{J\bibinitperiod}{}{}{}{}}%
+      }
+      \list{location}{1}{%
+        {Norwell, MA, USA}%
+      }
+      \list{publisher}{1}{%
+        {Kluwer Academic Publishers}%
+      }
+      \strng{namehash}{2c6b824b86026680c8aa76f03c0b4056}
+      \strng{fullhash}{2c6b824b86026680c8aa76f03c0b4056}
+      \field{labelalpha}{All02}
+      \field{sortinit}{2}
+      \field{sortinithash}{8343b463aacf48517c044b4d2c9c45ed}
+      \field{labelnamesource}{editor}
+      \field{labeltitlesource}{title}
+      \field{isbn}{0-7923-7664-1}
+      \field{title}{Topic Detection and Tracking: Event-based Information Organization}
+      \field{year}{2002}
+    \endentry
+    \entry{DBLP:conf/semweb/AuerBKLCI07}{inproceedings}{}
+      \name{author}{6}{}{%
+        {{hash=74de32830575f67e1479f58f47d2111d}{Auer}{A\bibinitperiod}{Sören}{S\bibinitperiod}{}{}{}{}}%
+        {{hash=c0ab52e226557a243a4a5277aec8acdc}{Bizer}{B\bibinitperiod}{Christian}{C\bibinitperiod}{}{}{}{}}%
+        {{hash=bac6a69c5666c5048bbc9cad7c95fe56}{Kobilarov}{K\bibinitperiod}{Georgi}{G\bibinitperiod}{}{}{}{}}%
+        {{hash=045d4294ee6b6936c99d278b857478b4}{Lehmann}{L\bibinitperiod}{Jens}{J\bibinitperiod}{}{}{}{}}%
+        {{hash=ff065518eacac535eec041c322c21896}{Cyganiak}{C\bibinitperiod}{Richard}{R\bibinitperiod}{}{}{}{}}%
+        {{hash=83b4fbd9574523563dbf6e72021bb892}{Ives}{I\bibinitperiod}{Zachary\bibnamedelima G.}{Z\bibinitperiod\bibinitdelim G\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{91ba05e3a8053b5f3aafa47005decbda}
+      \strng{fullhash}{02b8655cf2b58171275fe4c6d13b051a}
+      \field{labelalpha}{Aue+07}
+      \field{sortinit}{2}
+      \field{sortinithash}{8343b463aacf48517c044b4d2c9c45ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{The Semantic Web, 6th International Semantic Web Conference, 2nd Asian Semantic Web Conference, {ISWC} 2007 + {ASWC} 2007, Busan, Korea, November 11-15, 2007.}
+      \field{title}{DBpedia: {A} Nucleus for a Web of Open Data}
+      \field{year}{2007}
+      \field{pages}{722\bibrangedash 735}
+      \range{pages}{14}
+      \verb{doi}
+      \verb 10.1007/978-3-540-76298-0_52
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.1007/978-3-540-76298-0_52
+      \endverb
+    \endentry
+    \entry{Milne08aneffective}{inproceedings}{}
+      \name{author}{2}{}{%
+        {{hash=d9089b4be8a55f01b0bcce107e69f2e6}{Milne}{M\bibinitperiod}{David}{D\bibinitperiod}{}{}{}{}}%
+        {{hash=926252d979eb0dc3c8c27118fa93f219}{Witten}{W\bibinitperiod}{Ian\bibnamedelima H.}{I\bibinitperiod\bibinitdelim H\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{ef90903343e753a5c131c22e8d278b08}
+      \strng{fullhash}{ef90903343e753a5c131c22e8d278b08}
+      \field{labelalpha}{MW08}
+      \field{sortinit}{2}
+      \field{sortinithash}{8343b463aacf48517c044b4d2c9c45ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{In Proceedings of AAAI 2008}
+      \field{title}{An Effective, Low-Cost Measure of Semantic Relatedness Obtained from Wikipedia Links}
+      \field{year}{2008}
+    \endentry
+    \entry{Phuvipadawat:2010:BND:1913791.1913911}{inproceedings}{}
+      \name{author}{2}{}{%
+        {{hash=1d035e42a28bc08ba5342ae86d869038}{Phuvipadawat}{P\bibinitperiod}{Swit}{S\bibinitperiod}{}{}{}{}}%
+        {{hash=6e92e4c1ff6facace641ceca68b10deb}{Murata}{M\bibinitperiod}{Tsuyoshi}{T\bibinitperiod}{}{}{}{}}%
+      }
+      \list{location}{1}{%
+        {Washington, DC, USA}%
+      }
+      \list{publisher}{1}{%
+        {IEEE Computer Society}%
+      }
+      \strng{namehash}{45fa97b640a22367d0bbdccaae13fc3d}
+      \strng{fullhash}{45fa97b640a22367d0bbdccaae13fc3d}
+      \field{labelalpha}{PM10}
+      \field{sortinit}{2}
+      \field{sortinithash}{8343b463aacf48517c044b4d2c9c45ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the 2010 IEEE/WIC/ACM International Conference on Web Intelligence and Intelligent Agent Technology - Volume 03}
+      \field{isbn}{978-0-7695-4191-4}
+      \field{series}{WI-IAT '10}
+      \field{title}{Breaking News Detection and Tracking in Twitter}
+      \field{year}{2010}
+      \field{pages}{120\bibrangedash 123}
+      \range{pages}{4}
+      \verb{doi}
+      \verb 10.1109/WI-IAT.2010.205
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.1109/WI-IAT.2010.205
+      \endverb
+      \keyw{Twitter,Topic Detection and Tracking,Real-time text-mining,Information Retrieval}
+    \endentry
+    \entry{isem2013daiber}{inproceedings}{}
+      \name{author}{4}{}{%
+        {{hash=fd4bbdb2305651c3f920e215db1f191a}{Daiber}{D\bibinitperiod}{Joachim}{J\bibinitperiod}{}{}{}{}}%
+        {{hash=057759be8d73ed324cad1e3b8691d679}{Jakob}{J\bibinitperiod}{Max}{M\bibinitperiod}{}{}{}{}}%
+        {{hash=e63b793e31c321842aedf5171a00d67c}{Hokamp}{H\bibinitperiod}{Chris}{C\bibinitperiod}{}{}{}{}}%
+        {{hash=7876f26a5599f6f027a3195ff8462dba}{Mendes}{M\bibinitperiod}{Pablo\bibnamedelima N.}{P\bibinitperiod\bibinitdelim N\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{c3343d482e851efdbed152fc4de028e6}
+      \strng{fullhash}{79b33bbc69c1ba9fe9e6ae43663931e8}
+      \field{labelalpha}{Dai+13}
+      \field{sortinit}{2}
+      \field{sortinithash}{8343b463aacf48517c044b4d2c9c45ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the 9th International Conference on Semantic Systems (I-Semantics)}
+      \field{title}{Improving Efficiency and Accuracy in Multilingual Entity Extraction}
+      \field{year}{2013}
+    \endentry
+    \entry{DBLP:conf/www/PetkosPK14}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=fe55ff167c3bae0c469cb2f8ff7dd8c2}{Petkos}{P\bibinitperiod}{Georgios}{G\bibinitperiod}{}{}{}{}}%
+        {{hash=6a7d4b316269c9e4bb25972c0970820e}{Papadopoulos}{P\bibinitperiod}{Symeon}{S\bibinitperiod}{}{}{}{}}%
+        {{hash=be4fa21daa9765ef5af020509c1e16ba}{Kompatsiaris}{K\bibinitperiod}{Yiannis}{Y\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{df20201f13d1f36e7a3312ddf0b05d0c}
+      \strng{fullhash}{df20201f13d1f36e7a3312ddf0b05d0c}
+      \field{labelalpha}{PPK14}
+      \field{sortinit}{2}
+      \field{sortinithash}{8343b463aacf48517c044b4d2c9c45ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the {SNOW} 2014 Data Challenge co-located with 23rd International World Wide Web Conference {(WWW} 2014), Seoul, Korea, April 8, 2014.}
+      \field{title}{Two-level Message Clustering for Topic Detection in Twitter}
+      \field{year}{2014}
+      \field{pages}{49\bibrangedash 56}
+      \range{pages}{8}
+      \verb{url}
+      \verb http://ceur-ws.org/Vol-1150/petkos.pdf
+      \endverb
+    \endentry
+  \endsortlist
+\endrefsection
+\endinput
+

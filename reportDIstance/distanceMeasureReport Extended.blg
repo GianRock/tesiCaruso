@@ -1,0 +1,22 @@
+[1] Config.pm:324> INFO - This is Biber 2.1
+[1] Config.pm:327> INFO - Logfile is 'distanceMeasureReport Extended.blg'
+[52] biber-MSWIN:273> INFO - === %a %b %e, %Y, %H:%M:%S
+[52] Biber.pm:333> INFO - Reading 'distanceMeasureReport Extended.bcf'
+[309] Utils.pm:146> WARN - Warning: Found biblatex control file version 2.8, expected version 2.7
+[311] Biber.pm:645> INFO - Found 16 citekeys in bib section 0
+[332] Biber.pm:2977> INFO - Processing section 0
+[351] Biber.pm:3115> INFO - Looking for bibtex format file 'bib.bib' for section 0
+[431] bibtex.pm:1021> INFO - Decoding LaTeX character macros into UTF-8
+[499] bibtex.pm:895> INFO - Found BibTeX data source 'bib.bib'
+[558] Utils.pm:146> WARN - I didn't find a database entry for 'All02' (section 0)
+[560] Utils.pm:146> WARN - I didn't find a database entry for crossref 'DBLP:conf/semweb/2007' in entry 'DBLP:conf/semweb/AuerBKLCI07' - ignoring (section 0)
+[560] Utils.pm:146> WARN - I didn't find a database entry for crossref 'DBLP:conf/www/2014snowdc' in entry 'DBLP:conf/www/PetkosPK14' - ignoring (section 0)
+[560] Utils.pm:146> WARN - I didn't find a database entry for crossref 'DBLP:conf/icwsm/2011' in entry 'DBLP:conf/icwsm/HurlockW11' - ignoring (section 0)
+[560] Utils.pm:146> WARN - I didn't find a database entry for crossref 'DBLP:conf/icwsm/2011' in entry 'DBLP:conf/icwsm/LeeEC11' - ignoring (section 0)
+[738] UCollate.pm:66> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[738] UCollate.pm:66> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[738] Biber.pm:2854> INFO - Sorting list 'ynt' of type 'entry' with scheme 'ynt' and locale 'en-US'
+[738] Biber.pm:2858> INFO - No sort tailoring available for locale 'en-US'
+[760] bbl.pm:505> INFO - Writing 'distanceMeasureReport Extended.bbl' with encoding 'UTF-8'
+[829] bbl.pm:596> INFO - Output to distanceMeasureReport Extended.bbl
+[832] Biber.pm:106> INFO - WARNINGS: 6
