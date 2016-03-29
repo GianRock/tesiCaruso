@@ -37,8 +37,8 @@ La chiusura transitiva  di questa proprietà, è detta density-reachability. Due
 \label{def:ddr}
 Un oggetto $p$ si dice 	\emph{directly-density-reachable} da un oggetto $q$ rispetto ai parametri $Eps$ ed $MinPts$ nell'insieme di oggetti $D$ se:
 \begin{enumerate}
-\item $p \in N_{eps(Q)}$
-\item $|N_{eps(Q)}| \ge MinPts$
+\item $p \in Neigh_{eps(Q)}$
+\item $|Neigh_{eps(Q)}| \ge MinPts$
 \end{enumerate}
 \end{definizione}
 \begin{definizione}[density-reachable]
@@ -122,10 +122,25 @@ In un grafo, una \emph{componente connessa} è un sotto-grafo in cui ogni coppia
 \end{figure} 
 In figura \ref{fig:graphdensityConnectedObjects} è mostrato come è possibile rappresentare un grafo-diretto a partire da connessioni di densità: per ogni coppia di oggetti di  directly density reachable $a,b$ con $a$ core-object,
 verrà creato un arco $(a,b)$, se anche $b$ è un core object sarà creato un ulteriore arco da $b$ ad $a$ : $(b,a)$.
-Talvolta però, un border-object può essere nel vicinato di più di un core-object anche appartenenti a cluster distinti, come mostrato in figura \ref{fig:dbscanGraphRevisited}. Se fossero lasciati entrambi gli archi verso il border-object, verrebbe identificata un'unica componente connessa.
-In tali situazioni l'algoritmo DBSCAN non è deterministico:
-tale oggetto border potrà essere assegnato ad uno qualsiasi dei cluster. Sarà sufficiente  
-fare in modo che ogni border object abbia un solo arco in entrata. 
+Talvolta però, un border-object può essere nel vicinato di più di un core-object anche appartenenti a cluster distinti, come mostrato in figura \ref{fig:dbscanGraphRevisited}. Se fossero lasciati entrambi gli archi verso il border-object, verrebbe identificata un'unica componente connessa. Lasciare questi archi renderebbe l'algoritmo molto più sensibile al rumore, poiché in tal un solo punto potrebbe determinare la fusione di più cluster.
+
+Per evitare tali problematiche, bisogna costruire un grafo i cui nodi sono sono soltanto i \emph{core-objects}, e verrà aggiunto un arco fra due nodi solo se la loro distanza è minore di $eps$.  In maniera più formale il grafo è cosi definito:
+
+$
+G=(V,A) \:$ dove :
+
+$ V= \lbrace x \in D \:| \: Card(Neigh_{eps(x)}) \ge MinPts\rbrace$
+
+
+$ A= \lbrace (x,y) \in V \:| \: d(x,y) \le eps \rbrace$
+
+A partire da questo grafo $G$ verranno identificate tutte le componenti connesse che corrispondo ai cluster, individiuati però solo a partire dai nodi cores. Bisognerà quindi eseguire un ulteriore step per assegnare gli oggetti border ad un cluster con cui sono connessi. L'algoritmo originale nel caso in cui un oggetto border   ricade nel vicinato di più core objects, ciascuno dei quali di un cluster differente, lo assegna in maniera non casuale ad uno di questi cluster. In questo caso è possibile adottare tre strategie diverse:
+\begin{itemize}
+\item scegliere in maniera casuale un cluster 
+\item scegliere il cluster con cui il border object ha maggiore connettività 
+\item scegliere il cluster più vicino al border object
+\end{itemize}
+
 \begin{figure}
 \centering
 \includegraphics[width=0.6\textwidth]{dbscanRevisited}
@@ -134,7 +149,7 @@ fare in modo che ogni border object abbia un solo arco in entrata.
  \end{figure}
 %density connected def
  
-   
+ 
 
 
 \section{Sensitive Hashing}
