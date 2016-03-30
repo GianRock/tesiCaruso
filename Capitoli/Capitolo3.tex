@@ -1,0 +1,346 @@
+% !TEX encoding = UTF-8
+% !TEX TS-program = pdflatex
+% !TEX root = ../Tesi.tex
+% !TEX spellcheck = it-IT
+
+%************************************************
+
+%************************************************
+In questo capitolo verranno descritte le modifiche apportate al sistema TB-Credis esistente al fine di implementare le seguenti funzionalità:
+\begin{itemize}
+	\item[•] Predizione di un criminale nelle finestre temporali ``sconosciute'';
+	\item[•] Estrazione dei nomi dei perpetratori di un crimine;
+	\item[•] Interfaccia grafica.
+\end{itemize}
+
+\section{Descrizione del sistema esistente}
+TB-Credis è costituito, così come la maggior parte delle applicazioni complesse di tipo
+data-centric, da un architettura a 3 livelli.
+In sistemi siffatti, ogni livello è caratterizzato da una forte focalizzazione e specializzazione
+funzionale. Ogni livello (o layer) assolve compiti specifici e omogenei, è in grado di
+comunicare con gli altri layer e demanda ad essi le eventuali azioni non di propria
+pertinenza. Tra i diversi strati esiste inoltre una certa gerarchia, nel senso che il rapporto tra
+i layer in generale non è paritetico, ma è regolato da un insieme di dipendenze che
+permettono di individuare un ordine di relazione. Questo significa che ogni livello ``si
+appoggia'' ad uno o più strati per poter eseguire i suoi compiti, dipende da essi e comunica
+unicamente con loro.
+
+Il primo livello chiamato \textit{User Interface} (o livello di presentazione), ha lo scopo di gestire l'interazione del sistema con il mondo esterno, in particolare con gli utenti. Più dettagliatamente include le maschere per la visualizzazione e l'inserimento dei dati, i controlli, dai più semplici ai più complessi, e i meccanismi per intercettare e trattare opportunamente gli eventi che sono scatenati in funzione delle azioni svolte dagli utenti.
+Le richieste dell'utente, provenienti dal livello di presentazione vengono poi intercettate e gestite dallo strato \textit{Business Logic} (o livello di dominio), contenente tutti i componenti atti all'esecuzione delle funzionalità proprie di TB-Credis. Il livello di dominio, per eseguire le funzionalità richieste dal livello di presentazione, manipola i dati persistenti attraverso l'interazione con lo strato di accesso ai dati, che si occupa di persistere le informazioni trattate dall'applicazione e gestire la lettura e scrittura dei dati all'interno di un database.
+
+In TB-Credis il livello di presentazione è racchiuso nel package \textit{gui}, il livello di dominio è
+costituito dai package \textit{loader, matrixCreator, termSelector, positionCalculator, clusteringComponent, evolutionDiscoverer, entityExtraction }, mentre il livello di accesso ai dati è
+composto dal package \textit{dbInterface}.
+I package precedentemente citati, con i loro eventuali sotto-package sono racchiusi
+nell'unità \textit{crime}.
+
+Si descrivono brevemente le componenti logiche presenti nel sistema:
+\begin{itemize}
+	\item \textit{Loader}: inserisce i dati relativi ai criminali e ai documenti associati nella base di dati;
+	\item \textit{Matrix Creator}: estrae i termini dalla collezione di documenti, effettua lo stemming e la rimozione delle stop-word e definisce la matrice termini-documenti a partire sia da tutti i termini che da quelli selezionati ritenuti più rilevanti;
+	\item \textit{Terms Selector}: applica un algoritmo di feature selection tra i termini estratti, al fine di individuare i k termini più rilevanti;
+	\item \textit{Position Calculator}: permette di calcolare la posizione semantica dei criminali, a partire dai documenti ad essi associati, per ciascuna finestra temporale;
+	\item \textit{Clustering Component}: permette di raggruppare i criminali, in base alla loro posizione semantica, per ciascuna finestra temporale;
+	\item \textit{Evolution Discoverer}: scopre i pattern evolutivi a partire dai cluster individuati nelle diverse finestre temporali.
+	\item \textit{Entity Extraction}: applica tecniche di Sentence Segmentation, Tokenization, POS Tagging, Entity Extraction e Analisi delle Dipendenze per estrarre i perpetratori del crimine descritto nei documenti. 
+\end{itemize}
+	
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.13]{Diagramma.png}
+	\caption{Diagramma delle componenti TB-Credis}
+	\label{AlberoDipendenze}
+\end{figure}
+
+Al fine di progettare al meglio le diverse componenti software e la base di dati è necessario definire le tecnologie da utilizzare. In particolare si decide di implementare le componenti software in linguaggio JAVA 1.6, in grado di garantire la portabilità ed i vantaggi di un approccio object-oriented. Le successive specifiche saranno pertanto riportate secondo tale approccio, facendo riferimento a classi, attributi e metodi.
+La base di dati si realizzerà invece tramite il DBMS PostgreSQL 9.0 che, oltre ad essere open source e disponibile pressoché per tutte le piattaforme, garantisce un'ottima estensibilità grazie alla presenza del linguaggio PL/pgSQL, utile alla realizzazione di procedure, funzioni e trigger.
+
+
+Le modifiche apportate in questa tesi hanno riguardato sia il livello di presentazione, con la realizzazione delle classi per permettere l'inserimento di dati e l'utilizzo delle funzionalità del sistema da parte dell'utente, che il livello di dominio e quello di accesso ai dati.
+
+\section{Estensione Base di Dati}
+La base di dati, progettata e implementata nella prima versione del sistema, è stata estesa per permettere la memorizzazione di informazioni fondamentali per la fase di predizione ed estrazione dei perpetratori.
+In particolare il modello Entità-Relazione (ER) è stato esteso con l'inserimento della nuova associazione \textit{Criminal Group Position} per permettere la memorizzazione della posizione semantica dei cluster di criminali individuati: per ogni cluster verrà memorizzato lo score che ciascun termine selezionato ha relativamente a ciascun cluster in una data finestra temporale. Quindi oltre alle chiavi primarie delle entità a cui afferisce verrà inserito un attributo aggiuntivo di tipo reale che indichi tale valore (attributo score). 
+La figura \ref{ER} mostra il modello ER aggiornato, rifinito con gli attributi solo per le entità e associazioni modificate.
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{Immegine29.png}
+	\caption{Diagramma ER della base di dati estesa}
+	\label{ER}
+\end{figure}
+
+Per facilitare l'estrazione dei perpetratori è stata estesa l'entità \textit{Documents} con l'attributo \textit{Processable} di tipo booleano: data l'istanza di un documento, \textit{processable=1} se \textit{text}, l'attributo contenente il testo del documento, contiene al suo interno il nome del perpetratore. 
+\section{Componente Entity Extraction}
+La componente applica tutte le tecniche di Natural Language Processing (NLP) descritte nel paragrafo ~\ref{sec:estrazioneCriminali} per estrarre gli eventuali perpetratori del crimine presenti nel documento sotto analisi.
+
+Vista la grande disponibilità di tool di NLP per la lingua inglese, si è deciso di non implementare i metodi necessari per questa componente ex novo, ma sfruttare sistemi già esistenti.
+In particolare per il processo di Entity Extraction verranno utilizzati i sistemi \textit{TextPro}\cite{TextPro} e \textit{LingPipe}\cite{nlp:LingPipe}. 
+Una volta individuato, per ogni documento, un elenco di Named Entity ha inizio l'analisi delle relazioni di dipendenza tra parole e gruppi frasali. Anche in questo caso si è deciso di utilizzare tool esistenti come Stanford parser\cite{Marneffe06}.
+Si descrivono di seguito le classi che andranno a costituire il package \textit{EntityExtraction}.
+
+\textbf{LingPipe}: offre un unico metodo (\textit{getNamedEntities()}) per l'estrazione di una lista di Named Entity di persone e organizzazioni. Il modello statistico utilizzato per estrarre le entità è  addestrato su un corpus annotato di news, di incidenti terroristici, fornite dal MUC-6 (Message Understanding Conferences sixth edition).
+
+{\bf TextPro}: come LingPipe offre un unico metodo (\textit{getNamedEntities()}) per l'estrazione di una lista di Named Entity di persone e organizzazioni. Il sistema in questo caso non richiede in input modelli di apprendimento e restituisce un documento annotato che deve essere analizzato per estrarre la lista delle entità scoperte( \textit{parse(String pathOfFile)}).
+
+{\bf EntityExtraction}: Dato un documento di testo istanzia le classi LingPipe e TextPro ed esegue il processo di Entity Extraction.
+
+Attributi:
+\begin{itemize}
+	\item \textit{private HashSet$<$String$>$ criminalsTextPro}: insieme contenente le entità candidate estratte da TextPro;
+	\item \textit{private HashSet$<$String$>$ criminalsLingPipe} insieme contenente le entità candidate estratte da LingPipe;
+\end{itemize}
+Metodi:
+\begin{itemize}
+	\item \textit{EntityExtraction(String text)}: costruttore. Istanzia due oggetti di classe \textit{TextPro} e \textit{LingPipe} ed esegue il processo di Entity Extraction sul testo dato in input;
+	\item \textit{HashSet$<$String$>$ getEntityTextPro()}: restituisce l'attributo \textit{criminalsTextPro}.
+	\item \textit{HashSet<String> getEntityLingPipe()}: restituisce l'attributo \textit{criminalsLingPipe}; 
+\end{itemize}
+
+{\bf POSTagger}: effettua operazioni di NLP su un documento.
+
+Metodi:
+\begin{itemize}
+	\item \textit{String[] sentenceDetector(String text)}: splitta il testo in input in frasi.
+	\item \textit{String[] tokenDetector(String sentence)}: data una frase restituisce una lista di token
+	\item \textit{String[] posTagger(String[] tokens)}: associa ad una lista di token un \textit{Part Of Speech}
+	\item \textit{String getLemma(String word, String tag)}: restituisce il lemma di una parola.
+\end{itemize}
+
+\textbf{AnalizerDipendencies}: gestisce l'intero processo di Estrazione dei criminali descritto nel paragrafo \ref{criminalExtr}.
+
+Attributi:
+\begin{itemize}
+	\item \textit{private LexicalizedParser lp} istanza del parser che verrà utilizzato per la generazione dell'albero delle dipendenze;
+	\item \textit{private POStagger pos} POS-tagger usato per la lemmatizzazione dei verbi attraverso wordnet;
+	\item \textit{private TreebankLanguagePack tlp} albero contenente la struttura della frase
+ 	\item \textit{private GrammaticalStructureFactory gsf} grammatica utilizzata per realizzare l'analisi sintattica
+\end{itemize}
+
+Metodi:
+\begin{itemize}
+	\item \textit{ArrayList$<$String$>$ loadVerbslist(File path\_of\_verbs\_list)}: carica la lista dei verbi;
+	\item \textit{ArrayList$<$String$>$ getPerpretators(ArrayList $<$String$>$ verbsList, String text, HashSet $<$String$>$ entitiesCandidate)}: dati in input la lista di verbi, la lista delle entità candidate estratte da un documento testuale e il documento stesso restituisce la lista delle entità identificate come perpetratori;
+	\item \textit{void startAnalysisDependencies()}: esegue il processo di estrazione dei criminali sull'intera collezione di documenti memorizzata nel database e scrive i risultati su file.
+\end{itemize}
+
+\textbf{Tool ed elementi necessari per l'utilizzo di questa componente}
+
+Perché questa componente possa essere utilizzata è necessario definire una serie di elementi per permettere il corretto funzionamento dei tool TextPro e LingPipe:
+\begin{itemize}
+	\item Creare nella cartella root del sistema la cartella TextPro1.4, contenente il progetto omonimo, e le cartelle vuote temp e tmp;
+	\item Settare la variabile d'ambiente TEXTPRO (per Windows impostare TEXTPRO=c: \textbackslash TextPro1.4 \textbackslash, per le altre piattaforme setenv TEXTPRO /home/TextPro1.4/);
+	\item Istallare Wordnet e Perl versione 5.00 o superiori.
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{Immagine17.png}
+	\caption{Diagramma delle classi della componente entityExtraction}
+	\label{AlberoDipendenze}
+\end{figure}
+ 
+\section{Componente Evolution Discoverer}
+La componente è stata estesa implementando la classe \textit{CriminalAnalyzer} per realizzare le funzionalità definite nel paragrafo \ref{predCrim} e il package \textit{positionCalculatorClusterMethod} contente la classe \textit{CentroidCalculator} che implementa l'algoritmo del calcolo del centroide per calcolare la posizione semantica di un cluster a partire dalla posizione dei criminali associati.
+Si riportano di seguito solo gli attributi e i metodi più significativi per il processo di analisi.
+
+\textbf{CriminalAnalyzer}
+Attributi:
+\begin{itemize}
+	\item \textit{private DBInterface db }: permette l'accesso al database per estrarre i dati necessari al processo di predizione;
+	\item \textit{private int numTw}: numero di finestre ``note'' utilizzate per calcolare i cluster surrogato $C_{past}$ e $C_{future}$;
+	\item \textit{private Criminal criminal}: criminale su cui realizzare il processo di predizione;
+	\item \textit{private HashMap$<$Integer,List$<$TimeWindow$>>$ tempHole}: dizionario contenente tutti gli intervalli ``sconosciuti'' del criminale \textit{criminal} che devono essere elaborati, raggruppati per dimensione dell'intervallo.
+	\item \textit{private HashMap$<$TimeWindow,DirectedGraph$>$ hashGraphSx}: dizionario contente per ogni finestra di partenza di un intervallo ``sconosciuto'' il grafo generato a partire dal cluster surrogato $C_{past}$ ;
+	\item 	\textit{private HashMap$<$TimeWindow,DirectedGraph$>$ hashGraphDx}: dizionario contente per ogni finestra di partenza di un intervallo ``sconosciuto'' il grafo generato a partire da $C_{future}$ ; 
+	\item \textit{private Boolean versionWithSubstitution}: definisce la versione dell'algoritmo da eseguire (se true sfrutta le finestre già elaborate per predire i cluster dell'intervallo corrente) 
+	\item \textit{private HashMap$<$TimeWindow, Cluster$>$ clustersAnalyzed}
+	\item \textit{HashMap$<$TimeWindow,Integer$>$ criminalTwMarked}: associa ad ogni finestra temporale valore 0 se il criminale sotto analisi non è presente nella finestra ma è stato già calcolato il cluster più probabile, 1 se è presente nella finestra, -1 altrimenti.
+\end{itemize}
+
+Metodi:
+\begin{itemize}
+	\item \textit{CriminalAnalyzer(Criminal criminal, boolean version, int numTW)}: costruttore. Inizializza alcune delle variabili di classe necessarie al processo di predizione.
+	\item \textit{private void setTempHole(List$<$TimeWindow$>$ timeWindows)}: data una lista di time windows individua quali sono le finestre ``sconosciute'' e inizializza la variabile \textit{tempHole}.
+	\item \textit{private void setCriminalTwMarked(List$<$TimeWindow$>$ timewindows)}: inizializza la variabile \textit{criminalTwMarked};
+	\item \textit{HashMap$<$TimeWindow, Cluster$>$ classifyCriminal()}: calcola la posizione semantica del criminale nelle finestre temporali in cui esistono, per quel criminale, i documenti e individua per quelle finestre il cluster più simile;
+	\item \textit{public void startCriminalAnalyzer()}: dà via al processo di predizione.
+	\item \textit{private  HashMap$<$TimeWindow, List$<$ObjectScore$<$Cluster$>>>$ getProbability( Cluster clusterSurrogato, List$<$TimeWindow$>$ timeWindows, String verso ) }: a partire dal cluster \textit{clusterSurrogato} calcola la probabilità che i criminali qui presenti evolvano nelle finestre timeWindows. 
+	\item \textit{private HashMap$<$Cluster, Double$>$ getProb(List$<$Cluster$>$ clusters, Cluster clusterStart)}: a partire da \textit{clusterStart} calcola la probalilita che i criminali qui presenti evolvano in \textit{clusters};
+	\item HashMap$<$TimeWindow,HashMap$<$Cluster,Double$>>$ merge(List$<$TimeWindow$>$ timeWindows, HashMap$<$TimeWindow, List$<$ObjectScore$<$Cluster$>>>$resultsSx, HashMap$<$TimeWindow, List$<$ObjectScore$<$Cluster$>>>$ resultsDx ): fonde i grafi calcolati per l'intervallo ``sconosciuto'' timeWindows e calcola le probabilità finali associate ad ogni cluster. 
+\end{itemize}
+
+\textbf{CentroidCalculator}
+
+La classe implementa l'interfaccia \textit{PositionCalculator<Criminal>}, realizzata nella precedente versione del sistema per il calcolo della posizione semantica dei criminali ed estesa per lavorare su tipi generici. La classe contiene il solo metodo \textit{getSemanticPosition} che prendendo in input l'eventuale posizione semantica del cluster sotto analisi per la finestra temporale immediatamente precedente e la lista dei criminali appartenenti al cluster e ne calcola la posizione semantica. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{Immagine20.png}
+	\caption{Diagramma delle classi della componente evolutionDiscoverer}
+	\label{AlberoDipendenze}
+\end{figure}
+
+\section{Componente Gui}
+Questa componente dovrà consentire l'utilizzo delle funzionalità implementate nelle componenti logiche e la visualizzazione grafica dei risultati prodotti.
+
+\textbf{GUIController}
+
+Rappresenta la classe base del progetto, responsabile della gestione dell'intera interfaccia utente; questa permette l'accesso al menù principale, consentendo così l'esecuzione delle funzionalità implementate in questo lavoro di tesi.
+Si è deciso di implementare la classe seguendo il pattern creazionale Singleton, in modo da assicurare l'esistenza di un'unica istanza. L'implementazione più semplice del pattern Singleton prevede che la classe abbia un unico costruttore privato, in modo da impedire l'istanziazione diretta della classe. La classe deve inoltre fornire un metodo ``getter'' statico che restituisce un'istanza della classe (sempre la stessa), creandola preventivamente o alla prima chiamata del metodo, e memorizzandone il riferimento in un attributo privato anch'esso statico.
+Si descrivono di seguito gli attributi e i metodi di classe creati per permettere una simile implementazione:
+
+Attributi
+\begin{itemize}
+	\item  \textit{private static GuiController gc}: istanza della classe guiController, utilizzata per gestire l'interazione con l'utente.
+	\item  \textit{private static TBcredis tbCredis}: Frame contenente la finestra principale del progetto.	
+\end{itemize}
+
+Metodi:
+\begin{itemize}
+	\item \textit{private GuiController()}: costruttore. Richiama il metodo \textit{init()} della classe ConfigManager, che inizializza i parametri di configurazione alla Base di Dati;
+	\item \textit{ public static GuiController getControllerIstance()}: metodo ``getter''. Se la classe non è mai stata richiamata istanzia gli oggetti gc e tbCredis e restituisce gc, altrimenti restituisce solo gc;
+	\item \textit{public String[] getIdCriminals()}: richiama la classe BDInterface, responsabile dell'interazione con il Database e ottiene la lista dei criminali memorizzati. Questo metodo è richiamato da tutte quelle componenti grafiche che richiedono informazioni sui criminali presenti nella Base di Dati;
+	\item \textit{public void startCriminalAnalyzer(Integer criminalID, boolean versionWithSubstitution, int numTWknew)}: dà il via al processo di predizione della categoria del criminale con id \textit{criminalID}. Utilizzato dalla JDialog SelectCriminalDBDialog e SelectCriminalFileDialog;
+	\item \textit{public void printResults(CriminalAnalyzer result)}: Terminato il processo di predizione della categoria criminale, visualizza i risultati prodotti.
+\end{itemize}
+
+\textbf{Classi Swing Worker}
+
+Per la realizzazione di interfacce grafiche complesse in Java tramite Swing è fondamentale considerare le problematiche derivanti dalla concorrenza e dal multithreading. Un'applicazione che utilizza i componenti della libreria Swing deve essere realizzata in modo da sfruttare la concorrenza per creare una interfaccia utente che sia sempre reattiva ed in grado di gestire l'interazione con l'utente (responsiveness).
+La realizzazione di interfacce utente tramite Swing coinvolge tre tipologie di thread:
+\begin{itemize}
+	\item \textbf{I Thread Iniziali} (initial threads): i thread che eseguono il codice iniziale dell'applicazione(es. il main) e/o i thread creati dal programmatore;
+	\item L'\textbf{Event Dispatch Thread (EDT)}: il thread che esegue il codice di gestione degli eventi e gestisce l'interazione con l'utente. Per questo motivo ogni operazione che consiste nella visualizzazione, modifica o aggiornamento di un componente Swing, o che accede allo stato del componente stesso, verrà eseguito nell'Event Dispatch Thread.
+	\item I \textbf{Worker Thread} (o background thread): thread dedicati che eseguono operazioni ``lunghe'' (time-consuming) in background, in modo da non compromettere la reattività del thread che gestisce l'interazione con l'utente (cioè l'EDT).
+\end{itemize}
+Di conseguenza poiché molte funzionalità logiche del sistema, richiedono lunghi tempi di esecuzione che comporterebbero il blocco dell interfaccia grafica, e quindi la realizzazione di un' applicazione poco reattiva, si è deciso di eseguire le funzionalità logiche del sistema in background all' interno dei worker threads.
+A partire dal JDK 1.6 Java mette a disposizione del programmatore la classe SwingWorker del package javax.swing.La classe SwingWorker consente di gestire ed eseguire in background attività lunghe e complesse o bloccanti che necessitano di interagire con la GUI Swing al termine della computazione e/o durante il processamento.
+Tutte le classi che estendono la classe astratta SwingWorker devono definire il tipo del risultato finale e dei risultati intermedi che verranno prodotti. eseguire l'overriding del metodo \textit{protected abstract T doInBackground(}) che deve contenere il codice per l'esecuzione dell'attività lunga o bloccante e ritornare un oggetto dello stesso tipo dichiarato nella definizione della classe.
+Quindi per ogni classe che realizza una funzionalità logica bloccante deve essere definita una classe di tipo SwingWorker capace di richiamare nel metodo \textit{doInBackground} la classe o le classi responsabili per quella funzionalità. 
+
+Si descrive di seguito la classe \textit{CriminalAnalyzerSwingWorker} chiamata dalla classe GUIController per eseguire il processo di predizione delle categorie criminali per un dato criminale:
+
+\textit{Attributi}
+
+\begin{itemize}
+	\item  \textit{private Criminal criminal}: definisce il criminale per cui avviare il processo di predizione.
+	\item \textit{private boolean versionWithSubstitution}: definisce il tipo di versione che deve essere utilizzata;
+	\item \textit{private int numTWknew}: definisce il numero di finestre temporali utilzzate per il calcolo del cluster surrogato.
+\end{itemize}
+
+\textit{Metodi}
+
+\begin{itemize}
+	\item \textit{public CriminalAnalyzerSwingWorker()}: costruttore. Inizializza le variabili di classe.
+	\item \textit{protected CriminalAnalyzer doInBackground()}: Istanzia un oggetto di tipo criminalAnalyzer e dà via al processo di predizione.
+	\item \textit{protected void done()}: invocato automaticamente al completamento di \textit{doInBackground()} restituisce il controllo alla classe GUIController, che sarà responsabile della visualizzazione dei risultati elaborati.
+\end{itemize}
+
+Si descrivono infine le JDialog e i JFrame progettati per realizzare l'interfaccia grafica.
+
+\textbf{Finestre di dialogo del sistema}
+
+Sono state implementate le JDialog \textit{SelectCriminalDBDialog} e \textit{SelectCriminalFileDialog} per permettere all'utente l'inserimento dei parametri necessari al processo di predizione delle categorie criminali; in particolare \textit{SelectCriminalDBDialog} effettua una query al database (attraverso la classe  \textit{GUIController}) e inserisce i risultati in una ComboBox, permettendo all'utente di selezionare il criminale su cui dare inizio al processo di predizione. Al contrario \textit{SelectCriminalFileDialog}, permette di selezionare un file XML contenente informazioni sul criminale e sui documenti a questo associato, che verranno inserite nel database. Terminato il processo di inserimento, vengono calcolate le posizioni semantiche del criminale e avviato il processo di predizione.
+
+Si definisce di seguito un esempio di file di input che evidenzi lo schema al quale un file di dati valido dovrà risultare conforme.
+
+\footnotesize
+\begin{verbatimtab}[4]
+<crimedata>
+	<criminals>
+		<criminal id = ...>
+			<name>...</name>
+		</criminal>
+		...
+		<criminal id = ...>
+			<name>...</name>
+		</criminal>
+	</criminals>
+	
+	<documents>
+		<document id = ...>
+			<title>...</title>
+			<text>...</text>
+			<date>...</date>
+			<crims>
+				<crim id = ... />
+				...
+				<crim id = ... />
+			</crims>
+		</document>
+		...
+		<document id = ...>
+			<title>...</title>
+			<text>...</text>
+			<date>...</date>
+			<crims>
+				<crim id = ... />
+				...
+				<crim id = ... />
+			</crims>
+		</document>
+	</documents>
+</crimdata>
+\end{verbatimtab}
+\normalsize
+
+Pertanto un file di dati valido avrà una sezione relativa alla rappresentazione dei criminali (criminals) ed una per la rappresentazione dei documenti
+(documents). In quest'ultima, ciascun documento avrà uno o più criminali associati (crims), aventi un identificatore tra quelli definiti nella sezione criminals. Tutti gli elementi sono obbligatori, tranne l'elemento name relativo ai criminali.
+Inoltre, poiché a seguito dell'inserimento nella base di dati viene assegnato un nuovo identificatore a ciascun criminale e documento, è necessario creare
+un file in output in grado di rappresentare la corrispondenza (mapping) tra gli identificatori iniziali e quelli ottenuti dalla base di dati:
+\footnotesize
+\begin{verbatimtab}[4]
+<mapping>
+	<criminalMapping>
+		<criminal oldId=... newId=... />
+		...
+		<criminal oldId=... newId=... />
+	</criminalMapping>
+	
+	<documentMapping>
+		<document oldId=... newId=... />
+		...
+		<document oldId=... newId=... />
+	</documentMapping>
+</mapping>
+\end{verbatimtab}
+\normalsize
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{Immagine23.png}
+	\caption{Finestra di dialogo per l'avvio del processo di predizione di criminali memorizzati in file XML}
+	\label{}
+\end{figure}
+ \begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{Immagine24.png}
+	\caption{Finestra di dialogo per l'avvio del processo di predizione dei criminali memorizzati nel DB}
+	\label{}
+\end{figure}
+
+\textbf{Finestra Principale}
+
+L'interfaccia del sistema TB-Credis è stata progettata in modo che ad ogni istanziazione di un oggetto di tipo GuiController venga istanziato anche un oggetto di tipo TBcredis che permette la visualizzazione del pannello principale.
+Ogni nuova funzionalità logica implementata verrà inserita all'interno del menù principale.
+ \begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{Immagine26.png}
+	\caption{Finestra principale del sistema TB-Credis}
+	\label{}
+\end{figure}
+
+\textbf{Finestra dei risultati}
+
+Terminato il processo di analisi, verranno visualizzati all'utente, in una finestra secondaria, i grafi generati per le finestre ``sconosciute'', generati a partire dalle finestre ``note'' adiacenti, sia precedenti che successive e i risultati finali ottenuti dalla combinazione dei due grafi precedenti.
+
+ \begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.35]{Immagine25.png}
+	\caption{Diagramma delle classi della componente GUIController}
+	\label{}
+\end{figure}
+
+
+
+

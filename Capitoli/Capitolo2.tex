@@ -1,33 +1,3 @@
-\documentclass[a4paper,12pt]{report}
-\usepackage[utf8]{inputenc}
-\title{Report LSH}
-\author{Rocco Caruso}
-\usepackage{fancyhdr} 
-\usepackage{url} % per scrivere gli indirizzi Internet
-\usepackage{hyperref}
-\usepackage{amsthm}
-\usepackage{amsmath}
-\usepackage{graphicx} %per le immagini
-\usepackage{wrapfig}
-\usepackage{caption}
-\usepackage{subcaption}
-\usepackage{algorithm}
-\usepackage{algpseudocode}
-\usepackage{graphicx} %per le immagini
-
-%\usepackage{biblatex}
-% \addbibresource{bib.bib}
-\begin{document}
-%comandi per teoremi ed enunciati
-\theoremstyle{definition}
-\newtheorem{definizione}{definzione}
-\newtheorem{teorema}{Teorema}
-\maketitle
-\graphicspath{ {./immagini/} }%path alla cartella immagini
- \theoremstyle{plain}
- 
- 
-\chapter{Unspervised Learning}
 \section{DBSCAN}
 L'idea \lq\lq chiave\rq\rq dell'algoritmo DBSCAN\cite{Ester96adensity} è che ciascun elemento di un cluster debba avere un vicinato entro un certo raggio $\epsilon$ (Eps)  che contenga almeno un numero minimo di punti (MinPts). Questo algoritmo, in altre parole, stima la \emph{densità} di ciascun punto, per mezzo della cardinalità del suo \lq\lq vicinato\rq\rq entro un raggio predefinito $Eps$. Un punto sarà definito come \emph{core-object} se la densità del suo vicinato supera una data soglia $MinPts$.
 Un punto $q$ si dice \lq\lq directly density-reachable\rq\rq  da un core-object $p$, se $q$ ricade nell'eps-vicinato di $p$.
@@ -98,7 +68,7 @@ Tali strutture indicizzate però, non riescono a scalare all'aumentare della dim
 L'algoritmo DBSCAN riesce  a generare dei cluster anche con un elevata presenza di rumore. Inoltre grazie alla definizione di "density-connected"\ref{def:dc}, riesce ad identificare cluster di forme arbitrarie. Inoltre, a differenza di altri algoritmi come k-means, non necessita di conoscere a priori il numero di cluster. Tutte queste caratteristiche rendono questo algoritmo particolarmente interessante nella scoperta di cluster in questo lavoro di tesi poiché: i messaggi di un microblog come Twitter contengono un'alta percentuale di rumore, e nel task di event-detection non è possibile sapere a priori il numero di eventi.
 \subsection{DBSCAN come ricerca di componeti connesse }
 Il problema del clustering, può essere ricondotto al problema della ricerca di componenti connesse in un grafo.
-In un grafo, una \emph{componente connessa} è un sotto-grafo in cui ogni coppia di vertici è connessa da un cammino, e il sottografo non è connesso  a nessun vertice  del grafo di partenza. Per ottenere una corrispondenza fra una  componente ed  un cluster secondo dbscan, sarà sufficiente far sì che per ogni coppia di punti  density-connected, esista un cammino che li colleghi.
+In un grafo, una \emph{componente connessa} è un sotto-grafo in cui ogni coppia di vertici è connessa da un cammino, e il sottografo non è connesso  a nessun altro vertice  del grafo di partenza. Per ottenere una corrispondenza fra una  componente ed  un cluster secondo dbscan, sarà sufficiente far sì che per ogni coppia di punti  density-connected, esista un cammino che li colleghi.
 \begin{figure}
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
@@ -106,7 +76,6 @@ In un grafo, una \emph{componente connessa} è un sotto-grafo in cui ogni coppia
         \includegraphics[width=\textwidth]{dbscanWithoutPaths}
        	\caption{ MinPts=3}
          \label{fig:densityConnectedObjects}
-         
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.45\textwidth}

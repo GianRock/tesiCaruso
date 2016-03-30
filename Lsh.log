@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.2.13)  29 MAR 2016 15:33
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.2.13)  29 MAR 2016 17:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -634,71 +634,72 @@ File: ./immagini/dbscanPaths.png Graphic file (type png)
 <use ./immagini/dbscanPaths.png>
 Package pdftex.def Info: ./immagini/dbscanPaths.png used on input line 114.
 (pdftex.def)             Requested size: 175.49881pt x 150.94057pt.
-
-<./immagini/dbscanRevisited.png, id=70, 582.4962pt x 388.8126pt>
-File: ./immagini/dbscanRevisited.png Graphic file (type png)
-
-<use ./immagini/dbscanRevisited.png>
-Package pdftex.def Info: ./immagini/dbscanRevisited.png used on input line 131.
-
-(pdftex.def)             Requested size: 234.00238pt x 156.19269pt.
- [3] [4 <./immagini/dbscanWithoutPaths.png> <./immagini/dbscanPaths.png>] [5 <.
-/immagini/dbscanRevisited.png>]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 154.
+ [3] [4 <./immagini/dbscanWithoutPaths.png> <./immagini/dbscanPaths.png>]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 139.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 154.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 139.
 
-<./immagini/hashFamily.png, id=102, 653.44125pt x 474.77374pt>
+<./immagini/dbscanRevisited.png, id=89, 582.4962pt x 388.8126pt>
+File: ./immagini/dbscanRevisited.png Graphic file (type png)
+
+<use ./immagini/dbscanRevisited.png>
+Package pdftex.def Info: ./immagini/dbscanRevisited.png used on input line 146.
+
+(pdftex.def)             Requested size: 234.00238pt x 156.19269pt.
+ [5 <./immagini/dbscanRevisited.png>]
+[6] <./immagini/hashFamily.png, id=108, 653.44125pt x 474.77374pt>
 File: ./immagini/hashFamily.png Graphic file (type png)
 
 <use ./immagini/hashFamily.png>
-Package pdftex.def Info: ./immagini/hashFamily.png used on input line 165.
+Package pdftex.def Info: ./immagini/hashFamily.png used on input line 180.
 (pdftex.def)             Requested size: 234.00238pt x 170.0201pt.
- [6 <./immagini/hashFamily.png>]
-<./immagini/perfectSCURVE.png, id=111, 976.64874pt x 839.135pt>
+
+<./immagini/perfectSCURVE.png, id=110, 976.64874pt x 839.135pt>
 File: ./immagini/perfectSCURVE.png Graphic file (type png)
 
 <use ./immagini/perfectSCURVE.png>
-Package pdftex.def Info: ./immagini/perfectSCURVE.png used on input line 181.
+Package pdftex.def Info: ./immagini/perfectSCURVE.png used on input line 196.
 (pdftex.def)             Requested size: 175.49881pt x 150.7817pt.
 
-<./immagini/s-curve.png, id=112, 445.665pt x 407.5225pt>
+<./immagini/s-curve.png, id=111, 445.665pt x 407.5225pt>
 File: ./immagini/s-curve.png Graphic file (type png)
 
 <use ./immagini/s-curve.png>
-Package pdftex.def Info: ./immagini/s-curve.png used on input line 188.
+Package pdftex.def Info: ./immagini/s-curve.png used on input line 203.
 (pdftex.def)             Requested size: 175.49881pt x 160.47527pt.
- [7] [8 <./immagini/perfectSCURVE.png> <./immagini/s-curve.png>] <./immagini/co
-sineLSH.png, id=134, 361.35pt x 180.675pt>
+ [7 <./immagini/hashFamily.png>] [8 <./immagini/perfectSCURVE.png> <./immagini/
+s-curve.png>]
+<./immagini/cosineLSH.png, id=131, 361.35pt x 180.675pt>
 File: ./immagini/cosineLSH.png Graphic file (type png)
 
 <use ./immagini/cosineLSH.png>
-Package pdftex.def Info: ./immagini/cosineLSH.png used on input line 220.
+Package pdftex.def Info: ./immagini/cosineLSH.png used on input line 235.
 (pdftex.def)             Requested size: 234.00238pt x 117.00175pt.
-
-<./immagini/hashing.png, id=137, 192.72pt x 191.7564pt>
+ [9 <./immagini/cosineLSH.png>]
+<./immagini/hashing.png, id=146, 192.72pt x 191.7564pt>
 File: ./immagini/hashing.png Graphic file (type png)
 
 <use ./immagini/hashing.png>
-Package pdftex.def Info: ./immagini/hashing.png used on input line 237.
+Package pdftex.def Info: ./immagini/hashing.png used on input line 252.
 (pdftex.def)             Requested size: 195.0pt x 194.02351pt.
- (./Lsh.bbl [9 <./immagini/cosineLSH.png>] [10 <./immagini/hashing.png>])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 243.
+ (./Lsh.bbl [10 <./immagini/hashing.png>])
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 258.
  [11
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 243.
- (./Lsh.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 243.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 243.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 258.
+
+(./Lsh.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 258.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 258.
 Package rerunfilecheck Info: File `Lsh.out' has not changed.
 (rerunfilecheck)             Checksum: 88C86C0D6D0264D831DD43544B5094A6;396.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 243.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 258.
  ) 
 Here is how much of TeX's memory you used:
  7923 strings out of 494985
@@ -721,7 +722,7 @@ s/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
 7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></
 usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/sh
 are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on Lsh.pdf (12 pages, 805015 bytes).
+Output written on Lsh.pdf (12 pages, 807296 bytes).
 PDF statistics:
  217 PDF objects out of 1000 (max. 8388607)
  173 compressed objects within 2 object streams
