@@ -8,15 +8,43 @@
 %************************************************
 
 
-In questo capitolo si descriverà la progettazione e l'esecuzione della sperimentazione. Si partirà pertanto dai dati su cui quest'ultima è stata effettuata, proseguendo con la scelta delle modalità di esecuzione più interessanti e concludendo con una serie di tabelle e grafici contenenti i risultati ottenuti, opportunamente commentati.  
-\section{Sperimentazione modulo estrazione dei perpetratori}
+In questo capitolo si descriverà la progettazione e l'esecuzione della sperimentazione. Si partirà pertanto dalla descrizione dati su cui quest'ultima è stata effettuata, proseguendo con la scelta delle modalità di esecuzione più interessanti e concludendo con una serie di tabelle e grafici contenenti i risultati ottenuti, opportunamente commentati.  
 L'obiettivo di questa prima sperimentazione è valutare l'efficacia del sistema analizzato al fine di comprendere le cause di un eventuale successo o insuccesso delle tecniche utilizzate e quindi decidere se proseguire gli studi in questa direzione o definire strategie alternative.
+\section{Dataset per la valutazione}
 
 
-Nonostante in grande interesse in quest'area di ricerca, vi sono ad oggi, pochi corpora disponibili per valutare un sistema di scoperta di eventi da Twitter
-La sperimentazione del sistema è stata effettuata sfruttando i dati appartenenti al database GTD (Global Terrorism Database)\cite{GTD}.
-Questo database open-source, reso disponibile dal National Consortium for the Study of Terrorism and Responses to Terrorism (START), contiene informazioni su eventi terroristici avvenuti nel mondo nel periodo 1979-2011. A differenza di altri database, GTD contiene dati su incidenti terroristici nazionali e internazionali, per un totale di 104.000 istanze. Per ogni incidente sono disponibili una serie di informazioni quali data, luogo dell'incidente, armi utilizzate, numero di vittime e nomi degli individui o gruppi responsabili.
-Si descrivono di seguito le caratteristiche principali del database GTD:
+Sebbene il task di event detection sia un'area molto fervida di ricerca, vi sono, ad oggi, pochi corpus disponibili per valutare le performance di un sistema su larga scala. Creare un tale corpus, a causa della grande mole di dati, richiede sia molto tempo che risorse. Inoltre, a causa dei termini di servizio di Twitter
+\footnote{https//dev.twitter.com/overview/terms/agreement-and-policy: \emph{\lq\lq If you provide an API that returns Twitter data, you may only return IDs (including tweet IDs and user IDs).\rq\rq}},
+ non è possibile includere in questi corpus il contenuto dei tweet, ma solo gli identificativi di questi ultimi.
+
+Al fine di testare il sistema prodotto, è stato adoperato un corpora costruito proprio per la valutazione di sistemi
+di scoperta di eventi a partire da Twitter \cite{McMinn:2013:BLC:2505515.2505695}.
+In questo corpus sono stati raccolti tweets a partire dal 10/10/2012 al 7/11/2012, tramite le API streaming di Twitter.
+La scelta di questo intervallo temporale non  fu casuale, ma   è motivata dal fatto che, in quel periodo, erano previsti eventi molto importanti come le elezioni presidenziali degli Stati Uniti e l'uragano Sandy.
+Sono stati applicati i seguenti filtri 
+\begin{itemize}
+	\item \textbf{language-filter} :  sono stati filtrati solo i tweet di lingua inglese \footnote{https://code.google.com/archive/p/language-detection/}
+, utilizzando una libreria java che consente una la scoperta automatica della lingua.
+\item \textbf{spam-filter} : 
+Al fine di rimuovere parte dello spam presente su twitter, sono state applicate le seguenti regole empiriche \cite{Benevenuto10detectingspammers}
+    \begin{itemize}
+	\item tweet con più di tre hashtag
+	\item tweet con più di due url
+	\item tweet con più di tre user-mentions
+	\end{itemize}
+\end{itemize}
+Dopo l'applicazione di questi filtri sono stati raccolti 120 milioni di tweets.
+Di questi, circa il 30\% era costituito da  \emph{retweet} (quasi 40 milioni). Poiché i retweet non sono  altro una copia di un tweet di un altro utente, i creatori del corpus non hanno incluso questi ultimi nei giudizi di rilevanza. 
+
+
+\subsection{raccolta dati}
+Di questi 80 milioni sono stati resi pubblici, come detto in precedenza, solo gli id dei tweet e degli utenti, è necessario quindi, un ulteriore step per ritrovare il contenuto di tali tweet.
+Avendo gli identificativi dei tweets, esitono due metodologie per ritovare il contenuto: le API di twitter, o attraverso un crawling di twitter.com.
+Utilizzare le API di twitter fornendo come query gli id \footnote{https://dev.twitter.com/rest/reference/get/statuses/}, permette di ottenere non solo il contenuto testuale, ma anche ulteriori meta-dati come eventuali hashtag, urls, mentions, in formato JSON.
+Tuttavia vi è un limite orario di 150 richieste \footnote{in ogni richiesta si possono richiedere 100 id}, quindi scaricare un corpus di grandi dimensioni, come nel nostro caso, richiederebbe troppo tempo. Per tale ragione, si è adottato un crawler fornito pubblicamente dal TREC Microblog Task \footnote{https://github.com/myleott/twitter-corpus-tools}, che consente di aggirare questo limite. A termine di questa fase di crawling sono stati raccolti circa 15 milioni di tweets, di cui  4.5 milioni non sono retweets. La maggior parte dei tweet ritrovati è dovuta al fatto   che  utenti che avevano pubblicato status raccolti nel corpus, hanno eliminato i loro tweets o perfino il loro profilo.
+
+
+
  
 
 

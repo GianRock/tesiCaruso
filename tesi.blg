@@ -2,76 +2,56 @@ This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: tesi.aux
 The style file: plain.bst
-Illegal, another \bibstyle command---line 110 of file tesi.aux
+Illegal, another \bibstyle command---line 115 of file tesi.aux
  : \bibstyle
  :          {plain}
 I'm skipping whatever remains of this command
 Database file #1: bib.bib
-Repeated entry---line 492 of file bib.bib
- : @inproceedings{Gionis:1999
- :                           ,
-I'm skipping whatever remains of this entry
-Repeated entry---line 506 of file bib.bib
- : @inproceedings{Weber:1998:QAP:645924.671192
- :                                            ,
-I'm skipping whatever remains of this entry
-Repeated entry---line 534 of file bib.bib
- : @inproceedings{Lsh
- :                   ,
-I'm skipping whatever remains of this entry
-Repeated entry---line 550 of file bib.bib
- : @inproceedings{Petrovic:2010:SFS:1857999.1858020
- :                                                 ,
-I'm skipping whatever remains of this entry
-Repeated entry---line 619 of file bib.bib
- : @book{Allan:2002:TDT:772260
- :                            ,
-I'm skipping whatever remains of this entry
-Repeated entry---line 627 of file bib.bib
+Repeated entry---line 562 of file bib.bib
  : @inproceedings{Phuvipadawat:2010:BND:1913791.1913911
  :                                                     ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 710 of file bib.bib
+Repeated entry---line 645 of file bib.bib
  : @inproceedings{Yang:1998:SRO:290941.290953
  :                                           ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 726 of file bib.bib
+Repeated entry---line 661 of file bib.bib
  : @book{Salton:1989:ATP:77013
  :                            ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 734 of file bib.bib
+Repeated entry---line 669 of file bib.bib
  : @techreport{Papka:1999:ONE:897559
  :                                  ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 742 of file bib.bib
+Repeated entry---line 677 of file bib.bib
  :  @inproceedings{Luo:2007:RRN:1247480.1247536
  :                                             ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 759 of file bib.bib
+Repeated entry---line 694 of file bib.bib
  : @inproceedings{Kleinberg:2002:BHS:775047.775061
  :                                                ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 775 of file bib.bib
+Repeated entry---line 710 of file bib.bib
  : @inproceedings{DBLP:conf/icwsm/HurlockW11
  :                                          ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 788 of file bib.bib
+Repeated entry---line 723 of file bib.bib
  : @inproceedings{Castillo:2011:ICT:1963405.1963500
  :                                                 ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 805 of file bib.bib
+Repeated entry---line 740 of file bib.bib
  : @inproceedings{DBLP:conf/icwsm/LeeEC11
  :                                       ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 820 of file bib.bib
+Repeated entry---line 755 of file bib.bib
  : @inproceedings{Sankaranarayanan:2009:TNT:1653771.1653781
  :                                                         ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 837 of file bib.bib
+Repeated entry---line 772 of file bib.bib
  : @inproceedings{DBLP:conf/icwsm/BeckerNG11
  :                                          ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 851 of file bib.bib
+Repeated entry---line 786 of file bib.bib
  : @inproceedings{Charikar:2002:SET:509907.509965
  :                                               ,
 I'm skipping whatever remains of this entry
@@ -81,47 +61,48 @@ A bad cross reference---entry "DBLP:conf/icwsm/LeeEC11"
 refers to entry "DBLP:conf/icwsm/2011", which doesn't exist
 A bad cross reference---entry "DBLP:conf/icwsm/BeckerNG11"
 refers to entry "DBLP:conf/icwsm/2011", which doesn't exist
+Warning--I didn't find a database entry for "GTD"
 Warning--I didn't find a database entry for "DBLP:conf/icwsm/2011"
 Warning--empty institution in Papka:1999:ONE:897559
-You've used 21 entries,
+You've used 22 entries,
             2118 wiz_defined-function locations,
-            653 strings with 9266 characters,
-and the built_in function-call counts, 8519 in all, are:
-= -- 900
-> -- 318
-< -- 14
-+ -- 129
-- -- 104
-* -- 526
-:= -- 1294
-add.period$ -- 76
-call.type$ -- 21
-change.case$ -- 114
+            663 strings with 9575 characters,
+and the built_in function-call counts, 9018 in all, are:
+= -- 956
+> -- 336
+< -- 15
++ -- 136
+- -- 110
+* -- 558
+:= -- 1366
+add.period$ -- 80
+call.type$ -- 22
+change.case$ -- 120
 chr.to.int$ -- 0
-cite$ -- 22
-duplicate$ -- 395
-empty$ -- 708
-format.name$ -- 104
-if$ -- 1929
+cite$ -- 23
+duplicate$ -- 418
+empty$ -- 747
+format.name$ -- 110
+if$ -- 2045
 int.to.chr$ -- 0
-int.to.str$ -- 21
-missing$ -- 21
-newline$ -- 108
-num.names$ -- 43
-pop$ -- 136
+int.to.str$ -- 22
+missing$ -- 22
+newline$ -- 113
+num.names$ -- 45
+pop$ -- 142
 preamble$ -- 1
-purify$ -- 94
+purify$ -- 99
 quote$ -- 0
-skip$ -- 297
+skip$ -- 316
 stack$ -- 0
-substring$ -- 539
-swap$ -- 140
-text.length$ -- 14
+substring$ -- 576
+swap$ -- 150
+text.length$ -- 15
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 80
+type$ -- 84
 warning$ -- 1
-while$ -- 82
-width$ -- 23
-write$ -- 265
-(There were 21 error messages)
+while$ -- 87
+width$ -- 24
+write$ -- 279
+(There were 16 error messages)

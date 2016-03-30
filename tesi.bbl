@@ -86,6 +86,14 @@ Gang Luo, Chunqiang Tang, and Philip~S. Yu.
   on Management of Data}, SIGMOD '07, pages 497--508, New York, NY, USA, 2007.
   ACM.
 
+\bibitem{McMinn:2013:BLC:2505515.2505695}
+Andrew~J. McMinn, Yashar Moshfeghi, and Joemon~M. Jose.
+\newblock Building a large-scale corpus for evaluating event detection on
+  twitter.
+\newblock In {\em Proceedings of the 22Nd ACM International Conference on
+  Information \& Knowledge Management}, CIKM '13, pages 409--418, New York, NY,
+  USA, 2013. ACM.
+
 \bibitem{Papka:1999:ONE:897559}
 R.~Papka.
 \newblock On-line new event detection, clustering, and tracking title2:.
