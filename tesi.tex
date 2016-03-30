@@ -1,0 +1,154 @@
+\documentclass[a4paper,12pt,oneside]{book}
+\usepackage[italian]{babel}
+\usepackage{graphicx}%per le immagini
+\usepackage{fancyhdr}
+\usepackage[font = scriptsize, bf]{caption}
+\usepackage[utf8x]{inputenc}
+\usepackage[parfill]{parskip}
+\usepackage{amsmath, amssymb}
+\usepackage{moreverb}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage[swapnames]{frontespizio}
+\usepackage{url}
+\usepackage{setspace}
+\usepackage{eqparbox,array}
+%\usepackage[subfigure]{tocloft}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{url} % per scrivere gli indirizzi Internet
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{wrapfig}
+\usepackage{caption}
+\usepackage{subcaption}
+%\newcommand{\algorithmiccomment}[1]{  //\emph{\textcolor{Gray}{#1}}}
+
+
+% Sistema i margini per lasciare più spazio nella zona di rilegatura
+\addtolength{\oddsidemargin}{+1,0cm} 
+\addtolength{\evensidemargin}{+1,0cm} 
+\onehalfspacing
+
+% Imposta lo stile della prima pagina del capitolo
+\fancypagestyle{plain}
+{
+    \fancyhead{}
+    \fancyfoot[LE,RO]{\thepage}
+    \renewcommand{\headrulewidth}{0pt}
+}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\newcommand{\compInterfacciaDB}{Data Interface}
+\newcommand{\compLoader}{Loader}
+\newcommand{\compMatrix}{Matrix Creator}
+\newcommand{\compTermsSel}{Terms Selector}
+\newcommand{\compPosition}{Position Calculator}
+\newcommand{\compClustering}{Clustering Component}
+\newcommand{\compEvolution}{Evolution Discoverer}
+
+\hyphenation{ti-me-win-dow}
+
+\graphicspath{{./immagini/}}
+
+
+\begin{document}
+
+\theoremstyle{definition}
+\newtheorem{definizione}{definizione}
+\newtheorem{teorema}{Teorema}
+% Imposta lo stile di intestazione e piè di pagina della parte iniziale
+	\pagestyle{fancy}
+	\fancyfoot{}
+	\fancyfoot[LE,RO]{\thepage}
+	\fancyhead{}
+	\renewcommand{\headrulewidth}{0pt}
+	\headheight = 15pt
+
+
+	% frontespizio
+	\begin{frontespizio}
+		\Universita{Bari - ``Aldo Moro''}
+		\Logo[3.5cm]{logo_uni}
+		\Facolta{Scienze MM.FF.NN.}
+		\Corso{Informatica}
+		\Annoaccademico{2014-2015}
+		\Titoletto{Tesi di laurea\\in\\Basi di conoscenza e Data Mining}
+		\Titolo{TITOLO TESI}
+		\Candidato[573394]{Rocco Caruso}
+		\NCandidato{Laureando}
+		\Relatore{Chiar.mo Prof. Michelangelo Ceci}
+		\Relatore{Chiar.mo Prof. Donato Malerba}
+		\Correlatore{Dott.ssa Fabiana Lanotte}
+		\Correlatore{Dott.    Roberto Corizzo}
+		\Margini{3cm}{2cm}{2cm}{2cm}
+	\end{frontespizio}
+	\frontmatter
+	
+	% dedica
+	\null\vspace{\stretch{1}}
+		\begin{flushright}
+			\emph{Ahi mè ...}
+		\end{flushright}
+	\vspace{\stretch{2}}\null
+	
+	% indice
+	\tableofcontents
+	\listoftables
+	\listoffigures
+	\newpage
+	\color{white}
+	a
+	\color{black}
+%******************************************************************
+% Materiale iniziale
+%******************************************************************
+%\input{MaterialeInizialeFinale/Frontespizio}
+%\input{MaterialeInizialeFinale/Colophon}
+%\input{MaterialeInizialeFinale/Dedica}
+%\input{MaterialeInizialeFinale/Indici}
+%\input{MaterialeInizialeFinale/Sommario+Abstract}
+%\input{MaterialeInizialeFinale/Ringraziamenti}
+\input{MaterialeInizialeFinale/Introduzione}
+%\pagestyle{scrheadings} 
+%\cleardoublepage
+%******************************************************************
+% Materiale principale
+%******************************************************************
+
+
+% capitoli
+	% frontespizio
+	
+	\frontmatter	
+	\mainmatter
+
+	% Imposta lo stile di intestazione e piè di pagina dei capitoli
+	\fancyfoot{}
+	\fancyhead{}
+	\fancyhead[LE,RO]{\slshape \leftmark}
+	\fancyfoot[LE,RO]{\thepage}
+	\renewcommand{\headrulewidth}{1pt}
+	\renewcommand{\chaptermark}[1]{%
+	\markboth{\thechapter.\ #1}{}}
+
+
+\chapter{Stato dell'Arte}
+\label{cap:capitolo1}
+\input{Capitoli/Capitolo1}
+\chapter{Unsupervised Learning}
+\label{cap:capitolo2}
+\input{Capitoli/Capitolo2}
+
+%\input{Capitoli/Ipsum}
+%\appendix
+%\input{Capitoli/Dolor}
+% *****************************************************************
+% Materiale finale
+%******************************************************************
+%\input{MaterialeInizialeFinale/Conclusioni}
+\bibliographystyle{plain}
+\bibliography{Bibliografia}                % database di biblatex 
+
+\end{document}

@@ -1,3 +1,8 @@
+% !TEX encoding = UTF-8
+% !TEX TS-program = pdflatex
+% !TEX root = ../tesi.tex
+% !TEX spellcheck = it-IT
+
 \section{DBSCAN}
 L'idea \lq\lq chiave\rq\rq dell'algoritmo DBSCAN\cite{Ester96adensity} è che ciascun elemento di un cluster debba avere un vicinato entro un certo raggio $\epsilon$ (Eps)  che contenga almeno un numero minimo di punti (MinPts). Questo algoritmo, in altre parole, stima la \emph{densità} di ciascun punto, per mezzo della cardinalità del suo \lq\lq vicinato\rq\rq entro un raggio predefinito $Eps$. Un punto sarà definito come \emph{core-object} se la densità del suo vicinato supera una data soglia $MinPts$.
 Un punto $q$ si dice \lq\lq directly density-reachable\rq\rq  da un core-object $p$, se $q$ ricade nell'eps-vicinato di $p$.
