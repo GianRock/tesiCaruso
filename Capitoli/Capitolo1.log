@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.2.13)  29 MAR 2016 18:52
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.2.13)  30 MAR 2016 10:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -727,18 +727,113 @@ Missing character: There is no u in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no : in font nullfont!
 
+Overfull \hbox (20.0pt too wide) in paragraph at lines 10--12
+[]
+ []
+
+
+Overfull \hbox (24.27762pt too wide) in paragraph at lines 10--12
+\OT1/cmr/m/it/10 Topic
+ []
+
+
+Overfull \hbox (15.72765pt too wide) in paragraph at lines 10--12
+\OT1/cmr/m/it/10 De-
+ []
+
+
+Overfull \hbox (15.58873pt too wide) in paragraph at lines 10--12
+\OT1/cmr/m/it/10 tec-
+ []
+
+
+Overfull \hbox (17.12212pt too wide) in paragraph at lines 10--12
+\OT1/cmr/m/it/10 tion
+ []
+
+
+Overfull \hbox (15.84436pt too wide) in paragraph at lines 10--12
+\OT1/cmr/m/it/10 and
+ []
+
+
+Overfull \hbox (27.9831pt too wide) in paragraph at lines 10--12
+\OT1/cmr/m/it/10 Track-
+ []
+
+
+Overfull \hbox (13.2888pt too wide) in paragraph at lines 10--12
+\OT1/cmr/m/it/10 ing
+ []
+
+
+Overfull \hbox (21.86095pt too wide) in paragraph at lines 10--12
+\OT1/cmr/m/it/10 TDT
+ []
+
+
+Overfull \hbox (5.43053pt too wide) in paragraph at lines 10--12
+[]
+ []
+
+
+Overfull \hbox (4.48613pt too wide) in paragraph at lines 10--12
+[]
+ []
+
+
+Overfull \hbox (22.74426pt too wide) in paragraph at lines 10--12
+\OT1/cmr/m/it/10 event
+ []
+
+
+Overfull \hbox (13.28879pt too wide) in paragraph at lines 10--12
+\OT1/cmr/m/it/10 de-
+ []
+
+
+Overfull \hbox (15.58873pt too wide) in paragraph at lines 10--12
+\OT1/cmr/m/it/10 tec-
+ []
+
+
+Overfull \hbox (17.12212pt too wide) in paragraph at lines 10--12
+\OT1/cmr/m/it/10 tion
+ []
+
+
 ! LaTeX Error: Environment definizione undefined.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.12 \begin{definizione}
-                        
+l.14 \begin{definizione}
+                        [Evento]
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.14 \begin{definizione}[
+                         Evento]
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+Missing character: There is no [ in font nullfont!
+Missing character: There is no E in font nullfont!
+Missing character: There is no v in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no ] in font nullfont!
 
 ! LaTeX Error: \begin{document} ended by \end{definizione}.
 
@@ -746,165 +841,100 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.13 \end{definizione}
+l.17 \end{definizione}
                       
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
 
-Overfull \hbox (20.0pt too wide) in paragraph at lines 10--15
+Overfull \hbox (20.0pt too wide) in paragraph at lines 14--18
 []
  []
 
 
-Overfull \hbox (24.27762pt too wide) in paragraph at lines 10--15
-\OT1/cmr/m/it/10 Topic
+Overfull \hbox (3.06665pt too wide) in paragraph at lines 14--18
+\OT1/cmr/m/it/10 :
  []
 
 
-Overfull \hbox (15.72765pt too wide) in paragraph at lines 10--15
-\OT1/cmr/m/it/10 De-
- []
-
-
-Overfull \hbox (15.58873pt too wide) in paragraph at lines 10--15
-\OT1/cmr/m/it/10 tec-
- []
-
-
-Overfull \hbox (17.12212pt too wide) in paragraph at lines 10--15
-\OT1/cmr/m/it/10 tion
- []
-
-
-Overfull \hbox (15.84436pt too wide) in paragraph at lines 10--15
-\OT1/cmr/m/it/10 and
- []
-
-
-Overfull \hbox (27.9831pt too wide) in paragraph at lines 10--15
-\OT1/cmr/m/it/10 Track-
- []
-
-
-Overfull \hbox (13.2888pt too wide) in paragraph at lines 10--15
-\OT1/cmr/m/it/10 ing
- []
-
-
-Overfull \hbox (21.86095pt too wide) in paragraph at lines 10--15
-\OT1/cmr/m/it/10 TDT
- []
-
-
-Overfull \hbox (5.43053pt too wide) in paragraph at lines 10--15
-[]
- []
-
-
-Overfull \hbox (4.48613pt too wide) in paragraph at lines 10--15
-[]
- []
-
-
-Overfull \hbox (22.74426pt too wide) in paragraph at lines 10--15
-\OT1/cmr/m/it/10 event
- []
-
-
-Overfull \hbox (13.28879pt too wide) in paragraph at lines 10--15
-\OT1/cmr/m/it/10 de-
- []
-
-
-Overfull \hbox (15.58873pt too wide) in paragraph at lines 10--15
-\OT1/cmr/m/it/10 tec-
- []
-
-
-Overfull \hbox (17.12212pt too wide) in paragraph at lines 10--15
-\OT1/cmr/m/it/10 tion
- []
-
-
-Overfull \hbox (21.21097pt too wide) in paragraph at lines 10--15
+Overfull \hbox (21.21097pt too wide) in paragraph at lines 14--18
 \OT1/cmr/m/it/10 qual-
  []
 
 
-Overfull \hbox (21.46652pt too wide) in paragraph at lines 10--15
+Overfull \hbox (21.46652pt too wide) in paragraph at lines 14--18
 \OT1/cmr/m/it/10 cosa,
  []
 
 
-Overfull \hbox (16.35547pt too wide) in paragraph at lines 10--15
+Overfull \hbox (16.35547pt too wide) in paragraph at lines 14--18
 \OT1/cmr/m/it/10 non
  []
 
 
-Overfull \hbox (12.77766pt too wide) in paragraph at lines 10--15
+Overfull \hbox (12.77766pt too wide) in paragraph at lines 14--18
 \OT1/cmr/m/it/10 ba-
  []
 
 
-Overfull \hbox (20.95543pt too wide) in paragraph at lines 10--15
+Overfull \hbox (20.95543pt too wide) in paragraph at lines 14--18
 \OT1/cmr/m/it/10 nale,
  []
 
 
-Overfull \hbox (14.311pt too wide) in paragraph at lines 10--15
+Overfull \hbox (14.311pt too wide) in paragraph at lines 14--18
 \OT1/cmr/m/it/10 che
  []
 
 
-Overfull \hbox (13.28879pt too wide) in paragraph at lines 10--15
+Overfull \hbox (13.28879pt too wide) in paragraph at lines 14--18
 \OT1/cmr/m/it/10 ac-
  []
 
 
-Overfull \hbox (18.91096pt too wide) in paragraph at lines 10--15
+Overfull \hbox (18.91096pt too wide) in paragraph at lines 14--18
 \OT1/cmr/m/it/10 cade
  []
 
 
-Overfull \hbox (8.68884pt too wide) in paragraph at lines 10--15
+Overfull \hbox (8.68884pt too wide) in paragraph at lines 14--18
 \OT1/cmr/m/it/10 in
  []
 
 
-Overfull \hbox (10.98883pt too wide) in paragraph at lines 10--15
+Overfull \hbox (10.98883pt too wide) in paragraph at lines 14--18
 \OT1/cmr/m/it/10 un
  []
 
 
-Overfull \hbox (11.49992pt too wide) in paragraph at lines 10--15
+Overfull \hbox (11.49992pt too wide) in paragraph at lines 14--18
 \OT1/cmr/m/it/10 lu-
  []
 
 
-Overfull \hbox (14.311pt too wide) in paragraph at lines 10--15
+Overfull \hbox (14.311pt too wide) in paragraph at lines 14--18
 \OT1/cmr/m/it/10 ogo
  []
 
 
-Overfull \hbox (4.59996pt too wide) in paragraph at lines 10--15
+Overfull \hbox (4.59996pt too wide) in paragraph at lines 14--18
 \OT1/cmr/m/it/10 e
  []
 
 
-Overfull \hbox (25.81093pt too wide) in paragraph at lines 10--15
+Overfull \hbox (25.81093pt too wide) in paragraph at lines 14--18
 \OT1/cmr/m/it/10 tempo
  []
 
 
-Overfull \hbox (24.02202pt too wide) in paragraph at lines 10--15
+Overfull \hbox (24.02202pt too wide) in paragraph at lines 14--18
 \OT1/cmr/m/it/10 speci-
  []
 
 
-Overfull \hbox (15.45334pt too wide) in paragraph at lines 10--15
-\OT1/cmr/m/it/10 fico 
+Overfull \hbox (14.82211pt too wide) in paragraph at lines 14--18
+\OT1/cmr/m/it/10 fico
  []
 
 
@@ -914,8 +944,8 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.17  L
-       e tecniche di event-detection possono essere classificate in due macr...
+l.20 L
+      e tecniche di event-detection possono essere classificate in due macro...
 
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -1208,7 +1238,7 @@ Missing character: There is no [ in font nullfont!
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
                                                   \space undefined\on@line .
-l.18 ... stessi \cite{Yang:1998:SRO:290941.290953}
+l.21 ... stessi \cite{Yang:1998:SRO:290941.290953}
                                                   , mentre nella seconda si ...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1218,7 +1248,7 @@ and I'll forget about whatever was undefined.
 
 
 LaTeX Warning: Citation `Yang:1998:SRO:290941.290953' on page  undefined on inp
-ut line 18.
+ut line 21.
 
 Missing character: There is no ] in font nullfont!
 Missing character: There is no , in font nullfont!
@@ -1326,7 +1356,7 @@ Missing character: There is no [ in font nullfont!
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
                                                   \space undefined\on@line .
-l.18 ...le \cite{Kleinberg:2002:BHS:775047.775061}
+l.21 ...le \cite{Kleinberg:2002:BHS:775047.775061}
                                                   
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1336,7 +1366,7 @@ and I'll forget about whatever was undefined.
 
 
 LaTeX Warning: Citation `Kleinberg:2002:BHS:775047.775061' on page  undefined o
-n input line 18.
+n input line 21.
 
 Missing character: There is no ] in font nullfont!
 Missing character: There is no C in font nullfont!
@@ -1361,7 +1391,7 @@ Missing character: There is no [ in font nullfont!
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
                                                   \space undefined\on@line .
-l.19 ...iato da \cite{Yang:1998:SRO:290941.290953}
+l.22 ...iato da \cite{Yang:1998:SRO:290941.290953}
                                                    infatti, l'event detectio...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1371,7 +1401,7 @@ and I'll forget about whatever was undefined.
 
 
 LaTeX Warning: Citation `Yang:1998:SRO:290941.290953' on page  undefined on inp
-ut line 19.
+ut line 22.
 
 Missing character: There is no ] in font nullfont!
 Missing character: There is no i in font nullfont!
@@ -2022,7 +2052,7 @@ Missing character: There is no [ in font nullfont!
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
                                                   \space undefined\on@line .
-l.20 ... \emph{tf-idf}\cite{Salton:1989:ATP:77013}
+l.23 ... \emph{tf-idf}\cite{Salton:1989:ATP:77013}
                                                    che valuta quanto è impo...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -2032,7 +2062,7 @@ and I'll forget about whatever was undefined.
 
 
 LaTeX Warning: Citation `Salton:1989:ATP:77013' on page  undefined on input lin
-e 20.
+e 23.
 
 Missing character: There is no ] in font nullfont!
 Missing character: There is no c in font nullfont!
@@ -2421,7 +2451,7 @@ Missing character: There is no [ in font nullfont!
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
                                                   \space undefined\on@line .
-l.20 ...voro di \cite{Yang:1998:SRO:290941.290953}
+l.23 ...voro di \cite{Yang:1998:SRO:290941.290953}
                                                    il task di scoperta di nu...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -2431,7 +2461,7 @@ and I'll forget about whatever was undefined.
 
 
 LaTeX Warning: Citation `Yang:1998:SRO:290941.290953' on page  undefined on inp
-ut line 20.
+ut line 23.
 
 Missing character: There is no ] in font nullfont!
 Missing character: There is no i in font nullfont!
@@ -2984,7 +3014,7 @@ Missing character: There is no [ in font nullfont!
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
                                                   \space undefined\on@line .
-l.21 ...02:TDT:772260,Yang:1998:SRO:290941.290953}
+l.24 ...02:TDT:772260,Yang:1998:SRO:290941.290953}
                                                    che consente di suddivide...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -2994,14 +3024,14 @@ and I'll forget about whatever was undefined.
 
 
 LaTeX Warning: Citation `Allan:2002:TDT:772260' on page  undefined on input lin
-e 21.
+e 24.
 
 Missing character: There is no , in font nullfont!
 \citation{Yang:1998:SRO:290941.290953}
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
                                                   \space undefined\on@line .
-l.21 ...02:TDT:772260,Yang:1998:SRO:290941.290953}
+l.24 ...02:TDT:772260,Yang:1998:SRO:290941.290953}
                                                    che consente di suddivide...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -3011,7 +3041,7 @@ and I'll forget about whatever was undefined.
 
 
 LaTeX Warning: Citation `Yang:1998:SRO:290941.290953' on page  undefined on inp
-ut line 21.
+ut line 24.
 
 Missing character: There is no ] in font nullfont!
 Missing character: There is no c in font nullfont!
@@ -3739,7 +3769,7 @@ Missing character: There is no [ in font nullfont!
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
                                                   \space undefined\on@line .
-l.21 ...ita da  \cite{Yang:1998:SRO:290941.290953}
+l.24 ...ita da  \cite{Yang:1998:SRO:290941.290953}
                                                    è quella di modificare i...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -3749,7 +3779,7 @@ and I'll forget about whatever was undefined.
 
 
 LaTeX Warning: Citation `Yang:1998:SRO:290941.290953' on page  undefined on inp
-ut line 21.
+ut line 24.
 
 Missing character: There is no ] in font nullfont!
 Missing character: There is no � in font nullfont!
@@ -3876,197 +3906,197 @@ Missing character: There is no t in font nullfont!
 Missing character: There is no o in font nullfont!
 Missing character: There is no . in font nullfont!
 
-Overfull \hbox (20.0pt too wide) in paragraph at lines 17--22
+Overfull \hbox (20.0pt too wide) in paragraph at lines 20--25
 []
  []
 
 
-Overfull \hbox (44.97746pt too wide) in paragraph at lines 17--22
+Overfull \hbox (44.97746pt too wide) in paragraph at lines 20--25
 \OT1/cmr/m/it/10 document-
  []
 
 
-Overfull \hbox (26.32205pt too wide) in paragraph at lines 17--22
+Overfull \hbox (26.32205pt too wide) in paragraph at lines 20--25
 \OT1/cmr/m/it/10 piovot
  []
 
 
-Overfull \hbox (17.88875pt too wide) in paragraph at lines 17--22
+Overfull \hbox (17.88875pt too wide) in paragraph at lines 20--25
 \OT1/cmr/m/it/10 doc-
  []
 
 
-Overfull \hbox (8.94438pt too wide) in paragraph at lines 17--22
+Overfull \hbox (8.94438pt too wide) in paragraph at lines 20--25
 \OT1/cmr/m/it/10 u-
  []
 
 
-Overfull \hbox (21.72208pt too wide) in paragraph at lines 17--22
+Overfull \hbox (21.72208pt too wide) in paragraph at lines 20--25
 \OT1/cmr/m/it/10 ment
  []
 
 
-Overfull \hbox (11.75548pt too wide) in paragraph at lines 17--22
+Overfull \hbox (11.75548pt too wide) in paragraph at lines 20--25
 \OT1/cmr/m/it/10 pi-
  []
 
 
-Overfull \hbox (18.14432pt too wide) in paragraph at lines 17--22
+Overfull \hbox (18.14432pt too wide) in paragraph at lines 20--25
 \OT1/cmr/m/it/10 ovot
  []
 
 
-Overfull \hbox (5.43053pt too wide) in paragraph at lines 17--22
+Overfull \hbox (5.43053pt too wide) in paragraph at lines 20--25
 []
  []
 
 
-Overfull \hbox (5.43053pt too wide) in paragraph at lines 17--22
+Overfull \hbox (5.43053pt too wide) in paragraph at lines 20--25
 []
  []
 
 
-Overfull \hbox (5.43053pt too wide) in paragraph at lines 17--22
+Overfull \hbox (5.43053pt too wide) in paragraph at lines 20--25
 []
  []
 
 
-Overfull \hbox (5.6222pt too wide) in paragraph at lines 17--22
+Overfull \hbox (5.6222pt too wide) in paragraph at lines 20--25
 \OT1/cmr/m/it/10 il
  []
 
 
-Overfull \hbox (21.46652pt too wide) in paragraph at lines 17--22
+Overfull \hbox (21.46652pt too wide) in paragraph at lines 20--25
 \OT1/cmr/m/it/10 mod-
  []
 
 
-Overfull \hbox (15.33324pt too wide) in paragraph at lines 17--22
+Overfull \hbox (15.33324pt too wide) in paragraph at lines 20--25
 \OT1/cmr/m/it/10 ello
  []
 
 
-Overfull \hbox (16.09985pt too wide) in paragraph at lines 17--22
+Overfull \hbox (16.09985pt too wide) in paragraph at lines 20--25
 \OT1/cmr/m/it/10 vet-
  []
 
 
-Overfull \hbox (12.01102pt too wide) in paragraph at lines 17--22
+Overfull \hbox (12.01102pt too wide) in paragraph at lines 20--25
 \OT1/cmr/m/it/10 to-
  []
 
 
-Overfull \hbox (10.86102pt too wide) in paragraph at lines 17--22
+Overfull \hbox (10.86102pt too wide) in paragraph at lines 20--25
 \OT1/cmr/m/it/10 ri-
  []
 
 
-Overfull \hbox (12.26659pt too wide) in paragraph at lines 17--22
+Overfull \hbox (12.26659pt too wide) in paragraph at lines 20--25
 \OT1/cmr/m/it/10 ale
  []
 
 
-Overfull \hbox (5.6222pt too wide) in paragraph at lines 17--22
+Overfull \hbox (5.6222pt too wide) in paragraph at lines 20--25
 \OT1/cmr/m/it/10 il
  []
 
 
-Overfull \hbox (21.46652pt too wide) in paragraph at lines 17--22
+Overfull \hbox (21.46652pt too wide) in paragraph at lines 20--25
 \OT1/cmr/m/it/10 mod-
  []
 
 
-Overfull \hbox (15.33324pt too wide) in paragraph at lines 17--22
+Overfull \hbox (15.33324pt too wide) in paragraph at lines 20--25
 \OT1/cmr/m/it/10 ello
  []
 
 
-Overfull \hbox (13.79988pt too wide) in paragraph at lines 17--22
+Overfull \hbox (13.79988pt too wide) in paragraph at lines 20--25
 \OT1/cmr/m/it/10 bag
  []
 
 
-Overfull \hbox (8.17773pt too wide) in paragraph at lines 17--22
+Overfull \hbox (8.17773pt too wide) in paragraph at lines 20--25
 \OT1/cmr/m/it/10 of
  []
 
 
-Overfull \hbox (24.66095pt too wide) in paragraph at lines 17--22
+Overfull \hbox (24.66095pt too wide) in paragraph at lines 20--25
 \OT1/cmr/m/it/10 words
  []
 
 
-Overfull \hbox (9.96658pt too wide) in paragraph at lines 17--22
+Overfull \hbox (9.96658pt too wide) in paragraph at lines 20--25
 \OT1/cmr/m/it/10 tf-
  []
 
 
-Overfull \hbox (18.79436pt too wide) in paragraph at lines 17--22
+Overfull \hbox (18.79436pt too wide) in paragraph at lines 20--25
 \OT1/cmr/m/it/10 idf[]
  []
 
 
-Overfull \hbox (5.43053pt too wide) in paragraph at lines 17--22
+Overfull \hbox (5.43053pt too wide) in paragraph at lines 20--25
 []
  []
 
 
-Overfull \hbox (27.03038pt too wide) in paragraph at lines 17--22
+Overfull \hbox (27.03038pt too wide) in paragraph at lines 20--25
 \OT1/cmr/m/it/10 Group
  []
 
 
-Overfull \hbox (15.35542pt too wide) in paragraph at lines 17--22
+Overfull \hbox (15.35542pt too wide) in paragraph at lines 20--25
 \OT1/cmr/m/it/10 Av-
  []
 
 
-Overfull \hbox (12.39433pt too wide) in paragraph at lines 17--22
+Overfull \hbox (12.39433pt too wide) in paragraph at lines 20--25
 \OT1/cmr/m/it/10 er-
  []
 
 
-Overfull \hbox (14.311pt too wide) in paragraph at lines 17--22
+Overfull \hbox (14.311pt too wide) in paragraph at lines 20--25
 \OT1/cmr/m/it/10 age
  []
 
 
-Overfull \hbox (22.7443pt too wide) in paragraph at lines 17--22
+Overfull \hbox (22.7443pt too wide) in paragraph at lines 20--25
 \OT1/cmr/m/it/10 Clus-
  []
 
 
-Overfull \hbox (15.71652pt too wide) in paragraph at lines 17--22
+Overfull \hbox (15.71652pt too wide) in paragraph at lines 20--25
 \OT1/cmr/m/it/10 ter-
  []
 
 
-Overfull \hbox (13.2888pt too wide) in paragraph at lines 17--22
+Overfull \hbox (13.2888pt too wide) in paragraph at lines 20--25
 \OT1/cmr/m/it/10 ing
  []
 
 
-Overfull \hbox (22.06929pt too wide) in paragraph at lines 17--22
+Overfull \hbox (22.06929pt too wide) in paragraph at lines 20--25
 \OT1/cmr/m/it/10 GAC
  []
 
 
-Overfull \hbox (5.43053pt too wide) in paragraph at lines 17--22
+Overfull \hbox (5.43053pt too wide) in paragraph at lines 20--25
 []
  []
 
 
-Overfull \hbox (5.43053pt too wide) in paragraph at lines 17--22
+Overfull \hbox (5.43053pt too wide) in paragraph at lines 20--25
 []
  []
 
 
-Overfull \hbox (5.43053pt too wide) in paragraph at lines 17--22
+Overfull \hbox (5.43053pt too wide) in paragraph at lines 20--25
 []
  []
 
 
-Overfull \hbox (107.17278pt too wide) detected at line 25
+Overfull \hbox (107.17278pt too wide) detected at line 28
 []\OML/cmm/m/it/10 idf[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 w\OT1/cmr/m/n/10 ) = 
 \OML/cmm/m/it/10 log[] []
  []
@@ -4421,7 +4451,7 @@ Missing character: There is no [ in font nullfont!
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
                                                   \space undefined\on@line .
-l.27 ...RRN:1247480.1247536,Papka:1999:ONE:897559}
+l.30 ...RRN:1247480.1247536,Papka:1999:ONE:897559}
                                                    per limitare il numero ve...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -4431,14 +4461,14 @@ and I'll forget about whatever was undefined.
 
 
 LaTeX Warning: Citation `Luo:2007:RRN:1247480.1247536' on page  undefined on in
-put line 27.
+put line 30.
 
 Missing character: There is no , in font nullfont!
 \citation{Papka:1999:ONE:897559}
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
                                                   \space undefined\on@line .
-l.27 ...RRN:1247480.1247536,Papka:1999:ONE:897559}
+l.30 ...RRN:1247480.1247536,Papka:1999:ONE:897559}
                                                    per limitare il numero ve...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -4448,7 +4478,7 @@ and I'll forget about whatever was undefined.
 
 
 LaTeX Warning: Citation `Papka:1999:ONE:897559' on page  undefined on input lin
-e 27.
+e 30.
 
 Missing character: There is no ] in font nullfont!
 Missing character: There is no p in font nullfont!
@@ -4726,7 +4756,7 @@ Missing character: There is no [ in font nullfont!
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
                                                   \space undefined\on@line .
-l.27 ...diverso \cite{Yang:1998:SRO:290941.290953}
+l.30 ...diverso \cite{Yang:1998:SRO:290941.290953}
                                                   . Tutte queste tecniche pe...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -4736,7 +4766,7 @@ and I'll forget about whatever was undefined.
 
 
 LaTeX Warning: Citation `Yang:1998:SRO:290941.290953' on page  undefined on inp
-ut line 27.
+ut line 30.
 
 Missing character: There is no ] in font nullfont!
 Missing character: There is no . in font nullfont!
@@ -5152,7 +5182,7 @@ Missing character: There is no [ in font nullfont!
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
                                                   \space undefined\on@line .
-l.28 ...tano un burst \cite{Allan:2002:TDT:772260}
+l.31 ...tano un burst \cite{Allan:2002:TDT:772260}
                                                   . L'assunzione fatta da qu...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -5162,7 +5192,7 @@ and I'll forget about whatever was undefined.
 
 
 LaTeX Warning: Citation `Allan:2002:TDT:772260' on page  undefined on input lin
-e 28.
+e 31.
 
 Missing character: There is no ] in font nullfont!
 Missing character: There is no . in font nullfont!
@@ -5291,7 +5321,7 @@ Missing character: There is no [ in font nullfont!
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
                                                   \space undefined\on@line .
-l.28 ...di \cite{Kleinberg:2002:BHS:775047.775061}
+l.31 ...di \cite{Kleinberg:2002:BHS:775047.775061}
                                                    viene utilizzato un'autom...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -5301,7 +5331,7 @@ and I'll forget about whatever was undefined.
 
 
 LaTeX Warning: Citation `Kleinberg:2002:BHS:775047.775061' on page  undefined o
-n input line 28.
+n input line 31.
 
 Missing character: There is no ] in font nullfont!
 Missing character: There is no v in font nullfont!
@@ -5777,7 +5807,7 @@ Missing character: There is no [ in font nullfont!
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
                                                   \space undefined\on@line .
-l.29 ...Nel lavoro di \cite{Allan:2002:TDT:772260}
+l.32 ...Nel lavoro di \cite{Allan:2002:TDT:772260}
                                                    la frequenza delle parole...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -5787,7 +5817,7 @@ and I'll forget about whatever was undefined.
 
 
 LaTeX Warning: Citation `Allan:2002:TDT:772260' on page  undefined on input lin
-e 29.
+e 32.
 
 Missing character: There is no ] in font nullfont!
 Missing character: There is no l in font nullfont!
@@ -5860,7 +5890,6 @@ Missing character: There is no a in font nullfont!
 Missing character: There is no l in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no , in font nullfont!
-Missing character: There is no d in font nullfont!
 Missing character: There is no p in font nullfont!
 Missing character: There is no o in font nullfont!
 Missing character: There is no i in font nullfont!
@@ -5872,12 +5901,12 @@ Missing character: There is no o in font nullfont!
 Missing character: There is no n in font nullfont!
 Missing character: There is no o in font nullfont!
 Missing character: There is no i in font nullfont!
-Missing character: There is no d in font nullfont!
 Missing character: There is no n in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no i in font nullfont!
 Missing character: There is no v in font nullfont!
 Missing character: There is no i in font nullfont!
 Missing character: There is no d in font nullfont!
-Missing character: There is no i in font nullfont!
 Missing character: There is no u in font nullfont!
 Missing character: There is no a in font nullfont!
 Missing character: There is no t in font nullfont!
@@ -5978,7 +6007,7 @@ Missing character: There is no t in font nullfont!
 Missing character: There is no i in font nullfont!
 Missing character: There is no . in font nullfont!
 ! Undefined control sequence.
-l.30 \section
+l.33 \section
              {Event Detection in Twitter}
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -6852,7 +6881,7 @@ Missing character: There is no [ in font nullfont!
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
                                                   \space undefined\on@line .
-l.32 ...babbles) \cite{DBLP:conf/icwsm/HurlockW11}
+l.35 ...babbles) \cite{DBLP:conf/icwsm/HurlockW11}
                                                    e rumors \cite{Castillo:2...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -6862,7 +6891,7 @@ and I'll forget about whatever was undefined.
 
 
 LaTeX Warning: Citation `DBLP:conf/icwsm/HurlockW11' on page  undefined on inpu
-t line 32.
+t line 35.
 
 Missing character: There is no ] in font nullfont!
 Missing character: There is no e in font nullfont!
@@ -6877,7 +6906,7 @@ Missing character: There is no [ in font nullfont!
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
                                                   \space undefined\on@line .
-l.32 ...s \cite{Castillo:2011:ICT:1963405.1963500}
+l.35 ...s \cite{Castillo:2011:ICT:1963405.1963500}
                                                   . Inoltre le caratteristic...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -6887,7 +6916,7 @@ and I'll forget about whatever was undefined.
 
 
 LaTeX Warning: Citation `Castillo:2011:ICT:1963405.1963500' on page  undefined 
-on input line 32.
+on input line 35.
 
 Missing character: There is no ] in font nullfont!
 Missing character: There is no . in font nullfont!
@@ -7003,7 +7032,7 @@ Missing character: There is no [ in font nullfont!
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
                                                   \space undefined\on@line .
-l.32 ...t polluters \cite{DBLP:conf/icwsm/LeeEC11}
+l.35 ...t polluters \cite{DBLP:conf/icwsm/LeeEC11}
                                                    per disseminare pubblicit...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -7013,7 +7042,7 @@ and I'll forget about whatever was undefined.
 
 
 LaTeX Warning: Citation `DBLP:conf/icwsm/LeeEC11' on page  undefined on input l
-ine 32.
+ine 35.
 
 Missing character: There is no ] in font nullfont!
 Missing character: There is no p in font nullfont!
@@ -7653,7 +7682,7 @@ Missing character: There is no [ in font nullfont!
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
                                                   \space undefined\on@line .
-l.32 ...Sankaranarayanan:2009:TNT:1653771.1653781}
+l.35 ...Sankaranarayanan:2009:TNT:1653771.1653781}
                                                   : un sistema per scoprire ...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -7663,7 +7692,7 @@ and I'll forget about whatever was undefined.
 
 
 LaTeX Warning: Citation `Sankaranarayanan:2009:TNT:1653771.1653781' on page  un
-defined on input line 32.
+defined on input line 35.
 
 Missing character: There is no ] in font nullfont!
 Missing character: There is no : in font nullfont!
@@ -8678,7 +8707,7 @@ Missing character: There is no [ in font nullfont!
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
                                                   \space undefined\on@line .
-l.33 ...ite{Phuvipadawat:2010:BND:1913791.1913911}
+l.36 ...ite{Phuvipadawat:2010:BND:1913791.1913911}
                                                   . In questo lavoro per rid...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -8688,7 +8717,7 @@ and I'll forget about whatever was undefined.
 
 
 LaTeX Warning: Citation `Phuvipadawat:2010:BND:1913791.1913911' on page  undefi
-ned on input line 33.
+ned on input line 36.
 
 Missing character: There is no ] in font nullfont!
 Missing character: There is no . in font nullfont!
@@ -8946,7 +8975,7 @@ Missing character: There is no e in font nullfont!
 ! Undefined control sequence.
 \@footnotetext ...tins {\reset@font \footnotesize 
                                                   \interlinepenalty \interfo...
-l.33 ...\footnote{https://lucene.apache.org/core/}
+l.36 ...\footnote{https://lucene.apache.org/core/}
                                                   . I tweet simili fra loro ...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -8957,7 +8986,7 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 \@footnotetext ...}\color@begingroup \@makefntext 
                                                   {\rule \z@ \footnotesep \i...
-l.33 ...\footnote{https://lucene.apache.org/core/}
+l.36 ...\footnote{https://lucene.apache.org/core/}
                                                   . I tweet simili fra loro ...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -8966,7 +8995,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-Overfull \hbox (139.55583pt too wide) in paragraph at lines 33--33
+Overfull \hbox (139.55583pt too wide) in paragraph at lines 36--36
 [][]\OT1/cmr/m/n/10 https://lucene.apache.org/core/| 
  []
 
@@ -9289,7 +9318,7 @@ Missing character: There is no r in font nullfont!
 ! Undefined control sequence.
 \@footnotetext ...tins {\reset@font \footnotesize 
                                                   \interlinepenalty \interfo...
-l.33 ...//nlp.stanford.edu/software/CRF-NER.shtml}
+l.36 ...//nlp.stanford.edu/software/CRF-NER.shtml}
                                                    addestrato su un corpora ...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -9300,7 +9329,7 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 \@footnotetext ...}\color@begingroup \@makefntext 
                                                   {\rule \z@ \footnotesep \i...
-l.33 ...//nlp.stanford.edu/software/CRF-NER.shtml}
+l.36 ...//nlp.stanford.edu/software/CRF-NER.shtml}
                                                    addestrato su un corpora ...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -9309,12 +9338,12 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-Overfull \hbox (172.66705pt too wide) in paragraph at lines 33--33
+Overfull \hbox (172.66705pt too wide) in paragraph at lines 36--36
 [][]\OT1/cmr/m/n/10 http://nlp.stanford.edu/software/CRF-
  []
 
 
-Overfull \hbox (48.66676pt too wide) in paragraph at lines 33--33
+Overfull \hbox (48.66676pt too wide) in paragraph at lines 36--36
 \OT1/cmr/m/n/10 NER.shtml| 
  []
 
@@ -9771,7 +9800,7 @@ Missing character: There is no [ in font nullfont!
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
                                                   \space undefined\on@line .
-l.37 ...avoro di \cite{DBLP:conf/icwsm/BeckerNG11}
+l.40 ...avoro di \cite{DBLP:conf/icwsm/BeckerNG11}
                                                    viene posta maggiore atte...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -9781,7 +9810,7 @@ and I'll forget about whatever was undefined.
 
 
 LaTeX Warning: Citation `DBLP:conf/icwsm/BeckerNG11' on page  undefined on inpu
-t line 37.
+t line 40.
 
 Missing character: There is no ] in font nullfont!
 Missing character: There is no v in font nullfont!
@@ -10515,9 +10544,6 @@ Missing character: There is no u in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no r in font nullfont!
 Missing character: There is no e in font nullfont!
-Missing character: There is no f in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no a in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no v in font nullfont!
 Missing character: There is no e in font nullfont!
@@ -10529,8 +10555,6 @@ Missing character: There is no e in font nullfont!
 Missing character: There is no a in font nullfont!
 Missing character: There is no l in font nullfont!
 Missing character: There is no i in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no d in font nullfont!
 Missing character: There is no d in font nullfont!
 Missing character: There is no a in font nullfont!
 Missing character: There is no n in font nullfont!
@@ -10565,117 +10589,117 @@ Missing character: There is no c in font nullfont!
 Missing character: There is no " in font nullfont!
 Missing character: There is no : in font nullfont!
 
-Overfull \hbox (11.55556pt too wide) in paragraph at lines 25--38
+Overfull \hbox (11.55556pt too wide) in paragraph at lines 28--41
  $\OML/cmm/m/it/10 N[]$
  []
 
 
-Overfull \hbox (3.61111pt too wide) in paragraph at lines 25--38
+Overfull \hbox (3.61111pt too wide) in paragraph at lines 28--41
 \OML/cmm/m/it/10 t$
  []
 
 
-Overfull \hbox (27.16095pt too wide) in paragraph at lines 25--38
+Overfull \hbox (27.16095pt too wide) in paragraph at lines 28--41
 \OML/cmm/m/it/10 df[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 w\OT1/cmr/m/n/10 )$
  []
 
 
-Overfull \hbox (7.42825pt too wide) in paragraph at lines 25--38
+Overfull \hbox (7.42825pt too wide) in paragraph at lines 28--41
 \OML/cmm/m/it/10 w$
  []
 
 
-Overfull \hbox (3.61111pt too wide) in paragraph at lines 25--38
+Overfull \hbox (3.61111pt too wide) in paragraph at lines 28--41
 \OML/cmm/m/it/10 t$
  []
 
 
-Overfull \hbox (19.16653pt too wide) in paragraph at lines 25--38
+Overfull \hbox (19.16653pt too wide) in paragraph at lines 28--41
 \OT1/cmr/m/it/10 time
  []
 
 
-Overfull \hbox (18.911pt too wide) in paragraph at lines 25--38
+Overfull \hbox (18.911pt too wide) in paragraph at lines 28--41
 \OT1/cmr/m/it/10 win-
  []
 
 
-Overfull \hbox (16.86658pt too wide) in paragraph at lines 25--38
+Overfull \hbox (16.86658pt too wide) in paragraph at lines 28--41
 \OT1/cmr/m/it/10 dow
  []
 
 
-Overfull \hbox (5.43053pt too wide) in paragraph at lines 25--38
+Overfull \hbox (5.43053pt too wide) in paragraph at lines 28--41
 []
  []
 
 
-Overfull \hbox (5.43053pt too wide) in paragraph at lines 25--38
+Overfull \hbox (5.43053pt too wide) in paragraph at lines 28--41
 []
  []
 
 
-Overfull \hbox (5.43053pt too wide) in paragraph at lines 25--38
+Overfull \hbox (5.43053pt too wide) in paragraph at lines 28--41
 []
  []
 
 
-Overfull \hbox (5.43053pt too wide) in paragraph at lines 25--38
+Overfull \hbox (5.43053pt too wide) in paragraph at lines 28--41
 []
  []
 
 
-Overfull \hbox (5.43053pt too wide) in paragraph at lines 25--38
+Overfull \hbox (5.43053pt too wide) in paragraph at lines 28--41
 []
  []
 
 
-Overfull \hbox (5.43053pt too wide) in paragraph at lines 25--38
+Overfull \hbox (5.43053pt too wide) in paragraph at lines 28--41
 []
  []
 
 
-Overfull \hbox (5.43053pt too wide) in paragraph at lines 25--38
+Overfull \hbox (5.43053pt too wide) in paragraph at lines 28--41
 []
  []
 
 
-Overfull \hbox (5.43053pt too wide) in paragraph at lines 25--38
+Overfull \hbox (5.43053pt too wide) in paragraph at lines 28--41
 []
  []
 
 
-Overfull \hbox (5.43053pt too wide) in paragraph at lines 25--38
+Overfull \hbox (5.43053pt too wide) in paragraph at lines 28--41
 []
  []
 
 
-Overfull \hbox (5.43053pt too wide) in paragraph at lines 25--38
+Overfull \hbox (5.43053pt too wide) in paragraph at lines 28--41
 []
  []
 
 
-Overfull \hbox (5.43053pt too wide) in paragraph at lines 25--38
+Overfull \hbox (5.43053pt too wide) in paragraph at lines 28--41
 []
  []
 
 
-Overfull \hbox (4.48613pt too wide) in paragraph at lines 25--38
+Overfull \hbox (4.48613pt too wide) in paragraph at lines 28--41
 []
  []
 
 
-Overfull \hbox (21.21094pt too wide) in paragraph at lines 25--38
+Overfull \hbox (21.21094pt too wide) in paragraph at lines 28--41
 \OT1/cmr/m/it/10 boost
  []
 
 
-Overfull \hbox (4.48613pt too wide) in paragraph at lines 25--38
+Overfull \hbox (4.48613pt too wide) in paragraph at lines 28--41
 []
  []
 
 
-Overfull \hbox (5.43053pt too wide) in paragraph at lines 25--38
+Overfull \hbox (5.43053pt too wide) in paragraph at lines 28--41
 []
  []
 
@@ -12064,7 +12088,7 @@ Missing character: There is no [ in font nullfont!
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
                                                   \space undefined\on@line .
-l.45 ...n \cite{Petrovic:2010:SFS:1857999.1858020}
+l.48 ...n \cite{Petrovic:2010:SFS:1857999.1858020}
                                                    è stato ideato un algori...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -12074,7 +12098,7 @@ and I'll forget about whatever was undefined.
 
 
 LaTeX Warning: Citation `Petrovic:2010:SFS:1857999.1858020' on page  undefined 
-on input line 45.
+on input line 48.
 
 Missing character: There is no ] in font nullfont!
 Missing character: There is no � in font nullfont!
@@ -12120,7 +12144,7 @@ Missing character: There is no [ in font nullfont!
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
                                                   \space undefined\on@line .
-l.45 ...l \emph{Local Sensitive Hashing}\cite{Lsh}
+l.48 ...l \emph{Local Sensitive Hashing}\cite{Lsh}
                                                     grazie a cui è possibil...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -12129,7 +12153,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-LaTeX Warning: Citation `Lsh' on page  undefined on input line 45.
+LaTeX Warning: Citation `Lsh' on page  undefined on input line 48.
 
 Missing character: There is no ] in font nullfont!
 Missing character: There is no g in font nullfont!
@@ -12810,67 +12834,67 @@ Missing character: There is no i in font nullfont!
 Missing character: There is no a in font nullfont!
 Missing character: There is no . in font nullfont!
 
-Overfull \hbox (5.43053pt too wide) in paragraph at lines 44--48
+Overfull \hbox (5.43053pt too wide) in paragraph at lines 47--51
                                                                   []
  []
 
 
-Overfull \hbox (14.44987pt too wide) in paragraph at lines 44--48
+Overfull \hbox (14.44987pt too wide) in paragraph at lines 47--51
 \OT1/cmr/m/it/10 Lo-
  []
 
 
-Overfull \hbox (11.75546pt too wide) in paragraph at lines 44--48
+Overfull \hbox (11.75546pt too wide) in paragraph at lines 47--51
 \OT1/cmr/m/it/10 cal
  []
 
 
-Overfull \hbox (19.42209pt too wide) in paragraph at lines 44--48
+Overfull \hbox (19.42209pt too wide) in paragraph at lines 47--51
 \OT1/cmr/m/it/10 Sen-
  []
 
 
-Overfull \hbox (10.73326pt too wide) in paragraph at lines 44--48
+Overfull \hbox (10.73326pt too wide) in paragraph at lines 47--51
 \OT1/cmr/m/it/10 si-
  []
 
 
-Overfull \hbox (15.58876pt too wide) in paragraph at lines 44--48
+Overfull \hbox (15.58876pt too wide) in paragraph at lines 47--51
 \OT1/cmr/m/it/10 tive
  []
 
 
-Overfull \hbox (25.32207pt too wide) in paragraph at lines 44--48
+Overfull \hbox (25.32207pt too wide) in paragraph at lines 47--51
 \OT1/cmr/m/it/10 Hash-
  []
 
 
-Overfull \hbox (19.60405pt too wide) in paragraph at lines 44--48
+Overfull \hbox (19.60405pt too wide) in paragraph at lines 47--51
 \OT1/cmr/m/it/10 ing[]
  []
 
 
-Overfull \hbox (19.93321pt too wide) in paragraph at lines 44--48
+Overfull \hbox (19.93321pt too wide) in paragraph at lines 47--51
 \OT1/cmr/m/it/10 links
  []
 
 
-Overfull \hbox (5.28589pt too wide) in paragraph at lines 44--48
+Overfull \hbox (5.28589pt too wide) in paragraph at lines 47--51
 \OML/cmm/m/it/10 a$
  []
 
 
-Overfull \hbox (18.1489pt too wide) in paragraph at lines 44--48
+Overfull \hbox (18.1489pt too wide) in paragraph at lines 47--51
 \OML/cmm/m/it/10 link$
  []
 
 
-Overfull \hbox (4.29166pt too wide) in paragraph at lines 44--48
+Overfull \hbox (4.29166pt too wide) in paragraph at lines 47--51
 \OML/cmm/m/it/10 b$
  []
 
 
-Overfull \hbox (121.68697pt too wide) detected at line 50
+Overfull \hbox (121.68697pt too wide) detected at line 53
 \OML/cmm/m/it/10 a links b \OMS/cmsy/m/n/10 ([]) \OT1/cmr/m/n/10 1 \OMS/cmsy/m/
 n/10 ^^@ \OML/cmm/m/it/10 cos\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 a; b\OT1/cmr/m/n
 /10 ) \OML/cmm/m/it/10 < t
@@ -13599,16 +13623,16 @@ Missing character: There is no r in font nullfont!
 Missing character: There is no o in font nullfont!
 Missing character: There is no v in font nullfont!
 Missing character: There is no i in font nullfont!
-LaTeX Font Info:    Try loading font information for +cmr on input line 53.
-LaTeX Font Info:    No file cmr.fd. on input line 53.
+LaTeX Font Info:    Try loading font information for +cmr on input line 56.
+LaTeX Font Info:    No file cmr.fd. on input line 56.
 
 LaTeX Font Warning: Font shape `/cmr/m/n' undefined
-(Font)              using `/cmr/m/n' instead on input line 53.
+(Font)              using `/cmr/m/n' instead on input line 56.
 
 ! Corrupted NFSS tables.
 wrong@fontshape ...message {Corrupted NFSS tables}
                                                   error@fontshape else let f...
-l.53 ...più interessante del lavoro di Petrovi\'c
+l.56 ...più interessante del lavoro di Petrovi\'c
                                                    et al. \cite{Petrovic:201...
 This error message was generated by an \errmessage
 command, so I can't give any explicit help.
@@ -13617,7 +13641,7 @@ and deduce the truth by order and method.
 
 
 LaTeX Font Warning: Font shape `/cmr/m/n' undefined
-(Font)              using `OT1/cmr/m/n' instead on input line 53.
+(Font)              using `OT1/cmr/m/n' instead on input line 56.
 
 Missing character: There is no e in font nullfont!
 Missing character: There is no t in font nullfont!
@@ -13629,7 +13653,7 @@ Missing character: There is no [ in font nullfont!
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
                                                   \space undefined\on@line .
-l.53 .... \cite{Petrovic:2010:SFS:1857999.1858020}
+l.56 .... \cite{Petrovic:2010:SFS:1857999.1858020}
                                                    è rappresentato dal fatt...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -13639,7 +13663,7 @@ and I'll forget about whatever was undefined.
 
 
 LaTeX Warning: Citation `Petrovic:2010:SFS:1857999.1858020' on page  undefined 
-on input line 53.
+on input line 56.
 
 Missing character: There is no ] in font nullfont!
 Missing character: There is no � in font nullfont!
@@ -15275,7 +15299,7 @@ Missing character: There is no [ in font nullfont!
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
                                                   \space undefined\on@line .
-l.54 ...Sankaranarayanan:2009:TNT:1653771.1653781}
+l.57 ...Sankaranarayanan:2009:TNT:1653771.1653781}
                                                    suggeriscono, una volta i...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -15285,7 +15309,7 @@ and I'll forget about whatever was undefined.
 
 
 LaTeX Warning: Citation `Sankaranarayanan:2009:TNT:1653771.1653781' on page  un
-defined on input line 54.
+defined on input line 57.
 
 Missing character: There is no ] in font nullfont!
 Missing character: There is no s in font nullfont!
@@ -15522,17 +15546,6 @@ Missing character: There is no e in font nullfont!
 Missing character: There is no n in font nullfont!
 Missing character: There is no z in font nullfont!
 Missing character: There is no a in font nullfont!
-Missing character: There is no s in font nullfont!
-Missing character: There is no o in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no o in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no s in font nullfont!
-Missing character: There is no p in font nullfont!
-Missing character: There is no o in font nullfont!
-Missing character: There is no s in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no i in font nullfont!
 Missing character: There is no n in font nullfont!
 Missing character: There is no o in font nullfont!
 Missing character: There is no n in font nullfont!
@@ -15547,12 +15560,6 @@ Missing character: There is no a in font nullfont!
 Missing character: There is no n in font nullfont!
 Missing character: There is no n in font nullfont!
 Missing character: There is no o in font nullfont!
-Missing character: There is no q in font nullfont!
-Missing character: There is no u in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no d in font nullfont!
-Missing character: There is no i in font nullfont!
 Missing character: There is no a in font nullfont!
 Missing character: There is no d in font nullfont!
 Missing character: There is no i in font nullfont!
@@ -15720,6 +15727,7 @@ Missing character: There is no c in font nullfont!
 Missing character: There is no i in font nullfont!
 Missing character: There is no m in font nullfont!
 Missing character: There is no a in font nullfont!
+Missing character: There is no , in font nullfont!
 Missing character: There is no s in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no m in font nullfont!
@@ -15759,77 +15767,77 @@ Missing character: There is no a in font nullfont!
 Missing character: There is no ) in font nullfont!
 Missing character: There is no . in font nullfont!
 
-Overfull \hbox (5.28589pt too wide) in paragraph at lines 50--55
+Overfull \hbox (5.28589pt too wide) in paragraph at lines 53--58
    $\OML/cmm/m/it/10 a$
  []
 
 
-Overfull \hbox (5.28589pt too wide) in paragraph at lines 50--55
+Overfull \hbox (5.28589pt too wide) in paragraph at lines 53--58
 \OML/cmm/m/it/10 a$
  []
 
 
-Overfull \hbox (3.61111pt too wide) in paragraph at lines 50--55
+Overfull \hbox (3.61111pt too wide) in paragraph at lines 53--58
 \OML/cmm/m/it/10 t$
  []
 
 
-Overfull \hbox (3.61111pt too wide) in paragraph at lines 50--55
+Overfull \hbox (3.61111pt too wide) in paragraph at lines 53--58
 \OML/cmm/m/it/10 t$
  []
 
 
-Overfull \hbox (3.61111pt too wide) in paragraph at lines 50--55
+Overfull \hbox (3.61111pt too wide) in paragraph at lines 53--58
 \OML/cmm/m/it/10 t$
  []
 
 
-Overfull \hbox (9.44446pt too wide) in paragraph at lines 50--55
+Overfull \hbox (9.44446pt too wide) in paragraph at lines 53--58
 \/cmr/m/n/10 ^^Sc
  []
 
 
-Overfull \hbox (5.43053pt too wide) in paragraph at lines 50--55
+Overfull \hbox (5.43053pt too wide) in paragraph at lines 53--58
 []
  []
 
 
-Overfull \hbox (20.06094pt too wide) in paragraph at lines 50--55
+Overfull \hbox (20.06094pt too wide) in paragraph at lines 53--58
 \OT1/cmr/m/it/10 frag-
  []
 
 
-Overfull \hbox (21.97763pt too wide) in paragraph at lines 50--55
+Overfull \hbox (21.97763pt too wide) in paragraph at lines 53--58
 \OT1/cmr/m/it/10 men-
  []
 
 
-Overfull \hbox (12.01102pt too wide) in paragraph at lines 50--55
+Overfull \hbox (12.01102pt too wide) in paragraph at lines 53--58
 \OT1/cmr/m/it/10 ta-
  []
 
 
-Overfull \hbox (17.12212pt too wide) in paragraph at lines 50--55
+Overfull \hbox (17.12212pt too wide) in paragraph at lines 53--58
 \OT1/cmr/m/it/10 tion
  []
 
 
-Overfull \hbox (24.6609pt too wide) in paragraph at lines 50--55
+Overfull \hbox (24.6609pt too wide) in paragraph at lines 53--58
 \OT1/cmr/m/it/10 merg-
  []
 
 
-Overfull \hbox (13.2888pt too wide) in paragraph at lines 50--55
+Overfull \hbox (13.2888pt too wide) in paragraph at lines 53--58
 \OT1/cmr/m/it/10 ing
  []
 
 
-Overfull \hbox (5.43053pt too wide) in paragraph at lines 50--55
+Overfull \hbox (5.43053pt too wide) in paragraph at lines 53--58
 []
  []
 
 
-Overfull \hbox (6.80557pt too wide) in paragraph at lines 50--55
+Overfull \hbox (6.80557pt too wide) in paragraph at lines 53--58
 []\/cmr/m/n/10 E
  []
 
@@ -15841,7 +15849,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.55 
+l.58 
      
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -15849,9 +15857,21 @@ or  <return>  to continue without it.
 
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 ! Undefined control sequence.
+<write> \newlabel{def:evento}{{}{\thepage 
+                                          }}
+l.58 
+     
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+\newlabel{def:evento}{{}{}}
+! Undefined control sequence.
 <write> \newlabel{eq:incIDF}{{1}{\thepage 
                                           }}
-l.55 
+l.58 
      
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -15870,7 +15890,7 @@ and I'll forget about whatever was undefined.
 Here is how much of TeX's memory you used:
  40 strings out of 494985
  737 string characters out of 6180356
- 53094 words of memory out of 5000000
+ 54094 words of memory out of 5000000
  3352 multiletter control sequences out of 15000+600000
  4294 words of font info for 16 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
