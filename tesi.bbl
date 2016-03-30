@@ -32,6 +32,13 @@ Martin Ester.
   Large Data Bases, August 24-27, 1998, New York City, New York, USA}, pages
   226--231. AAAI Press, 1996.
 
+\bibitem{export:69500}
+Michael Gamon, Sumit Basu, Dmitriy Belenko, Danyel Fisher, Matthew Hurst, and
+  Arnd~Christian K{\"o}nig.
+\newblock Blews: Using blogs to provide context for news articles.
+\newblock In {\em 2nd AAAI Conference on Weblogs and Social Media (ICWSM
+  2008)}. American Association for Artificial Intelligence, April 2008.
+
 \bibitem{Gionis:1999}
 Aristides Gionis, Piotr Indyk, and Rajeev Motwani.
 \newblock Similarity search in high dimensions via hashing.
