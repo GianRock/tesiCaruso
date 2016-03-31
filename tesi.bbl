@@ -1,5 +1,9 @@
 \begin{thebibliography}{10}
 
+\bibitem{doi:10.1137/1.9781611972825.54}
+Charu~C. Aggarwal and Karthik Subbian.
+\newblock {\em Event Detection in Social Streams}, chapter~53, pages 624--635.
+
 \bibitem{Allan:2002:TDT:772260}
 James Allan, editor.
 \newblock {\em Topic Detection and Tracking: Event-based Information
@@ -11,6 +15,12 @@ Hila Becker, Mor Naaman, and Luis Gravano.
 \newblock Beyond trending topics: Real-world event identification on twitter.
 \newblock In {\em Proceedings of the Fifth International Conference on Weblogs
   and Social Media, Barcelona, Catalonia, Spain, July 17-21, 2011}, 2011.
+
+\bibitem{Benevenuto10detectingspammers}
+Fabrício Benevenuto, Gabriel Magno, Tiago Rodrigues, and Virgílio Almeida.
+\newblock Detecting spammers on twitter.
+\newblock In {\em In Collaboration, Electronic messaging, Anti-Abuse and Spam
+  Conference (CEAS}, 2010.
 
 \bibitem{Castillo:2011:ICT:1963405.1963500}
 Carlos Castillo, Marcelo Mendoza, and Barbara Poblete.

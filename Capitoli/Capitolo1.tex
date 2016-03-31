@@ -45,7 +45,23 @@ Nel lavoro di \cite{DBLP:conf/icwsm/BeckerNG11} viene posta maggiore attenzione 
 \item twitter centric-features: queste caratteristiche hanno lo scopo di identificare le attività twitter-centric. Esempi di queste feature sono la percentuale di tweet contenenti hashtag e la percentuale di tweet contenenti l'hashtag più utilizzato. Gli autori presumono che un'alta percentuale della prima stia ad indicare un topic conversazionale.
 \end{enumerate}
 Poichè i cluster evolvono nel tempo, queste feature sono periodicamente aggiornate.
-Sulla base di queste feature, è stato addestrato una support vector machine (SVM) a partire da un insieme di cluster etichettati, che verrà usata per decidere se un nuovo cluster contiene o meno informazioni relative a eventi reali. AL fine di permettere di eseguire il task di scoperta di eventi su larga scala invece, in \cite{Petrovic:2010:SFS:1857999.1858020} è stato ideato un algoritmo che fa ricorso al \emph{Local Sensitive Hashing}\cite{Lsh}  grazie a cui è possibile superare alcuni limiti degli approcci classici.
+Sulla base di queste feature, è stato addestrato una support vector machine (SVM) a partire da un insieme di cluster etichettati, che verrà usata per decidere se un nuovo cluster contiene o meno informazioni relative a eventi reali. 
+
+Uno dei maggiori problemi da affrontare, quando si cerca di effettuare il clustering dei documenti è il numero di confronti da effettuare, per ridurre tale numero Aggrawal e Subbian \cite{doi:10.1137/1.9781611972825.54} utilizzano, un numero prefissato di cluster e per ciascun cluster prodotto mantengono delle informazioni che ne sintetizzano il contenuto (summaries). Ogni cluster-summary contiene: 
+\begin{itemize}
+\item un node-summary che è dato dall'insieme degli utenti e le  loro rispettive frequenze all'interno del clusters
+\item un content-summary dato dall'insieme delle keywords e i rispettivi pesi TF-IDF.
+\end{itemize} 
+Sulla base di queste due informazioni aggregate, hanno definito una funzione di similarità che quindi non tiene solo conto del testo dei tweet, ma che sfrutti informazioni della struttura sociale di Twitter.
+Tale funzione di similarità tra un documento $D$ ed un cluster $C$ è definita come segue:
+\begin{equation}
+\label{eq:aggrawalSim}
+Sim(D,C)=\lambda\cdot SimS(D,C)+(1-\lambda)\cdot SimC(D,C)
+\end{equation}
+Dove $SimS$ e $SimC$ rappresentano rispettivamente la similarità strutturale e la similarità basata su contenuto, e $\lambda$ rappresenta un fattore di bilanciamento compreso fra $[0,1]$
+%CITAZIONE LSH PETROVIC
+
+AL fine di permettere di eseguire il task di scoperta di eventi su larga scala invece, in \cite{Petrovic:2010:SFS:1857999.1858020} è stato ideato un algoritmo che fa ricorso al \emph{Local Sensitive Hashing}\cite{Lsh}  grazie a cui è possibile superare alcuni limiti degli approcci classici.
 L'utilizzo dell'LSH, permette di ridurre drasticamente il tempo richiesto per la scoperta del Nearest Neighbor di un punto in uno spazio vettoriale.
 In particolare per ogni documento proveniente dallo stream, viene calcolata la distanza rispetto al suo nearest neighbor, che verrà adoperata sia per determinare il grado di novità del documento rispetto ai precedenti (Novelty Score), sia per dall'altro è utilizzato per creare dei "thread di tweets" o in altri termini cluster, che come negli altri metodi document-pivot precedentemente descritti, si assume che  corrisponderanno ad eventi. Viene definita una relazione \emph{links} come segue: si dice che un tweet   $a$ ha un $link$ verso il tweet $b$  se la loro distanza è al di sotto di uuna soglia.  
  \begin{equation}

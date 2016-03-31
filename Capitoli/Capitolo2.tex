@@ -137,11 +137,12 @@ Dopo aver eseguito l'hashing  tutte le coppie che sono state mappate nello stess
  Data una funzione di hashing $h$ diremo che una coppia di oggetti $(x,y)$ sarà una \emph{candidate}   se $h(x)=h(y)$. Sia $d(\cdot,\cdot)$ una qualche funzione  definita su un insieme di oggetti $S$
 \begin{definizione}[Locality-sensitive hashing] 
 
+Una famiglia di funzioni $H$ si dice $(d_1,d_2,p_1,p_2)-Sensitive$ se  $\forall (x,y) \in S ,\;\forall h \in H $ 
 
-Una famiglia di funzioni $H$ si dice $(d_1,d_2,p_1,p_2)-Sensitive$ se  $\forall (x,y) \in S ,\forall h \in H $ 
+
 \begin{itemize}
-\item $if \quad  d(x,y)\leq d_1 \Rightarrow P_H[h(x)==h(y)]\geq p_1  $,
-\item $if \quad  d(x,y)\geq d_2 \Rightarrow P_H[h(x)==h(y)]\leq p_2  $
+\item $se \quad  d(x,y)\leq d_1 \Rightarrow P_H[h(x)==h(y)]\geq p_1  $,
+\item $se \quad  d(x,y)\geq d_2 \Rightarrow P_H[h(x)==h(y)]\leq p_2  $
 \end{itemize}
 dove $p_1>p_2$
 \end{definizione}
