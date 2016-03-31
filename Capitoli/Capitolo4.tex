@@ -76,8 +76,12 @@ A differenza dell'articolo orginale, sono stati considerati i clusters che cresc
 L'algoritmo di Aggrawal e Subbian, invece, richiede a priori il numero di cluster in cui suddividere il corpus. I creatori del dataset hanno scelto k=1200 in quanto questo parametro permetteva loro di clusterizzare l'intera collezione in un tempo ragionevole (4 giorni). Il parametro $\lambda$ è stato impostato pari a $0$, dando cioè, il peso massimo alla similarità testuale).
 Sono stati rimossi, empiricamente, i cluster aventi meno di 30 tweet e con un basso grow-rate ($\alpha<12$), producendo in tal modo una lista di 1097 eventi candidati.
 
-Attraverso il portale degli eventi correnti, Wikipedia, mantiene una lista di eventi giornalieri, disseminati su tutto il globo. Ad ogni evento è associato un link ad un articolo contenente degli approfondimenti in merito a tale evento (ciascun evento di tale lista quindi, combacia perfettamente con la definizione \ref {def:eventoDataset} data precedentemente).
+Attraverso il portale degli eventi correnti, Wikipedia, mantiene una lista di eventi giornalieri, disseminati su tutto il globo. Ad ogni evento è associato un link ad un articolo contenente degli approfondimenti in merito a tale evento (ciascun evento di tale lista quindi, combacia perfettamente con la definizione \ref {def:eventoDataset} data precedentemente). 
+Di ogni evento viene fornita una breve descrizione, la data dell'evento, e uno o più link ad articoli rilevanti. 
 
+Questo approccio è completamente diverso rispetto a quelli precedentemente illustrati. In questo caso, infatti, si esegue il processo opposto: si parte da una lista di eventi e l'obiettivo è quello di associare a ciascuno di essi un insieme di tweet rilevanti.
+Per far ciò il primo step è stato quello di indicizzare l'intero corpus ramite Lucene 4.2, dopo aver applicato delle operazioni di nlp come rimozione di stop-word, URLs e i prefissi di hashtag e mentions (\#,@). 
+ Per ogni evento ( dei 468 eventi del portale Wikipedia), è stato interrogato il corpus utilizzando  come query la descrizione dell'evento. Per ciascuna query sono stati ritrovati i top 2000 documenti da una finestra di 72 ore, centrata sulla data dell'evento.
  
 
 \subsection{Raccolta dati}
