@@ -10,8 +10,8 @@
 
 In questo capitolo si descriverà la progettazione e l'esecuzione della sperimentazione. Si partirà pertanto dalla descrizione dati su cui quest'ultima è stata effettuata, proseguendo con la scelta delle modalità di esecuzione più interessanti e concludendo con una serie di tabelle e grafici contenenti i risultati ottenuti, opportunamente commentati.  
 L'obiettivo di questa prima sperimentazione è valutare l'efficacia del sistema analizzato al fine di comprendere le cause di un eventuale successo o insuccesso delle tecniche utilizzate e quindi decidere se proseguire gli studi in questa direzione o definire strategie alternative.
-Il corpus di documenti utilizzato\cite{McMinn:2013:BLC:2505515.2505695}. per testare le performance della soluzione proposta, è stato costruito proprio per la valutazione del task di event detection. Questo corpus ricopre un periodo di quattro settimane ed è composto circa 120 milioni di tweets. A partire da questi tweets, sono stati generati un pool di eventi \lq\lq candidati \rq\rq attraverso alcuni approcci dello stato dell'arte e Wikipedia. Attraverso crowdsourcing, sono stati raccolti i giudizi di rilevanza rispetto di questi eventi candidati, solo dopo aver fornito una propria definizione di evento.
-Al termine di tale processo sono stati raccolti i giudizi di 150.000 tweet, suddivisi in 500 eventi.
+Il corpus di documenti utilizzato\cite{McMinn:2013:BLC:2505515.2505695}. per testare le performance della soluzione proposta, è stato costruito proprio per la valutazione del task di event detection. Questo corpus ricopre un periodo di quattro settimane ed è composto circa 120 milioni di tweets. A partire da questi tweets, gli autori del corpus hanno generato un pool di eventi \lq\lq candidati \rq\rq attraverso alcuni approcci dello stato dell'arte e Wikipedia. Successivamente,attraverso crowdsourcing, sono stati raccolti i giudizi di rilevanza rispetto di questi eventi candidati, solo dopo aver fornito una propria definizione di evento.
+Al termine di tale processo sono stati raccolti i giudizi di 150.000 tweet, suddivisi in 500 eventi. 
 
 In seguito è fornita una descrizione maggiormente dettagliata di tale dataset.
 \section{Dataset per la valutazione}
@@ -25,6 +25,21 @@ Al fine di testare il sistema prodotto, è stato adoperato un corpora costruito 
 di scoperta di eventi a partire da Twitter \cite{McMinn:2013:BLC:2505515.2505695}.
 In questo corpus sono stati raccolti tweets a partire dal 10/10/2012 al 7/11/2012, tramite le API streaming di Twitter.
 La scelta di questo intervallo temporale non  fu casuale, ma   è motivata dal fatto che, in quel periodo, erano previsti eventi molto importanti come le elezioni presidenziali degli Stati Uniti e l'uragano Sandy.
+Gli autori del dataset, per poter raccogliere dei giudizi di rilevanza in merito ad eventi, hanno innanzitutto fornito il loro concetto di evento come segue:
+\begin{definizione}[ ]
+\label{def:eventoDataset}
+Un evento è qualcosa di \textbf{significante}  che avviene in un luogo e tempo specifico.
+\end{definizione}
+Rispetto alla definizione\ref{def:evento} data dal TDT, viene aggiunto il vincolo di \emph{significatività} di un evento, per scartare dal pool di eventi candidati, quelli che si riferiscono ad eventi banali o contenenti status prettamente personali. Nel task del TDT infatti, è ragionevole assumere che tutti i documenti siano rilevanti, in quanto estratti da newswire.
+\begin{definizione}
+Qualcosa è \emph{significante} se può essere discusso dai media.
+\end{definizione}
+Gli autori sottolineano, però, che non è necessario che qualcosa sia discusso dai media per essere considerato un evento, ma utilizzano tale definizione solo come livello di significatività necessario affinché si possa parlare di un evento.
+
+
+
+
+
 Sono stati applicati i seguenti filtri 
 \begin{itemize}
 	\item \textbf{language-filter} :  sono stati filtrati solo i tweet di lingua inglese \footnote{https://code.google.com/archive/p/language-detection/}
@@ -40,27 +55,36 @@ Al fine di rimuovere parte dello spam presente su twitter, sono state applicate 
 Dopo l'applicazione di questi filtri sono stati raccolti 120 milioni di tweets.
 Di questi, circa il 30\% era costituito da  \emph{retweet} (quasi 40 milioni). Poiché i retweet non sono  altro una copia di un tweet di un altro utente, i creatori del corpus non hanno incluso questi ultimi nei giudizi di rilevanza. 
 \subsection{Generazione Eventi Candidati}
-Gli autori del dataset, per poter raccogliere dei giudizi di rilevanza in merito ad eventi hanno innanzitutto fornito il loro concetto di evento come segue:
-\begin{definizione}[Evento]
-Un evento è qualcosa di \textbf{significante}  che avviene in un luogo e tempo specifico.
-\end{definizione}
-Rispetto alla definizione\ref{def:evento} data dal TDT, viene aggiunto il vincolo di \emph{significatività} di un evento, per scartare
+Piuttosto che creare manualmente una lista di eventi, gli autori hanno utilizzato due approcci della letteratura (\emph{detection-approach}) e Wikipedia Events Curent Portal (\emph{curated-approach}) \footnote{https://en.wikipedia.org/wiki/Portal:Current\_events}.
 
 
-piuttosto che manualmente una lista di eventi, hanno utilizzato due approcci della letteratura (\emph{detection-approach}) e Wikipedia Events Curent Portal (\emph{curated-approach}) \footnote{https://en.wikipedia.org/wiki/Portal:Current\_events}.
 I sistemi di scoperta di eventi della letteratura usati sono i seguenti:
 \begin{itemize}
 \item l'approccio basato su LSH proposto da Petrovi\'c \cite{Petrovic:2010:SFS:1857999.1858020}
 \item l'approccio basato su Cluster-Summarization proposto da Aggarwal e Subbian \cite{doi:10.1137/1.9781611972825.54}
-
-
 \end{itemize}
+I creatori del dataset hanno scelto questi due approcci poiché sono document-pivot, ovvero producono  cluster di document (piuttosto che cluster di termini: è quindi più semplice generare dei giudizi di rilevanza),ed inoltre entrambi gli approcci scelti, sono abbastanza efficienti e riescono a processare grandi moli di dati.
+L'algoritmo proposto da Petrovi\'c è stato lanciato su tutto il  corpus , utilizzando dei parametri molto simili a quelli proposti nell'articolo di riferimento \cite{Petrovic:2010:SFS:1857999.1858020}
+ ovvero: 
+\begin{enumerate}
+\item 13 bits per chiave (numero di hash functions)
+\item 70 hash tables
+\item 0.45 come distanza massima
+\end{enumerate} 
+A differenza dell'articolo orginale, sono stati considerati i clusters che crescono più velocemente su base oraria (piuttosto che ogni 100K). Per ogni ora, è stata prodotta una lista di cluster. Tale lista è stata ordinata in base al numero di utenti distinti, di ciascun cluster, e i cluster aventi bassa entropia sono posizionati in coda alla lista. Considerare una lista così prodotta avrebbe generato un numero troppo elevato di eventi candidati. Per tale ragione gli autori hanno rimosso tutti quei cluster il cui valore di entropia ricade al di fuori dell'intervallo ottimale [3.5,4.25]\cite{Petrovic:2010:SFS:1857999.1858020}, producendo così una lista di 1340 eventi candidati.
+
+L'algoritmo di Aggrawal e Subbian, invece, richiede a priori il numero di cluster in cui suddividere il corpus. I creatori del dataset hanno scelto k=1200 in quanto questo parametro permetteva loro di clusterizzare l'intera collezione in un tempo ragionevole (4 giorni). Il parametro $\lambda$ è stato impostato pari a $0$, dando cioè, il peso massimo alla similarità testuale).
+Sono stati rimossi, empiricamente, i cluster aventi meno di 30 tweet e con un basso grow-rate ($\alpha<12$), producendo in tal modo una lista di 1097 eventi candidati.
+
+Attraverso il portale degli eventi correnti, Wikipedia, mantiene una lista di eventi giornalieri, disseminati su tutto il globo. Ad ogni evento è associato un link ad un articolo contenente degli approfondimenti in merito a tale evento (ciascun evento di tale lista quindi, combacia perfettamente con la definizione \ref {def:eventoDataset} data precedentemente).
+
+ 
 
 \subsection{Raccolta dati}
-Di questi 80 milioni sono stati resi pubblici, come detto in precedenza, solo gli id dei tweet e degli utenti, è necessario quindi, un ulteriore step per ritrovare il contenuto di tali tweet.
-Avendo gli identificativi dei tweets, esitono due metodologie per ritovare il contenuto: le API di twitter, o attraverso un crawling di twitter.com.
+Di questi 120 milioni di tweets, sono stati resi pubblici solo gli (id dei tweet e degli utenti di tali tweet).  \'E necessario quindi, un ulteriore step per ritrovare il contenuto di tali tweet.
+Avendo gli identificativi dei tweets, esitono due metodologie per ritovare il contenuto: le API di twitter, il crawling di twitter.com.
 Utilizzare le API di twitter fornendo come query gli id \footnote{https://dev.twitter.com/rest/reference/get/statuses/}, permette di ottenere non solo il contenuto testuale, ma anche ulteriori meta-dati come eventuali hashtag, urls, mentions, in formato JSON.
-Tuttavia vi è un limite orario di 150 richieste \footnote{in ogni richiesta si possono richiedere 100 id}, quindi scaricare un corpus di grandi dimensioni, come nel nostro caso, richiederebbe troppo tempo. Per tale ragione, si è adottato un crawler fornito pubblicamente dal TREC Microblog Task \footnote{https://github.com/myleott/twitter-corpus-tools}, che consente di aggirare questo limite. A termine di questa fase di crawling sono stati raccolti circa 15 milioni di tweets, di cui  circa 10 milioni  sono retweets. Poiché i retweet non sono sati inclusi nei giudizi di rilevanza, si è deciso di scartarli in quanto non influenti per la valutazione del sistema. La maggior parte dei tweet non  ritrovati è dovuta al fatto   che  utenti che avevano pubblicato status raccolti nel corpus, hanno eliminato i loro tweets o perfino il loro profilo.
+Tuttavia vi è un limite orario di 150 richieste \footnote{in ogni richiesta si possono richiedere 100 id}, quindi scaricare un corpus di grandi dimensioni, come nel nostro caso, richiederebbe troppo tempo. Per tale ragione, si è adottato un crawler fornito pubblicamente dal TREC Microblog Task \footnote{https://github.com/myleott/twitter-corpus-tools}, che consente di aggirare questo limite. A termine di questa fase di crawling sono stati raccolti circa 15 milioni di tweets, di cui  circa 10 milioni  sono retweets. Poiché i retweet non sono sati inclusi nei giudizi di rilevanza, si è deciso di scartarli in quanto non influenti ai fini della valutazione. Bisogna sottolineare che,  molti tweet non sono stati ritrovati poiché, utenti che avevano pubblicato status raccolti nel corpus, hanno eliminato i loro tweets o perfino il loro profilo.
 
 
 
