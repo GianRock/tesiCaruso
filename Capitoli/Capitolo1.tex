@@ -58,7 +58,8 @@ Tale funzione di similarità tra un documento $D$ ed un cluster $C$ è definita 
 \label{eq:aggrawalSim}
 Sim(D,C)=\lambda\cdot SimS(D,C)+(1-\lambda)\cdot SimC(D,C)
 \end{equation}
-Dove $SimS$ e $SimC$ rappresentano rispettivamente la similarità strutturale e la similarità basata su contenuto, e $\lambda$ rappresenta un fattore di bilanciamento compreso fra $[0,1]$
+Dove $SimS$ e $SimC$ rappresentano rispettivamente la similarità strutturale e la similarità basata su contenuto, e $\lambda$ rappresenta un fattore di bilanciamento compreso fra $[0,1]$.
+Ogni nuovo documento proveniente dallo stream, viene assegnato al cluster più vicino a meno che la sua similarità verso ciascun cluster esistente sia inferiore in maniera \emph	{significativa} rispetto agli altri documenti.  Un valore di similarità si considera come significativamente più piccolo, se è minore di $\mu-3 \cdot \sigma$, dove $\mu$ rappresenta la media di tutti i precedenti score di similarità, e $\sigma$ la deviazione standard.
 %CITAZIONE LSH PETROVIC
 
 AL fine di permettere di eseguire il task di scoperta di eventi su larga scala invece, in \cite{Petrovic:2010:SFS:1857999.1858020} è stato ideato un algoritmo che fa ricorso al \emph{Local Sensitive Hashing}\cite{Lsh}  grazie a cui è possibile superare alcuni limiti degli approcci classici.
