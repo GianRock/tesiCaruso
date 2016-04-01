@@ -94,9 +94,9 @@ In un grafo, una \emph{componente connessa} è un sotto-grafo in cui ogni coppia
     	blue=noise}
     \label{fig:dbscangraph}
 \end{figure} 
-In figura \ref{fig:graphdensityConnectedObjects} è mostrato come è possibile rappresentare un grafo-diretto a partire da connessioni di densità: per ogni coppia di oggetti di  directly density reachable $a,b$ con $a$ core-object,
-verrà creato un arco $(a,b)$, se anche $b$ è un core object sarà creato un ulteriore arco da $b$ ad $a$ : $(b,a)$.
-Talvolta però, un border-object può essere nel vicinato di più di un core-object anche appartenenti a cluster distinti, come mostrato in figura \ref{fig:dbscanGraphRevisited}. Se fossero lasciati entrambi gli archi verso il border-object, verrebbe identificata un'unica componente connessa. Lasciare questi archi renderebbe l'algoritmo molto più sensibile al rumore, poiché in tal un solo punto potrebbe determinare la fusione di più cluster.
+In figura \ref{fig:graphdensityConnectedObjects} è mostrato come è possibile rappresentare un grafo non diretto a partire da connessioni di densità: per ogni coppia di oggetti di  directly density reachable $a,b$ con $a$ core-object,
+verrà creato un arco $(a,b)$.
+Talvolta però, un border-object può essere nel vicinato di più di un core-object anche appartenenti a cluster distinti, come mostrato in figura \ref{fig:dbscanGraphRevisited}. Se fossero lasciati entrambi gli archi verso il border-object, verrebbe identificata un'unica componente connessa. Lasciare questi archi renderebbe l'algoritmo molto più sensibile al rumore, poiché  un solo punto (magari un noise) potrebbe determinare la fusione di più cluster.
 
 Per evitare tali problematiche, bisogna costruire un grafo i cui nodi sono sono soltanto i \emph{core-objects}, e verrà aggiunto un arco fra due nodi solo se la loro distanza è minore di $eps$.  In maniera più formale il grafo è cosi definito:
 

@@ -89,19 +89,19 @@ In particolare ad ogni annotatore era richiesto di leggere 13 tweet scelti casua
 
 Nel caso, invece, dei risultati prodotti dall'approccio curated, si sà già a priori che ciascuno dei candidati è un evento. Agli annotatori era solo richiesto di etichettare ciascun tweet ritrovato come rilevante o meno.
  
-
+I risultati prodotti dai metodi di event-detection sono stati considerati come eventi
+ se almeno il 50\% degli annotatori gli ha etichettati come eventi. Per il metodo basato su LSH sono stati filtrati 382 eventi, 52 per l'apporoccio CS.
+ I candidati prodotti dall'apporccio curated, sono stati considerati come eventi se hanno prodotto almeno un tweet rilevante, producendo cosi 361 eventi.
+ 
+ 
+ Ciascuno dei tre metodi utilizzato ha prodotto insiemi di eventi diversi, ma non  disgiunti, esiste cioè   un overlap molto i vari risultati. Ad esempio il metodo basato su LSH ha prodotto 40 cluster di eventi per l'evento relativo al terzo dibattito presidenziale.
+ Per questo è stato applicato un algoritmo di clustering sui risultati dei tre metodi al fine di fondere quelli fra loro più simili. A termine di questa operazione, sono stati prodotti 506 cluster che corrispondono quindi ad eventi.
 \subsection{Raccolta dati}
 Di questi 120 milioni di tweets, sono stati resi pubblici solo gli (id dei tweet e degli utenti di tali tweet).  \'E necessario quindi, un ulteriore step per ritrovare il contenuto di tali tweet.
 Avendo gli identificativi dei tweets, esistono due metodologie per ritovare il contenuto: le API di twitter, il crawling di twitter.com.
 Utilizzare le API di twitter fornendo come query gli id \footnote{https://dev.twitter.com/rest/reference/get/statuses/}, permette di ottenere non solo il contenuto testuale, ma anche ulteriori meta-dati come eventuali hashtag, urls, mentions, in formato JSON.
 Tuttavia vi è un limite orario di 150 richieste \footnote{in ogni richiesta si possono richiedere 100 id}, quindi scaricare un corpus di grandi dimensioni, come nel nostro caso, richiederebbe troppo tempo. Per tale ragione, si è adottato un crawler fornito pubblicamente dal TREC Microblog Task \footnote{https://github.com/myleott/twitter-corpus-tools}, che consente di aggirare questo limite. A termine di questa fase di crawling sono stati raccolti circa 15 milioni di tweets, di cui  circa 10 milioni  sono retweets. Poiché i retweet non sono sati inclusi nei giudizi di rilevanza, si è deciso di scartarli in quanto non influenti ai fini della valutazione. Bisogna sottolineare che,  molti tweet non sono stati ritrovati poiché, utenti che avevano pubblicato status raccolti nel corpus, hanno eliminato i loro tweets o perfino il loro profilo.
- I risultati prodotti dai metodi di event-detection sono stati considerati come eventi
- se almeno il 50\% degli annotatori gli ha etichettati come eventi. Per il metodo basato su LSH sono stati filtrati 382 eventi, 52 per l'apporoccio CS.
- I candidati prodotti dall'apporccio curated, sono stati considerati come eventi se hanno prodotto almeno un tweet rilevante, producendo cosi 361 eventi.
  
- 
- Ciascuno dei tre metodi utilizzato ha prodotto insiemi di eventi diversi, ma non8 disgiunti, esiste cioè   un overlap molto i vari risultati. Ad esempio il metodo basato su LSH ha prodotto 40 cluster di eventi per l'evento relativo al terzo dibattito presidenziale.
- Per questo è stato applicato un algoritmo di clustering sui risultati dei tre metodi al fine di fondere quelli fra loro più simili. A termine di questa operazione, sono stati prodotti 506 cluster che corrispondono quindi ad eventi.
  
 
  
