@@ -6,16 +6,12 @@
 \section{DBSCAN}
 L'algoritmo DBSCAN\cite{Ester96adensity} si basa sull'idea che ciascun elemento di un cluster debba avere un vicinato entro un certo raggio $\epsilon$ (anche chiamato $Eps$)  che contenga almeno un numero minimo di punti (MinPts). Questo algoritmo, in altre parole, stima la \emph{densità} di ciascun punto, per mezzo della cardinalità del suo vicinato entro un raggio predefinito $Eps$. 
 
-A tal fine DBSCAN etichetta ogni punto in una delle sequenti categorie:\textit{ core-object, border} e \textit{noise}.
+A tal fine DBSCAN etichetta ogni punto in una delle sequenti categorie:\textit{ core-object, border-object} e \textit{noise}.
 Un punto sarà definito come \emph{core-object} se la densità del suo eps-vicinato supera la soglia $MinPts$.
-Un punto $q$ è etichettato come \textit{border} se esiste un core-object $p$ tale che $q$ ricade nell'eps-vicinato di $p$ e $q$ non è un \emph{core-object}. Tutti i punti che non ricadono nelle prime due categorie sono etichettati come \textit{noise}.
-%Un punto $q$ si dice \textit{density-reachable} da un core-object $p$, se $q$ ricade nell'eps-vicinato di $p$ e $p$ non è un \emph{core-object}.
-%La chiusura transitiva  di questa proprietà, è detta density-reachability. Due punti $p$ e $q$ si diranno invece, \emph{density-connected}, se esiste un terzo oggetto $o$ dal quale entrambi sono density-reachable. Grazie a quest'ultima proprietà è possibile definire un cluster, ovvero come un insieme di oggetti densamente connessi che è massimale rispetto alla proprietà di density-reachability. Il noise, invece, sarà dato dall'insieme di punti che non appartengono a nessuno di questi cluster.  
+A partire da questi punti core vengono definite delle proprietà di connettività verso  tutti quei punti che appartengono al eps-vicinato.
 
 
-In seguito verranno date le definizioni in maniera più formale:
- 
-
+In seguito verranno date le definizioni formali delle proprietà di connettività fra i punti, che verranno utilizzate per generare i possibili cluster.
  %defizioni di DBSCAN
 \begin{definizione}[directly density-reachable]
 \label{def:ddr}
@@ -27,9 +23,10 @@ Un oggetto $p$ si dice 	\emph{directly-density-reachable} da un oggetto $q$ risp
 \end{definizione}
 \begin{definizione}[density-reachable]
 \label{def:dr} 
-Un oggetto   $p$ si dice 	\emph{"density-reachable"} da un oggetto $q$ rispetto ai parametri $Eps$ ed $MinPts$ nell'insieme di oggetti $D$, e si  indica con \emph{$p>_{D}q$}, se esiste una catena di oggetti: $p_1,\dots,p_n$, $p_1=p p_n=q$ tali che:  $p_{i} \in D  \land p_{i+1}$ è \emph{directly-density-reachable} da $p_{i}$
+Un oggetto   $p$ si dice 	\emph{"density-reachable"} da un oggetto $q$ rispetto ai parametri $Eps$ ed $MinPts$ nell'insieme di oggetti $D$, e si  indica con \emph{$p>_{D}q$}, se esiste una catena di oggetti: $p_1,\dots,p_n$, $p_1=p\; p_n=q$ tali che:  $p_{i} \in D  \land p_{i+1}$ è \emph{directly density-reachable} da $p_{i}$
 \end{definizione}
-Questa relazione è l'estensione canonica della relazione Directly-density-reachability, inoltre è una relaione transitiva ma non simmetrica. Sebbene non sia simmetrica, vi sono delle zone nell'isnieme $D$, in cui questa relazione è simmetrica ovvero  per quegli oggetti $o$ nell insieme per cui $|N_{eps(o)}| \ge MinPts$. Due oggetti \emph{border}, ovvero due oggetti che giacciono sul confine di un cluser, probabilmente non saranno density-reachable fra loro in quanto non ci sono abbastanza oggetti nel loro vicinato. Tuttavia, ci sarà necessariamente, un terzo oggetto nel cluster dal quale entrambi questi  oggetti border saranno density-reachable.
+Questa relazione è l'estensione canonica della relazione di  Directly density reachability. Ovvero se abbiamo che un punto $p$ è ddr\footnote{ddr=directly density reachable} a q, e q è ddr da $r$ allora diremo che $p$ è \emph{density reachable} da $r$.
+Inoltre è una relazione transitiva ma non simmetrica. Sebbene non sia simmetrica, vi sono delle zone nell'isnieme $D$, in cui questa relazione è simmetrica ovvero  per quegli oggetti $o$ nell insieme per cui $|N_{eps(o)}| \ge MinPts$. Due oggetti \emph{border}, ovvero due oggetti che giacciono sul confine di un cluser, probabilmente non saranno density-reachable fra loro in quanto non ci sono abbastanza oggetti nel loro vicinato. Tuttavia, ci sarà necessariamente, un terzo oggetto nel cluster dal quale entrambi questi  oggetti border saranno density-reachable.
 %figura esempio
 \begin{figure}
 \centering
