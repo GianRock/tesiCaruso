@@ -4,9 +4,18 @@
 % !TEX spellcheck = it-IT
 
 \section{DBSCAN}
-L'idea \lq\lq chiave\rq\rq dell'algoritmo DBSCAN\cite{Ester96adensity} è che ciascun elemento di un cluster debba avere un vicinato entro un certo raggio $\epsilon$ (Eps)  che contenga almeno un numero minimo di punti (MinPts). Questo algoritmo, in altre parole, stima la \emph{densità} di ciascun punto, per mezzo della cardinalità del suo \lq\lq vicinato\rq\rq entro un raggio predefinito $Eps$. Un punto sarà definito come \emph{core-object} se la densità del suo vicinato supera una data soglia $MinPts$.
-Un punto $q$ si dice \lq\lq directly density-reachable\rq\rq  da un core-object $p$, se $q$ ricade nell'eps-vicinato di $p$.
-La chiusura transitiva  di questa proprietà, è detta density-reachability. Due punti $p$ e $q$ si diranno invece, \emph{density-connected}, se esiste un terzo oggetto $o$ dal quale entrambi sono density-reachable. Grazie a quest'ultima proprietà è possibile definire un cluster, ovvero come un insieme di oggetti densamente connessi che è massimale rispetto alla proprietà di density-reachability. Il noise, invece, sarà dato dall'insieme di punti che non appartengono a nessuno di questi cluster.  In seguito verranno date le definizioni in maniera più formale:
+L'algoritmo DBSCAN\cite{Ester96adensity} si basa sull'idea che ciascun elemento di un cluster debba avere un vicinato entro un certo raggio $\epsilon$ (anche chiamato $Eps$)  che contenga almeno un numero minimo di punti (MinPts). Questo algoritmo, in altre parole, stima la \emph{densità} di ciascun punto, per mezzo della cardinalità del suo vicinato entro un raggio predefinito $Eps$. 
+
+A tal fine DBSCAN etichetta ogni punto in una delle sequenti categorie:\textit{ core-object, border} e \textit{noise}.
+Un punto sarà definito come \emph{core-object} se la densità del suo eps-vicinato supera la soglia $MinPts$.
+Un punto $q$ è etichettato come \textit{border} se esiste un core-object $p$ tale che $q$ ricade nell'eps-vicinato di $p$ e $q$ non è un \emph{core-object}. Tutti i punti che non ricadono nelle prime due categorie sono etichettati come \textit{noise}.
+%Un punto $q$ si dice \textit{density-reachable} da un core-object $p$, se $q$ ricade nell'eps-vicinato di $p$ e $p$ non è un \emph{core-object}.
+%La chiusura transitiva  di questa proprietà, è detta density-reachability. Due punti $p$ e $q$ si diranno invece, \emph{density-connected}, se esiste un terzo oggetto $o$ dal quale entrambi sono density-reachable. Grazie a quest'ultima proprietà è possibile definire un cluster, ovvero come un insieme di oggetti densamente connessi che è massimale rispetto alla proprietà di density-reachability. Il noise, invece, sarà dato dall'insieme di punti che non appartengono a nessuno di questi cluster.  
+
+
+In seguito verranno date le definizioni in maniera più formale:
+ 
+
  %defizioni di DBSCAN
 \begin{definizione}[directly density-reachable]
 \label{def:ddr}
