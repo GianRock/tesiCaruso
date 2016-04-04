@@ -2,7 +2,9 @@
 % !TEX TS-program = pdflatex
 % !TEX root = ../tesi.tex
 % !TEX spellcheck = it-IT
-
+\color{red}
+Inserire un'incipit sul problema del clustering
+\color{black}
 \section{DBSCAN}
 DBSCAN\cite{Ester96adensity}(Density-Based Spatial Clustering of Applications with Noise) è un algoritmo di clustering proposto da Martin Ester et. al nel 1996. basato su densità. 
 L'idea di questo algoritmo è che ciascun elemento di un cluster debba avere un vicinato entro un certo raggio $\epsilon$ (anche chiamato $Eps$)  che contenga almeno un numero minimo di punti (MinPts). Questo algoritmo, in altre parole, stima la \emph{densità} di ciascun punto  enumerando gli elementi che ricadono entro un dato raggio $\epsilon$ dal punto. Quei punti con una densità superiore ad una certa soglia, $MinPts$, sono classificati come \textit{core objects} .I punti rimanenti invece, saranno etichettati come \emph{noise} se nel loro intorno, entro il raggio stabilito, non contengono nessun core-point, \emph{border} altrimenti.
@@ -69,8 +71,8 @@ Questo algoritmo presenta due proprietà fondamentali che ne permettono una comp
 \end{enumerate}
 
 L'algoritmo di DBSCAN, al fine di creare un cluster,parte da un punto arbitrario $p$ e ritrova tutti i punti da esso density-reachable rispetto ai parametri $Eps$ e $MinPts$, effettuando region-query \footnote{una region-query  di un punto $p$ è la ricerca dei punti che ricadono nel viciniato di $p$} prima per $p$ ed eventualmente per i vicini di p diretti ed indiretti.
-Se l'oggetto $p$ è un core-object tale procura ci darà un cluster, altrimenti l'oggetto $p$ sarà considerato come NOISE, e si passerà al oggetto successivo. Se $p$ è un border-point sarà successivamente ri-etichettato quando, verrà considerato un core object dal quale $p$ è density reachable.
-Le implementazioni classiche di DBSCAN fanno uso di indici spaziali come R-tree o X-tree, che consentono di ritrovare il viciniato di ciacun punto (region-query) in maniera efficiente $O(logn)$. Nel peggiore dei casi, DBSCAN visita ogni punto del dataset, ovvero esegue una region query per ciascun punto, ciò determina una complessità $0(n^2)$  dove $n$ rappresenta il numero di punti nel dataset. Se si utilizza una struttura indicizzata come un R-tree, è possibile passare ad una coplessità $0(nlogn)$ . 
+Se l'oggetto $p$ è un core-object tale procedura ci darà un cluster, altrimenti l'oggetto $p$ sarà considerato come noise, e si passerà al oggetto successivo. Se $p$ è un border-point sarà successivamente ri-etichettato quando, verrà considerato un core object dal quale $p$ è density reachable.
+Le implementazioni classiche di DBSCAN fanno uso di indici spaziali come R-tree o X-tree, che consentono di ritrovare il viciniato di ciacun punto (region-query) in maniera efficiente $O(log(n))$. Nel peggiore dei casi, DBSCAN visita ogni punto del dataset, ovvero esegue una region query per ciascun punto, ciò determina una complessità $0(n^2)$  dove $n$ rappresenta il numero di punti nel dataset. Se si utilizza una struttura indicizzata come un R-tree, è possibile passare ad una coplessità $0(n \cdot log(n))$ . 
 Tali strutture indicizzate però, non riescono a scalare all'aumentare della dimensionalità dei dati: la performance delle region query passa da  O(logn)to O(n), facendo degenerare, cioè la complessità temporale di dbscan in $O(n^2)$ rendendo poco adatto questo algoritmo al problema del clustering dei tweets. Nel lavoro di Guo et al. \cite{4370588} vien proposto una variante dell'algoritmo DBSCAN che fa uso dell'LSH, al fine di ritrovare i nearest-neighbors di un punto, riducendo sensibilmente la complessità dell'algoritmo.
  
  %note dbscan
@@ -102,15 +104,15 @@ In figura \ref{fig:graphdensityConnectedObjects} è mostrato come è possibile r
 verrà creato un arco $(a,b)$.
 Talvolta però, un border-object può essere nel vicinato di più di un core-object anche appartenenti a cluster distinti, come mostrato in figura \ref{fig:dbscanGraphRevisited}. Se fossero lasciati entrambi gli archi verso il border-object, verrebbe identificata un'unica componente connessa. Lasciare questi archi renderebbe l'algoritmo molto più sensibile al rumore, poiché  un solo punto (magari un noise) potrebbe determinare la fusione di più cluster.
 
-Per evitare tali problematiche, bisogna costruire un grafo i cui nodi sono sono soltanto i \emph{core-objects}, e verrà aggiunto un arco fra due nodi solo se la loro distanza è minore di $eps$.  In maniera più formale il grafo è cosi definito:
+Per evitare tali problematiche bisogna costruire un grafo i cui nodi sono \emph{core-objects} e \emph{border-objects}, e verrà aggiunto un arco fra due nodi solo se la loro distanza è minore di $eps$.  In maniera più formale il grafo $
+G=(V,E)$ è così definito:
+\begin{itemize}
+\item $ V= \lbrace x \in D \:| x \in \{ cores(D) \cup borders(D)\}\} $
+\item 
+%$ E = \lbrace (x,y) \in V \:| \: d(x,y) \le eps \rbrace$
+$ E = \lbrace (x,y) \in V \:| \: Card(Neigh_{eps(x)}) \ge MinPts\rbrace$
 
-$
-G=(V,A) \:$ dove :
-
-$ V= \lbrace x \in D \:| \: Card(Neigh_{eps(x)}) \ge MinPts\rbrace$
-
-
-$ A= \lbrace (x,y) \in V \:| \: d(x,y) \le eps \rbrace$
+\end{itemize}
 
 A partire da questo grafo $G$ verranno identificate tutte le componenti connesse che corrispondo ai cluster, individiuati però solo a partire dai nodi cores. Bisognerà quindi eseguire un ulteriore step per assegnare gli oggetti border ad un cluster con cui sono connessi. L'algoritmo originale nel caso in cui un oggetto border   ricada nel vicinato di più core objects, ciascuno dei quali di un cluster differente, lo assegnerebbe in maniera  casuale ad uno di questi cluster. In questo caso è possibile adottare tre strategie diverse:
 \begin{itemize}
@@ -131,14 +133,14 @@ A partire da questo grafo $G$ verranno identificate tutte le componenti connesse
 
 
 \section{Local Sensitive Hashing}
-Un problema fondamentale che molti task di Data Mining devono affrontare è quello di esaminare i dati per trovare item "simili". Molto spesso questo problema è risolto cercando il Nearest Neighbor ( o i primi k-nearest neighbor) di un oggetto in qualche spazio metrico $R^d$ .
+Un problema fondamentale che molti task di Data Mining devono affrontare è quello di esaminare i \color{red} coppie \color{black} di dati per trovare item "simili". Molto spesso questo problema è risolto cercando il Nearest Neighbor ( o i primi k-nearest neighbor) di un oggetto in qualche spazio metrico $R^d$ .
 Nel caso di poche dimensioni (d=2, d=3) questo problema, si riesce a risolvere in maniera piuttosto efficiente (O(log n)) mediante l'utlizzo di strutture dati come K-D-Tree o R-tree che partizionano lo spazio delle feature. Tuttavia al crescere delle dimensioni (curse of dimensionality), queste strutture basate sul partizionamento dello spazio, degradano in una ricerca lineare \cite{Weber:1998:QAP:645924.671192} passando quindi ad una complessità quadratica.
 Per rendere meglio l'idea supponiamo di voler calcolare i documenti più simili in una collezione composta da un milione di documenti, si avrebbero quindi  $\binom{100000}{2}$  coppie di cui calcolare la similarità. Se ci si impiega un microsecondo per ogni calcolo di similarità, sarebbero necessari quasi sei giorni per valutare tutte queste coppie.
 Se l'obiettivo è proprio il calcolo delle similarità di ogni possibile coppia, l'unico modo per ridurre il tempo necessario è usare una qualche forma di parallelismo. Tuttavia spesso, come nel caso del NNS-problem, si è interessati solo alle coppie più simili o più in generale a quelle coppie la cui similarità è al di sopra di una determinata soglia. \'E quindi sufficiente considerare solo quelle coppie che "probabilmente" sono simili, piuttosto che considerarle tutte. Proprio a tale scopo, se la dimensionalità dei dati è piuttosto alta, è possibile usare la tecnica del \emph{Local Sensitive Hashing} (LSH) \cite{Lsh} \cite{Gionis:1999}. L'idea chiave dell'LSH è quella di eseguire l'hasing dei punti attraverso molte funzioni di hashing, in modo tale che per ogni funzione la probabilità di collisione sia più alta per i punti vicini fra loro, rispetto ai punti più distanti.
 Dopo aver eseguito l'hashing  tutte le coppie che sono state mappate nello stesso "bucket" possono essere considerate come \emph{coppie candidate}, solo queste coppie saranno valutate per determinare quali sono realmente simili. Quello che ci si augura è che, le coppie di item fra loro dissimili non vegano mai mappate verso lo stesso bucket,tali coppie rappresentano infatti dei \emph{false positive}. Allo stesso tempo ci si auspica che tutte (o la maggior parte) delle coppie realmente simili siano mappate nel medesimo bucket, le coppie che simili che non sono ricadute nello stesso bucket rappresentano i \emph{false-negative}
 \subsection{Teoria dell'LSH}
  L'LSH è un framework per costruire strutture dati che permettono di ricercare i "near neighbor" all'interno di una collezione di vettori altamente dimensionali.  Dato un insieme $P$ contenente vettori D-dimensionali, l'obiettivo è di costruire una struttura che consenta di ritrovare, per un qualsiasi query point $q$, tutti quei punti che giacciono in un raggio di distanza $cR$ (dove $c$ rappresenta un fattore di approssimazione $>1$), o più formalmente gli \emph{R-near neighbors} di q.
- Data una funzione di hashing $h$ diremo che una coppia di oggetti $(x,y)$ sarà una \emph{candidate}   se $h(x)=h(y)$. Sia $d(\cdot,\cdot)$ una qualche funzione  definita su un insieme di oggetti $S$
+ Data una funzione di hashing $h$ diremo che una coppia di oggetti $(x,y)$ sarà una \emph{candidate}   se $h(x)=h(y)$. \color{red} Sia $d(\cdot,\cdot)$ una qualche funzione  definita su un insieme di oggetti $S$ \color{black}
 \begin{definizione}[Locality-sensitive hashing] 
 
 Una famiglia di funzioni $H$ si dice $(d_1,d_2,p_1,p_2)-Sensitive$ se  $\forall (x,y) \in S ,\;\forall h \in H $ 
@@ -150,9 +152,9 @@ Una famiglia di funzioni $H$ si dice $(d_1,d_2,p_1,p_2)-Sensitive$ se  $\forall 
 \end{itemize}
 dove $p_1>p_2$
 \end{definizione}
-A differenza di algoritmi di hashing classici dove si cercano di evitare delle collsioni per item diversi, in questo caso si cerca di massimizzare la probabilità di collisione per item vicini.
+A differenza di algoritmi di hashing classici dove si cercano di evitare delle collsioni per item diversi, in questo caso si cerca di massimizzare la probabilità di collisione per item vicini. 
 Dato un oggetto $q$ come query, verranno restituiti gli oggetti che giacciono nello stesso bucket $h(q)$
- 
+ \color{black}
 
 \begin{figure}[h]
 \centering
