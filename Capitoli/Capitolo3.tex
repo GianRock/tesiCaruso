@@ -2,9 +2,30 @@
 % !TEX TS-program = pdflatex
 % !TEX root = ../tesi.tex
 % !TEX spellcheck = it-IT
+
+
 \color{red}
 Inserire un'incipit sul problema del clustering
 \color{black}
+
+
+Il Clustering o analisi dei gruppi (dal termine inglese cluster analysis introdotto da Robert
+Tryon nel 1939) `e un insieme di tecniche di analisi dei dati volte alla selezione e raggruppamento di elementi omogenei in un insieme di dati. Le tecniche di clustering si basano
+su misure relative alla somiglianza tra gli elementi. In molti approcci questa similarit`a,
+o meglio, dissimilarit`
+a, `e concepita in termini di distanza in uno spazio multidimension-
+ale. La bont`
+a delle analisi ottenute dagli algoritmi di c,ustering dipende molto dalla scelta
+della metrica, e quindi da come `e calcolata la distanza. Nel Clustering density-based, il
+raggruppamento avviene analizzando l’intorno di ogni punto dello spazio. In particolare,
+viene considerata la densit`
+a di punti in un intorno di raggio fissato. DBSCAN (Density-
+Based Spatial Clustering of Applications with Noise) è un metodo di clustering proposto
+nel 1996 da Martin Ester, Hans-Peter Kriegel, Jrg Sander and Xiaowei Xu `e basato sulla
+densit`a perch`e connette regioni di punti con densit`a sufficientemente alta. A differenza
+degli altri algoritmi di clustering basati su centroide, gli elementi che appartengono ad uno
+stesso clustrer possono anche non essere vicini fra loro, ma appartengono allo stesso cluster
+perch`e sono raggiungibili attraverso altri elementi. 
 \section{DBSCAN}
 DBSCAN\cite{Ester96adensity}(Density-Based Spatial Clustering of Applications with Noise) è un algoritmo di clustering proposto da Martin Ester et. al nel 1996. basato su densità. 
 L'idea di questo algoritmo è che ciascun elemento di un cluster debba avere un vicinato entro un certo raggio $\epsilon$ (anche chiamato $Eps$)  che contenga almeno un numero minimo di punti (MinPts). Questo algoritmo, in altre parole, stima la \emph{densità} di ciascun punto  enumerando gli elementi che ricadono entro un dato raggio $\epsilon$ dal punto. Quei punti con una densità superiore ad una certa soglia, $MinPts$, sono classificati come \textit{core objects} .I punti rimanenti invece, saranno etichettati come \emph{noise} se nel loro intorno, entro il raggio stabilito, non contengono nessun core-point, \emph{border} altrimenti.
