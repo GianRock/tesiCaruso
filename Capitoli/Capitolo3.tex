@@ -10,24 +10,20 @@ Inserire un'incipit sul problema del clustering
 
 
 Il Clustering o analisi dei gruppi (dal termine inglese cluster analysis introdotto da Robert
-Tryon nel 1939) `e un insieme di tecniche di analisi dei dati volte alla selezione e raggruppamento di elementi omogenei in un insieme di dati. Le tecniche di clustering si basano
-su misure relative alla somiglianza tra gli elementi. In molti approcci questa similarit`a,
-o meglio, dissimilarit`
-a, `e concepita in termini di distanza in uno spazio multidimension-
-ale. La bont`
-a delle analisi ottenute dagli algoritmi di c,ustering dipende molto dalla scelta
-della metrica, e quindi da come `e calcolata la distanza. Nel Clustering density-based, il
-raggruppamento avviene analizzando l’intorno di ogni punto dello spazio. In particolare,
-viene considerata la densit`
+Tryon nel 1939) è un insieme di tecniche di analisi dei dati volte alla selezione e raggruppamento di elementi omogenei in un insieme di dati. Le tecniche di clustering si basano
+su misure relative alla somiglianza tra gli elementi. In molti approcci questa similarità, o meglio, dissimilarità, è concepita in termini di distanza in uno spazio multidimensionale. La bontà delle analisi ottenute dagli algoritmi di clustering dipende molto dalla scelta
+della metrica, e quindi da come è calcolata la distanza. Nel Clustering density-based, il
+raggruppamento avviene analizzando l'intorno di ogni punto dello spazio. In particolare,
+viene considerata la densità
 a di punti in un intorno di raggio fissato. DBSCAN (Density-
 Based Spatial Clustering of Applications with Noise) è un metodo di clustering proposto
-nel 1996 da Martin Ester, Hans-Peter Kriegel, Jrg Sander and Xiaowei Xu `e basato sulla
-densit`a perch`e connette regioni di punti con densit`a sufficientemente alta. A differenza
+nel 1996 da Martin Ester, Hans-Peter Kriegel, Jrg Sander and Xiaowei Xu. `e basato sulla
+densità petche connette regioni di punti con densità sufficientemente alta. A differenza
 degli altri algoritmi di clustering basati su centroide, gli elementi che appartengono ad uno
 stesso clustrer possono anche non essere vicini fra loro, ma appartengono allo stesso cluster
-perch`e sono raggiungibili attraverso altri elementi. 
+perché sono raggiungibili attraverso altri elementi. 
 \section{DBSCAN}
-DBSCAN\cite{Ester96adensity}(Density-Based Spatial Clustering of Applications with Noise) è un algoritmo di clustering proposto da Martin Ester et. al nel 1996. basato su densità. 
+DBSCAN\cite{Ester96adensity}(Density-Based Spatial Clustering of Applications with Noise) è un algoritmo di clustering proposto da Martin Ester et. al nel 1996, basato su densità. 
 L'idea di questo algoritmo è che ciascun elemento di un cluster debba avere un vicinato entro un certo raggio $\epsilon$ (anche chiamato $Eps$)  che contenga almeno un numero minimo di punti (MinPts). Questo algoritmo, in altre parole, stima la \emph{densità} di ciascun punto  enumerando gli elementi che ricadono entro un dato raggio $\epsilon$ dal punto. Quei punti con una densità superiore ad una certa soglia, $MinPts$, sono classificati come \textit{core objects} .I punti rimanenti invece, saranno etichettati come \emph{noise} se nel loro intorno, entro il raggio stabilito, non contengono nessun core-point, \emph{border} altrimenti.
  
  
@@ -94,7 +90,7 @@ Questo algoritmo presenta due proprietà fondamentali che ne permettono una comp
 L'algoritmo di DBSCAN, al fine di creare un cluster,parte da un punto arbitrario $p$ e ritrova tutti i punti da esso density-reachable rispetto ai parametri $Eps$ e $MinPts$, effettuando region-query \footnote{una region-query  di un punto $p$ è la ricerca dei punti che ricadono nel viciniato di $p$} prima per $p$ ed eventualmente per i vicini di p diretti ed indiretti.
 Se l'oggetto $p$ è un core-object tale procedura ci darà un cluster, altrimenti l'oggetto $p$ sarà considerato come noise, e si passerà al oggetto successivo. Se $p$ è un border-point sarà successivamente ri-etichettato quando, verrà considerato un core object dal quale $p$ è density reachable.
 Le implementazioni classiche di DBSCAN fanno uso di indici spaziali come R-tree o X-tree, che consentono di ritrovare il viciniato di ciacun punto (region-query) in maniera efficiente $O(log(n))$. Nel peggiore dei casi, DBSCAN visita ogni punto del dataset, ovvero esegue una region query per ciascun punto, ciò determina una complessità $0(n^2)$  dove $n$ rappresenta il numero di punti nel dataset. Se si utilizza una struttura indicizzata come un R-tree, è possibile passare ad una coplessità $0(n \cdot log(n))$ . 
-Tali strutture indicizzate però, non riescono a scalare all'aumentare della dimensionalità dei dati: la performance delle region query passa da  O(logn)to O(n), facendo degenerare, cioè la complessità temporale di dbscan in $O(n^2)$ rendendo poco adatto questo algoritmo al problema del clustering dei tweets. Nel lavoro di Guo et al. \cite{4370588} vien proposto una variante dell'algoritmo DBSCAN che fa uso dell'LSH, al fine di ritrovare i nearest-neighbors di un punto, riducendo sensibilmente la complessità dell'algoritmo.
+Tali strutture indicizzate però, non riescono a scalare all'aumentare della dimensionalità dei dati: la performance delle region query passa da  $O(log\;n)$ a   $O(n)$, facendo degenerare, cioè la complessità temporale di dbscan in $O(n^2)$ rendendo poco adatto questo algoritmo al problema del clustering dei tweets. Nel lavoro di Guo et al. \cite{4370588} vien proposto una variante dell'algoritmo DBSCAN che fa uso dell'LSH, al fine di ritrovare i nearest-neighbors di un punto, riducendo sensibilmente la complessità dell'algoritmo.
  
  %note dbscan
 L'algoritmo DBSCAN riesce  a generare dei cluster anche con un elevata presenza di rumore. Inoltre grazie alla definizione di "density-connected"\ref{def:dc}, riesce ad identificare cluster di forme arbitrarie. Inoltre, a differenza di altri algoritmi come k-means, non necessita di conoscere a priori il numero di cluster. Tutte queste caratteristiche rendono questo algoritmo particolarmente interessante nella scoperta di cluster in questo lavoro di tesi poiché: i messaggi di un microblog come Twitter contengono un'alta percentuale di rumore, e nel task di event-detection non è possibile sapere a priori il numero di eventi.
@@ -125,22 +121,27 @@ In figura \ref{fig:graphdensityConnectedObjects} è mostrato come è possibile r
 verrà creato un arco $(a,b)$.
 Talvolta però, un border-object può essere nel vicinato di più di un core-object anche appartenenti a cluster distinti, come mostrato in figura \ref{fig:dbscanGraphRevisited}. Se fossero lasciati entrambi gli archi verso il border-object, verrebbe identificata un'unica componente connessa. Lasciare questi archi renderebbe l'algoritmo molto più sensibile al rumore, poiché  un solo punto (magari un noise) potrebbe determinare la fusione di più cluster.
 
-Per evitare tali problematiche bisogna costruire un grafo i cui nodi sono \emph{core-objects} e \emph{border-objects}, e verrà aggiunto un arco fra due nodi solo se la loro distanza è minore di $eps$.  In maniera più formale il grafo $
+Per evitare tali problematiche bisogna costruire un grafo i cui nodi sono dati dagli oggetti  \emph{core} e \emph{border}.
+Verrà aggiunto un arco fra tutte le coppie di oggetti che core la cui distanza è minore della soglia $eps$.
+Quando un border object ricade nel vicinato di due core objects appartenenti a cluster diversi, verrà creato un solo arco fra il border object e uno solo dei core.
+
+
+
+ e verrà aggiunto un arco fra due nodi solo se la loro distanza è minore di $eps$.  In maniera più formale il grafo $
 G=(V,E)$ è così definito:
 \begin{itemize}
 \item $ V= \lbrace x \in D \:| x \in \{ cores(D) \cup borders(D)\}\} $
 \item 
-%$ E = \lbrace (x,y) \in V \:| \: d(x,y) \le eps \rbrace$
-$ E = \lbrace (x,y) \in V \:| \: Card(Neigh_{eps(x)}) \ge MinPts\rbrace$
+ $ E = \lbrace (x,y) \in V \:| \: d(x,y) \le eps \rbrace$
+%$ E = \lbrace (x,y) \in VxV \:| \: Card(N_{eps(x)}) \ge MinPts\rbrace$
 
 \end{itemize}
-
-A partire da questo grafo $G$ verranno identificate tutte le componenti connesse che corrispondo ai cluster, individiuati però solo a partire dai nodi cores. Bisognerà quindi eseguire un ulteriore step per assegnare gli oggetti border ad un cluster con cui sono connessi. L'algoritmo originale nel caso in cui un oggetto border   ricada nel vicinato di più core objects, ciascuno dei quali di un cluster differente, lo assegnerebbe in maniera  casuale ad uno di questi cluster. In questo caso è possibile adottare tre strategie diverse:
-\begin{itemize}
-\item scegliere in maniera casuale un cluster 
-\item scegliere il cluster con cui il border object ha maggiore connettività 
-\item scegliere il cluster più vicino al border object
-\end{itemize}
+%A partire da questo grafo $G$ verranno identificate tutte le componenti connesse che corrispondo ai cluster, individiuati però solo a partire dai nodi cores. Bisognerà quindi eseguire un ulteriore step per assegnare gli oggetti border ad un cluster con cui sono connessi. L'algoritmo originale nel caso in cui un oggetto border   ricada nel vicinato di più core objects, ciascuno dei quali di un cluster differente, lo assegnerebbe in maniera  casuale ad uno di questi cluster. In questo caso è possibile adottare tre strategie diverse:
+ %\begin{itemize}
+ %\item scegliere in maniera casuale un cluster 
+ %\item scegliere il cluster con cui il border object ha maggiore connettività 
+ %\item scegliere il cluster più vicino al border object
+ %\end{itemize}
 
 \begin{figure}
 \centering
@@ -154,7 +155,7 @@ A partire da questo grafo $G$ verranno identificate tutte le componenti connesse
 
 
 \section{Local Sensitive Hashing}
-Un problema fondamentale che molti task di Data Mining devono affrontare è quello di esaminare i \color{red} coppie \color{black} di dati per trovare item "simili". Molto spesso questo problema è risolto cercando il Nearest Neighbor ( o i primi k-nearest neighbor) di un oggetto in qualche spazio metrico $R^d$ .
+Un problema fondamentale che molti task di Data Mining devono affrontare è quello di esaminare  coppie  di dati per trovare item "simili". Molto spesso questo problema è risolto cercando il Nearest Neighbor ( o i primi k-nearest neighbor) di un oggetto in qualche spazio metrico $R^d$ .
 Nel caso di poche dimensioni (d=2, d=3) questo problema, si riesce a risolvere in maniera piuttosto efficiente (O(log n)) mediante l'utlizzo di strutture dati come K-D-Tree o R-tree che partizionano lo spazio delle feature. Tuttavia al crescere delle dimensioni (curse of dimensionality), queste strutture basate sul partizionamento dello spazio, degradano in una ricerca lineare \cite{Weber:1998:QAP:645924.671192} passando quindi ad una complessità quadratica.
 Per rendere meglio l'idea supponiamo di voler calcolare i documenti più simili in una collezione composta da un milione di documenti, si avrebbero quindi  $\binom{100000}{2}$  coppie di cui calcolare la similarità. Se ci si impiega un microsecondo per ogni calcolo di similarità, sarebbero necessari quasi sei giorni per valutare tutte queste coppie.
 Se l'obiettivo è proprio il calcolo delle similarità di ogni possibile coppia, l'unico modo per ridurre il tempo necessario è usare una qualche forma di parallelismo. Tuttavia spesso, come nel caso del NNS-problem, si è interessati solo alle coppie più simili o più in generale a quelle coppie la cui similarità è al di sopra di una determinata soglia. \'E quindi sufficiente considerare solo quelle coppie che "probabilmente" sono simili, piuttosto che considerarle tutte. Proprio a tale scopo, se la dimensionalità dei dati è piuttosto alta, è possibile usare la tecnica del \emph{Local Sensitive Hashing} (LSH) \cite{Lsh} \cite{Gionis:1999}. L'idea chiave dell'LSH è quella di eseguire l'hasing dei punti attraverso molte funzioni di hashing, in modo tale che per ogni funzione la probabilità di collisione sia più alta per i punti vicini fra loro, rispetto ai punti più distanti.
