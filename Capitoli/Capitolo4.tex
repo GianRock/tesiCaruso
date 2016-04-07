@@ -32,7 +32,6 @@ Dato uno stream  di tweet (ordinato temporalmente), l'obiettivo  è quello di in
 In questo lavoro di tesi, è stata adottata la prima metodologia, l'obiettivo è quindi suddividere lo stream in cluster, tali che ciascuno di essi corrisponda a tutti i tweet relativi ad un \lq\lq evento\rq\rq.  
 La definizione di evento utilizzata è quella utilizzata per il Topic Detection and Tracking (TDT) \cite{Allan:2002:TDT:772260} :
 In seguito sono descritte in maniera più dettagliata tutte le fasi eseguite.
-
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.6\textwidth]{diagrammaComponenti}
@@ -81,16 +80,19 @@ Per poter applicare gli algorimi di machine learning è necessario rappresentare
 I tweet saranno rappresentati come vettori, utilizzando il Vector space Model \cite{Salton:1989:ATP:77013}. 
 Il Vector Space Model (VSM), in italiano Modello a Spazio Vettoriale, è una modellazione matematica per documenti testuali che si basa sull'assunzione che il significato dei documenti possa essere rappresentato dai termini che compongono il documento stesso. 
 L'intero corpus di documenti, può essere quindi considerato come una matrice $A \in \mathbb{R}^{mxn}$, dove $m$  indica il numero dei termini distinti nel dizionario, $n$  il numero dei documenti 
+La figura \ref{fig:vsm}  mostra una possibile rappresentazione in uno spazio vettoriale a tre dimensioni (ovvero vi sono solo tre termini) di tre documenti.
 
 In questo modello, ciascuna dimensione dei vettori corrisponde ad un termine distinto, e sarà diversa da zero se il termine compare nel documento: i singoli valori $a_{ij}$ della matrice rappresentano il peso
-assunto dal i-esimo termine nell’j-esimo documento. Questo peso può essere assegnato in base a  diversi schemi di pesatura, ed è solitamente funzione della frequenza del termine nello specifico documento e di altri fattori, mentre assume valore 0 in assenza del
+assunto dal i-esimo termine nell’j-esimo documento.
+
+ Questo peso può essere assegnato in base a  diversi schemi di pesatura, ed è solitamente funzione della frequenza del termine nello specifico documento e di altri fattori, mentre assume valore 0 in assenza del
 termine nel documento. Di conseguenza questi vettori sono altamente dimensionali, e molto sparsi dato che i tweet sono composti al più da 140 caratteri. 
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.6\textwidth]{vector_space}
     \caption{Esempio di documenti in uno spazio vettoriale.}
-    \label{fig:dbpedia}
+    \label{fig:vsm}
 \end{figure}  
 
 
@@ -130,13 +132,16 @@ Le tecniche per risolvere questi problemi prevedono l'uso di euristiche ed  espr
  
 \subsubsection{Stop-Word Removal}
 
-Le Stop Word sono parole che vengono individuate e filtrate o rimosse all'interno del processo di Natural Language Processing. Solitamente sono contenute in una lista, la stop word list, che può contenere diversi tipi di parole a seconda degli obiettivi dell'applicazione. Solitamente vengono inserite nella lista le parole a più alta frequenza e dunque meno discriminanti, di un certo linguaggio, individuabili dunque all'interno delle categorie chiuse del discorso e tra le parole a maggiore frequenza
-delle altre categorie, come ad esempio verbi ausiliari o parole molto generiche. In questo lavoro è stata utilizzata una lista contenente le classiche stopword per la lingua inglese, a cui sono state aggiunte però
+Le Stop Word sono parole che vengono individuate e filtrate o rimosse all'interno del processo di Natural Language Processing.
+Parole come "the", "above", "for" non hanno nessun potere discriminativo all'interno di un documento, rimuoverle ha un vantaggio duplice: da un lato diminuisce la complessità del documento stesso, dall'altro evita che venagano in seguito considerati come simili dei documenti che contengono queste parole.
+Generalmente, queste stop-word, sono contenute in una lista, la stop word list, che può contenere diversi tipi di parole a seconda degli obiettivi dell'applicazione. Solitamente vengono inserite nella lista le parole a più alta frequenza e dunque meno discriminanti, di un certo linguaggio, individuabili dunque all'interno delle categorie chiuse del discorso e tra le parole a maggiore frequenza
+delle altre categorie, come ad esempio verbi ausiliari o parole molto generiche. In questo lavoro è stata utilizzata una lista contenente le classiche stopword per la lingua inglese \footnote{http://www.ranks.nl/stopwords}, a cui sono state aggiunte però
 delle stopword specifiche per Twitter come: "Retweet","favorite","dm".
 \subsubsection{Stemming}
 Lo Stemming è il processo di riduzione della forma flessa o derivata di una parola alla sua radice detta \emph{tema}. 
 Non è necessario che il tema corrisponda ad una valida radice morfologica, ma è utile che tutte le inflessioni o le derivazioni della parola
 vengano ricondotte ad un unico tema, al fine di ridurre complessivamente lo spazio delle parole. 
+
  Ciò che materialmente gli algoritmi eseguono è la rimozione dei suffissi delle parole, che possono essere enclitici, ovvero essere particelle attaccate alla radice, flessioni che eseguono le declinazioni grammaticali di una parola di una certa categoria e derivazioni che cambiano categoria grammaticale o modificano il significato  
 
 \subsubsection{Pos-Tagging}
@@ -163,8 +168,25 @@ apprese da un dataset etichettato per raffinarne i risultati
 \item \textbf{Stocastici} la maggior parte basati su Hidden Markov Model,
 che, dopo aver etichettato le parole certe, massimizzano la probabilità che unasequenza di parole abbia una determinata sequenza di etichette utilizzando l'algoritmo di Viterbi \cite{Ryan:1993:VA:901051}.
 \end{enumerate}
-\end{enumerate}
-
+\begin{table}[]
+\centering
+\caption{esempio di pos Tags di Penn TreeBank}
+\label{tabPosTags}
+\begin{tabular}{ll}
+\hline
+ \textbf{Tag}& \textbf{Descrizione}\\ \hline
+\texttt{CC}  & {Cordinate Conjunction}  \\ \hline
+\texttt{CD}  & {Cardinal number}  \\ \hline
+\texttt{CC}  & {Cordinate Conjunction}  \\ \hline
+\texttt{NN}  & {Noun, singular or mass}  \\ \hline
+\texttt{NNS}  & {Noun, plural}  \\ \hline
+\texttt{NNP}  & {Proper noun, singular}  \\ \hline
+\texttt{VB}  & {Verb, base form}  \\ \hline
+\texttt{VBD}  & {Verb, past tense}  \\ \hline
+\texttt{JJ}  & {Adjective}  \\ \hline
+\texttt{PRP}  & {Personal pronoun}  \\ \hline
+\end{tabular}
+\end{table}
 \subsubsection{Entity Linking} 
 
 

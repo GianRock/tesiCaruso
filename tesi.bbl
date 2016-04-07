@@ -29,11 +29,10 @@ Abdelghani Bellaachia and Mohammed Al{-}Dhelaan.
 \newblock Hg-rank: {A} hypergraph-based keyphrase extraction for short
   documents in dynamic genre.
 \newblock In {\em Proceedings of the the 4th Workshop on Making Sense of
-  Microposts co-located with the 23rd International World Wide Web Conference
+  Microposts co-located with the 23rd International World Wide Web , Conference
   {(WWW2014), Seoul, Korea, April 7th, 2014.}, pages = {42--49}, year = {2014},
-  crossref = {DBLP:conf/msm/2014}, url =
-  {http://ceur-ws.org/Vol-1141/paper_06.pdf}, timestamp = {Mon, 13 Jul 2015
-  17:43:46 +0200},}.
+  crossref = {DBLP:conf/msm/2014}, timestamp = {Mon, 13 Jul 2015 17:43:46
+  +0200}}.
 
 \bibitem{Benevenuto10detectingspammers}
 Fabrício Benevenuto, Gabriel Magno, Tiago Rodrigues, and Virgílio Almeida.

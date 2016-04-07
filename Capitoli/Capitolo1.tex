@@ -60,7 +60,7 @@ Per tale ragione, Spark si presta bene per eseguire in parallelo sia algoritmi a
 
 Questi RDD possono essere creati in due modi: o a partire da dati in un sistema di memorizzazione stabile\footnote{per stabile si intende fault-tolerant} (HDFS, Hive, Cassandra, ) o a partire da altri RDD. Queste operazioni, che creano RDD, sono dette \emph{trasformazioni}.
 
-Spark non materializzare gli RDD dopo ogni operazione, verrà memorizzato per ogni RDD intermedio il suo \emph{lineage} ovvero la sequenza di trasformazioni che lo ha prodotto, a partire da un altro RDD. In tal modo SPARK nel caso vi sia un failure, può rielaborare un RDD in maniera del tutto trasparente.
+Spark non materializza gli RDD dopo ogni operazione, ma invece memorizza per ogni RDD intermedio il suo \emph{lineage} ovvero la sequenza di trasformazioni che lo ha prodotto, a partire da un altro RDD. In tal modo SPARK nel caso vi sia un failure, può rielaborare un RDD in maniera del tutto trasparente.
  
 Architetturalmente, Spark è progettato per essere altamente accessibile: offre API per Python, Java, Scala, SQL e R. Inoltre si integra alla perfezione con strumenti di Big Data quali Hadoop (e strumenti che dipendono da esso come HBase, Hive, etc.) e Cassandra.
 
@@ -89,9 +89,9 @@ La figura \ref{fig:sparkstack} mostra le principali componenti di Apache Spark:
 \end{itemize}
 
 \subsection{Modello di esecuzione}
-Una applicazione Spark consiste in un processo \textit{driver} e di un insieme di processi \textit{executors} distribuiti sui nodi del cluster.
+Una applicazione Spark consiste in un processo \textit{driver} e di un insieme di processi \textit{executors} distribuiti sui nodi del cluster (worker nodes) .
 
-Fra le responsabilità del driver si annoverano:
+Il processo (nodo)   driver dovrà gestire:
 \begin{itemize}
 \item interazione con l'utente;
 \item coordinare e distribuire il flusso di controllo.
@@ -101,11 +101,11 @@ Fra le responsabilità del driver si annoverano:
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]{cluster-ov.png}
-\caption{componenti principali di Hadooop}
-\label{fig:hadoopComponets}
+\caption{componentiDiUnClusterSpark}
+\label{fig:sparkClusterComponents}
 \end{figure} 
  
-I processi "executor" sono responsabili dell'esecuzione dei work in forma di \textit{tasks} e di memorizzare qualsiasi tipo di dato che l'utente sceglie di mantenere in cache. 
+I processi \lq\lq executor\rq\rq sono responsabili dell'esecuzione dei work in forma di \textit{tasks} e di memorizzare qualsiasi tipo di dato che l'utente sceglie di mantenere in cache. 
 
 In cima al modello di esecuzione vi sono i \textit{jobs}: l'invocazione di una azione all'interno di una applicazione Spark provoca l'esecuzione di uno Spark job in grado di soddisfare la richiesta. Spark esamina il grafo degli RDD dal quale l'zione dipende e produce un piano di esecuzione che inizia computando le risorse (gli RDD) in ordine di dipendenza, culminando con l'RDD che produrrà i risultati dell'azione.
  
