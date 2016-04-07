@@ -10,11 +10,30 @@ James Allan, editor.
   Organization}.
 \newblock Kluwer Academic Publishers, Norwell, MA, USA, 2002.
 
+\bibitem{DBLP:conf/semweb/AuerBKLCI07}
+S{\"{o}}ren Auer, Christian Bizer, Georgi Kobilarov, Jens Lehmann, Richard
+  Cyganiak, and Zachary~G. Ives.
+\newblock Dbpedia: {A} nucleus for a web of open data.
+\newblock In {\em The Semantic Web, 6th International Semantic Web Conference,
+  2nd Asian Semantic Web Conference, {ISWC} 2007 + {ASWC} 2007, Busan, Korea,
+  November 11-15, 2007.}, pages 722--735, 2007.
+
 \bibitem{DBLP:conf/icwsm/BeckerNG11}
 Hila Becker, Mor Naaman, and Luis Gravano.
 \newblock Beyond trending topics: Real-world event identification on twitter.
 \newblock In {\em Proceedings of the Fifth International Conference on Weblogs
   and Social Media, Barcelona, Catalonia, Spain, July 17-21, 2011}, 2011.
+
+\bibitem{DBLP:conf/msm/BellaachiaA14}
+Abdelghani Bellaachia and Mohammed Al{-}Dhelaan.
+\newblock Hg-rank: {A} hypergraph-based keyphrase extraction for short
+  documents in dynamic genre.
+\newblock In {\em Proceedings of the the 4th Workshop on Making Sense of
+  Microposts co-located with the 23rd International World Wide Web Conference
+  {(WWW2014), Seoul, Korea, April 7th, 2014.}, pages = {42--49}, year = {2014},
+  crossref = {DBLP:conf/msm/2014}, url =
+  {http://ceur-ws.org/Vol-1141/paper_06.pdf}, timestamp = {Mon, 13 Jul 2015
+  17:43:46 +0200},}.
 
 \bibitem{Benevenuto10detectingspammers}
 Fabrício Benevenuto, Gabriel Magno, Tiago Rodrigues, and Virgílio Almeida.
@@ -33,6 +52,12 @@ Moses~S. Charikar.
 \newblock Similarity estimation techniques from rounding algorithms.
 \newblock In {\em Proceedings of the Thiry-fourth Annual ACM Symposium on
   Theory of Computing}, STOC '02, pages 380--388, New York, NY, USA, 2002. ACM.
+
+\bibitem{isem2013daiber}
+Joachim Daiber, Max Jakob, Chris Hokamp, and Pablo~N. Mendes.
+\newblock Improving efficiency and accuracy in multilingual entity extraction.
+\newblock In {\em Proceedings of the 9th International Conference on Semantic
+  Systems (I-Semantics)}, 2013.
 
 \bibitem{Ester96adensity}
 Martin Ester.
@@ -104,10 +129,23 @@ Andrew~J. McMinn, Yashar Moshfeghi, and Joemon~M. Jose.
   Information \& Knowledge Management}, CIKM '13, pages 409--418, New York, NY,
   USA, 2013. ACM.
 
+\bibitem{Milne08aneffective}
+David Milne and Ian~H. Witten.
+\newblock An effective, low-cost measure of semantic relatedness obtained from
+  wikipedia links.
+\newblock In {\em In Proceedings of AAAI 2008}, 2008.
+
 \bibitem{Papka:1999:ONE:897559}
 R.~Papka.
 \newblock On-line new event detection, clustering, and tracking title2:.
 \newblock Technical report, Amherst, MA, USA, 1999.
+
+\bibitem{DBLP:conf/www/PetkosPK14}
+Georgios Petkos, Symeon Papadopoulos, and Yiannis Kompatsiaris.
+\newblock Two-level message clustering for topic detection in twitter.
+\newblock In {\em Proceedings of the {SNOW} 2014 Data Challenge co-located with
+  23rd International World Wide Web Conference {(WWW} 2014), Seoul, Korea,
+  April 8, 2014.}, pages 49--56, 2014.
 
 \bibitem{Petrovic:2010:SFS:1857999.1858020}
 Sa\v{s}a Petrovi\'{c}, Miles Osborne, and Victor Lavrenko.
@@ -123,6 +161,11 @@ Swit Phuvipadawat and Tsuyoshi Murata.
 \newblock In {\em Proceedings of the 2010 IEEE/WIC/ACM International Conference
   on Web Intelligence and Intelligent Agent Technology - Volume 03}, WI-IAT
   '10, pages 120--123, Washington, DC, USA, 2010. IEEE Computer Society.
+
+\bibitem{Ryan:1993:VA:901051}
+Matthew~S. Ryan and Graham~R. Nudd.
+\newblock The viterbi algorithm.
+\newblock Technical report, Coventry, UK, UK, 1993.
 
 \bibitem{Salton:1989:ATP:77013}
 Gerard Salton.
@@ -158,5 +201,14 @@ Yiming Yang, Tom Pierce, and Jaime Carbonell.
 \newblock In {\em Proceedings of the 21st Annual International ACM SIGIR
   Conference on Research and Development in Information Retrieval}, SIGIR '98,
   pages 28--36, New York, NY, USA, 1998. ACM.
+
+\bibitem{Zaharia:2012:RDD:2228298.2228301}
+Matei Zaharia, Mosharaf Chowdhury, Tathagata Das, Ankur Dave, Justin Ma, Murphy
+  McCauley, Michael~J. Franklin, Scott Shenker, and Ion Stoica.
+\newblock Resilient distributed datasets: A fault-tolerant abstraction for
+  in-memory cluster computing.
+\newblock In {\em Proceedings of the 9th USENIX Conference on Networked Systems
+  Design and Implementation}, NSDI'12, pages 2--2, Berkeley, CA, USA, 2012.
+  USENIX Association.
 
 \end{thebibliography}

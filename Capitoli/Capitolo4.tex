@@ -28,14 +28,19 @@ Il sistema
 
 \color{black}
 
-Dato uno stream  di tweet (ordinato temporalmente) l'obiettivo  è quello di individuare dei "topic” o “event”. In letteratura, come già descritto nel capitolo \ref{cap:capitolo2}, esistono due principali metodologie :
-\begin{itemize}
-\item document-pivot
-\item feature-pivot
-\end{itemize}
+Dato uno stream  di tweet (ordinato temporalmente), l'obiettivo  è quello di individuare dei "topic” o “event”. In letteratura, come già descritto nel capitolo \ref{cap:capitolo2}, esistono due principali metodologie : document-pivot e feature-pivot.
 In questo lavoro di tesi, è stata adottata la prima metodologia, l'obiettivo è quindi suddividere lo stream in cluster, tali che ciascuno di essi corrisponda a tutti i tweet relativi ad un \lq\lq evento\rq\rq.  
 La definizione di evento utilizzata è quella utilizzata per il Topic Detection and Tracking (TDT) \cite{Allan:2002:TDT:772260} :
 In seguito sono descritte in maniera più dettagliata tutte le fasi eseguite.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{diagrammaComponenti}
+    \caption{Principali componenti del sistema}
+    \label{fig:diagrammaComponentiSistema}
+\end{figure} 
+
+
 \section{Data Cleaning: Preprocessing}
 
 Il preprocessing è uno step essenziale per qualunque task di text-mining, quando si ha a che fare con testo derivante dai social media come twitter, tale step diviene di vitale importanza a causa delle caratteristiche dei tweet. In Twitter gli utenti spesso usano slang, abbreviazione e talvolta coniano nuovi termini mai usati 
@@ -45,7 +50,7 @@ Il primo passo in questa fase è la rimozione di quelle feature testuali legate 
 \begin{itemize}
 \item \emph{url:} dal testo sono eliminati tutti i riferimenti a url o media  
 \item \emph{@-mentions:} vengono eliminate tutte le mentions ad altri utenti
-\item  \emph{\#hashtag:} Per quanto riguarda gli hashtag viene solo eliminato il caratattere   \#   poich\`e se fossero eliminati si potrebbe perdere della semantica dal testo.
+\item  \emph{\#hashtag:} Per quanto riguarda gli hashtag viene solo eliminato il caratattere   \#   poiché fossero eliminati si potrebbe perdere della semantica dal testo.
 Inoltre spesso nei tweet gli hashtag sono composizioni di più parole dove ciascuna parola inizia con una lettera maiuscola (camel Case), come ad esempio \#StopBombingGaza. Gli hashtag che si presentano nella forma su descritta verranno suddivisi nelle parole che di cui sono composti (\#StopBombingGaza $\rightarrow$ Stop Bombing Gaza).
 \item \emph{RT:} per i retweet viene considerato il testo del tweet originale.
 \end{itemize}
@@ -107,7 +112,13 @@ Poichè si utilizza il logaritmo, se un termine compare in tutti i documenti, il
 \subsection{Natural Language Processing}
 Per poter trasformare il testo in vettori, sono state svolte delle operazioni di Natural Language Processing come:
 \begin{enumerate}
-\item \textbf{Tokenization} 
+\item \textbf{Tokenization}: In questa fase il testo viene suddiviso in unità atomiche dette \emph{token}
+\item \textbf{Stop-Word removal}: Rimozione delle parole più comuni nel lessico
+\item \textbf{Stemming}: Riduzione di ciascuna parola alla sua radice detta \emph{tema}
+\item \textbf{Pos Tagging}: Ad ogni parola viene etichettata con la sua categoria lessicale (Part of Speech).
+\end{enumerate}
+\subsubsection{Tokenization}
+
 La \emph{Tokenizzazione} è il primo passo di elaborazione di un sistema di Natural Language
 Processing. Consiste nella separazione del flusso di caratteri che compone il testo
 in input in una serie di elementi atomici detti \emph{token}. I token rappresentano le
@@ -116,16 +127,20 @@ interpunzione e numeri. Sebbene questa operazione di suddivisione in token
 sembrare banale, presenta alcune problematiche. La semplice suddivisione in base allo spazio Suddividere non è sufficiente poiché in molti casi non
 ci sono spazi che separano le parole dalla punteggiatura, ci sono sequenze di caratteri senza spazi al loro interno che rappresentano due distinti token (come ad esempio parole precedute da articolo con l'apostrofo, o banalmente parole virgolettate o all'interno di parentesi), esistono sequenze di caratteri. Esistono inoltre molte differenze nelle convenzioni ortografiche, ad esempio nelle date o nei numeri. 
 Le tecniche per risolvere questi problemi prevedono l'uso di euristiche ed  espressioni regolari.
-\item \textbf{Stop-Word Removal}
+ 
+\subsubsection{Stop-Word Removal}
+
 Le Stop Word sono parole che vengono individuate e filtrate o rimosse all'interno del processo di Natural Language Processing. Solitamente sono contenute in una lista, la stop word list, che può contenere diversi tipi di parole a seconda degli obiettivi dell'applicazione. Solitamente vengono inserite nella lista le parole a più alta frequenza e dunque meno discriminanti, di un certo linguaggio, individuabili dunque all'interno delle categorie chiuse del discorso e tra le parole a maggiore frequenza
 delle altre categorie, come ad esempio verbi ausiliari o parole molto generiche. In questo lavoro è stata utilizzata una lista contenente le classiche stopword per la lingua inglese, a cui sono state aggiunte però
 delle stopword specifiche per Twitter come: "Retweet","favorite","dm".
-\item \textbf{Stemming} 
+\subsubsection{Stemming}
 Lo Stemming è il processo di riduzione della forma flessa o derivata di una parola alla sua radice detta \emph{tema}. 
 Non è necessario che il tema corrisponda ad una valida radice morfologica, ma è utile che tutte le inflessioni o le derivazioni della parola
 vengano ricondotte ad un unico tema, al fine di ridurre complessivamente lo spazio delle parole. 
  Ciò che materialmente gli algoritmi eseguono è la rimozione dei suffissi delle parole, che possono essere enclitici, ovvero essere particelle attaccate alla radice, flessioni che eseguono le declinazioni grammaticali di una parola di una certa categoria e derivazioni che cambiano categoria grammaticale o modificano il significato  
-\item \textbf{Pos-Tagging}
+
+\subsubsection{Pos-Tagging}
+ 
 Il Part of Speech Tagging, che corrisponde in italiano all'analisi grammaticale, consiste nell’associare un'etichetta che si riferisce ad una parte del discorso o categoria lessicale a ciascuna parola in una frase, basandosi sia sulla sua definizione che sul  suo contesto, ovvero la sua associazione rispetto alle parole adiacenti e correlate all’interno di una frase, di un periodo o di un paragrafo.
 Le categorie lessicali in italiano sono nove, ovvero verbo, aggettivo, sostantivo,
 pronome, articolo, preposizione, avverbio, interiezione e congiunzione, ma possono
@@ -137,10 +152,8 @@ di etichette che possono essere assegnati alle parole, che possono tenere in con
 derazione solo la categoria lessicale o anche genere, numero, tempo e così via. I
 più utilizzati sono il Penn Treebank   e il Multext.
 Processing.
-La difficoltà del passo di Part of Speech Tagging consiste nell’ambiguità dell’as-
-segnazione di una specifica etichetta ad una parola, poiché ogni parola può essere
-etichettata in diversi modi, potendo essa appartenere a diverse categorie lessicali
-dipendentemente dal contesto in cui compare 
+La difficoltà del passo di Part of Speech Tagging consiste nell’ambiguità dell'assegnazione di una specifica etichetta ad una parola, poiché ogni parola può essere
+etichettata in diversi modi, potendo essa appartenere a diverse categorie lessicali in base al contesto in cui compare 
 Gli algoritmi utilizzati per il Part of Speech Tagging sono principalmente di due
 categorie:
 \begin{enumerate}
@@ -148,7 +161,7 @@ categorie:
 per le parole ambigue e successivamente applicano una serie di trasformazioni
 apprese da un dataset etichettato per raffinarne i risultati 
 \item \textbf{Stocastici} la maggior parte basati su Hidden Markov Model,
-che, dopo aver etichettato le parole certe, massimizzano la probabilità che unasequenza di parole abbia una determinata sequenza di etichette utilizzando l'algoritmo di Viterbi.
+che, dopo aver etichettato le parole certe, massimizzano la probabilità che unasequenza di parole abbia una determinata sequenza di etichette utilizzando l'algoritmo di Viterbi \cite{Ryan:1993:VA:901051}.
 \end{enumerate}
 \end{enumerate}
 
@@ -215,7 +228,7 @@ NDD(a,b):=\begin{cases}
  
  
 \section{Clustering}
-L'algoritmo di clustering utilizzato è Incremental Dbscan poiché può gestire bene il rumore e non necessita di parametri come il numero di cluster a priori. La distanza utilizzata si basa sia sulla rappresentazione tf-idf del tweet sia sui DBpedia URIs estratti :
+L'algoritmo di clustering utilizzato è  Dbscan poiché può gestire bene il rumore e non necessita di parametri come il numero di cluster a priori. La distanza utilizzata si basa sia sulla rappresentazione tf-idf del tweet sia sui DBpedia URIs estratti :
 \begin{equation}
 dist(a,b)=1- timeSim(a,b)\,\frac{textSim(a,b)+semanticSim(a,b)}{2}
 \end{equation}
