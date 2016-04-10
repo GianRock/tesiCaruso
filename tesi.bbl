@@ -24,21 +24,17 @@ Hila Becker, Mor Naaman, and Luis Gravano.
 \newblock In {\em Proceedings of the Fifth International Conference on Weblogs
   and Social Media, Barcelona, Catalonia, Spain, July 17-21, 2011}, 2011.
 
-\bibitem{DBLP:conf/msm/BellaachiaA14}
-Abdelghani Bellaachia and Mohammed Al{-}Dhelaan.
-\newblock Hg-rank: {A} hypergraph-based keyphrase extraction for short
-  documents in dynamic genre.
-\newblock In {\em Proceedings of the the 4th Workshop on Making Sense of
-  Microposts co-located with the 23rd International World Wide Web , Conference
-  {(WWW2014), Seoul, Korea, April 7th, 2014.}, pages = {42--49}, year = {2014},
-  crossref = {DBLP:conf/msm/2014}, timestamp = {Mon, 13 Jul 2015 17:43:46
-  +0200}}.
-
 \bibitem{Benevenuto10detectingspammers}
 Fabrício Benevenuto, Gabriel Magno, Tiago Rodrigues, and Virgílio Almeida.
 \newblock Detecting spammers on twitter.
 \newblock In {\em In Collaboration, Electronic messaging, Anti-Abuse and Spam
   Conference (CEAS}, 2010.
+
+\bibitem{Bizer:2009:DCP:1640541.1640848}
+Christian Bizer, Jens Lehmann, Georgi Kobilarov, S\"{o}ren Auer, Christian
+  Becker, Richard Cyganiak, and Sebastian Hellmann.
+\newblock Dbpedia - a crystallization point for the web of data.
+\newblock {\em Web Semant.}, 7(3):154--165, September 2009.
 
 \bibitem{Castillo:2011:ICT:1963405.1963500}
 Carlos Castillo, Marcelo Mendoza, and Barbara Poblete.
@@ -57,6 +53,14 @@ Joachim Daiber, Max Jakob, Chris Hokamp, and Pablo~N. Mendes.
 \newblock Improving efficiency and accuracy in multilingual entity extraction.
 \newblock In {\em Proceedings of the 9th International Conference on Semantic
   Systems (I-Semantics)}, 2013.
+
+\bibitem{GateModelTagger}
+Leon Derczynski, Alan Ritter, Sam Clark, and Kalina Bontcheva.
+\newblock Twitter part-of-speech tagging for all: Overcoming sparse and noisy
+  data.
+\newblock In {\em Proceedings of the International Conference on Recent
+  Advances in Natural Language Processing}. Association for Computational
+  Linguistics, 2013.
 
 \bibitem{Ester96adensity}
 Martin Ester.
@@ -105,6 +109,13 @@ Jon Kleinberg.
 \newblock In {\em Proceedings of the Eighth ACM SIGKDD International Conference
   on Knowledge Discovery and Data Mining}, KDD '02, pages 91--101, New York,
   NY, USA, 2002. ACM.
+
+\bibitem{Krovetz:1993:VMI:160688.160718}
+Robert Krovetz.
+\newblock Viewing morphology as an inference process.
+\newblock In {\em Proceedings of the 16th Annual International ACM SIGIR
+  Conference on Research and Development in Information Retrieval}, SIGIR '93,
+  pages 191--202, New York, NY, USA, 1993. ACM.
 
 \bibitem{DBLP:conf/icwsm/LeeEC11}
 Kyumin Lee, Brian~David Eoff, and James Caverlee.
@@ -179,6 +190,16 @@ Jagan Sankaranarayanan, Hanan Samet, Benjamin~E. Teitler, Michael~D. Lieberman,
 \newblock In {\em Proceedings of the 17th ACM SIGSPATIAL International
   Conference on Advances in Geographic Information Systems}, GIS '09, pages
   42--51, New York, NY, USA, 2009. ACM.
+
+\bibitem{Toutanova:2000:EKS:1117794.1117802}
+Kristina Toutanova and Christopher~D. Manning.
+\newblock Enriching the knowledge sources used in a maximum entropy
+  part-of-speech tagger.
+\newblock In {\em Proceedings of the 2000 Joint SIGDAT Conference on Empirical
+  Methods in Natural Language Processing and Very Large Corpora: Held in
+  Conjunction with the 38th Annual Meeting of the Association for Computational
+  Linguistics - Volume 13}, EMNLP '00, pages 63--70, Stroudsburg, PA, USA,
+  2000. Association for Computational Linguistics.
 
 \bibitem{Weber:1998:QAP:645924.671192}
 Roger Weber, Hans-J\"{o}rg Schek, and Stephen Blott.

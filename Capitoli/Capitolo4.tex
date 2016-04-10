@@ -111,7 +111,7 @@ idf(t, D) =  \log \frac{|D|}{|\{d \in D: t \in d\}|}
 L'Inverse Document Frequency   indica la quantità di informazione di un dato termine, ovvero stabilisce se un termine è comune o meno all'interno del corpus. Più il termine è comune minore sarà la sua informazione. 
 Poichè si utilizza il logaritmo, se un termine compare in tutti i documenti, il suo valore di Idf sarà pari a 0.
 
-\subsection{Natural Language Processing}
+\subsection{Feature sintattiche}
 Per poter trasformare il testo in vettori, sono state svolte delle operazioni di Natural Language Processing come:
 \begin{enumerate}
 \item \textbf{Tokenization}: In questa fase il testo viene suddiviso in unità atomiche dette \emph{token}
@@ -146,18 +146,10 @@ vengano ricondotte ad un unico tema, al fine di ridurre complessivamente lo spaz
 
 \subsubsection{Pos-Tagging}
  
-Il Part of Speech Tagging, che corrisponde in italiano all'analisi grammaticale, consiste nell’associare un'etichetta che si riferisce ad una parte del discorso o categoria lessicale a ciascuna parola in una frase, basandosi sia sulla sua definizione che sul  suo contesto, ovvero la sua associazione rispetto alle parole adiacenti e correlate all’interno di una frase, di un periodo o di un paragrafo.
-Le categorie lessicali in italiano sono nove, ovvero verbo, aggettivo, sostantivo,
-pronome, articolo, preposizione, avverbio, interiezione e congiunzione, ma possono
-variare in altri linguaggi. Cinque di queste parti si dicono variabili perché possono
-mutare le loro terminazioni (articolo, nome, aggettivo, pronome, verbo) e quattro
-si dicono invariabili perché non possono mutare le loro terminazione: avverbio, pre-
-posizione, congiunzione e interiezione. Su di esse si basano i tagset, ovvero insiemi
-di etichette che possono essere assegnati alle parole, che possono tenere in consi-
-derazione solo la categoria lessicale o anche genere, numero, tempo e così via. I
-più utilizzati sono il Penn Treebank   e il Multext.
-Processing.
-La difficoltà del passo di Part of Speech Tagging consiste nell’ambiguità dell'assegnazione di una specifica etichetta ad una parola, poiché ogni parola può essere
+Il Part of Speech Tagging consiste nell'associare a ciascuna parola nel testo, un'etichetta che si riferisce ad una parte del discorso o categoria lessicale in una frase (nome, pronome,verbo), basandosi sia sulla sua definizione che sul  suo contesto, ovvero la sua associazione rispetto alle parole adiacenti e correlate all'interno di una frase, di un periodo o di un paragrafo.
+Esistono vari insiemi di categorie lessicali, i più utilizzati solo il Penn Treebank \footnote{https://cs.nyu.edu/grishman/jet/guide/PennPOS.html} e il Multext\footnote{http://universaldependencies.org/tagset-conversion/sl-multext-uposf.html}.
+La tabella \ref{tab:PosTags} mosta un esempio di categorie lessicali (Part of Speech Tags) secondo il Penn Treebank.
+La difficoltà del task di Part of Speech Tagging è data nell'ambiguità dell'assegnazione di una specifica etichetta ad una parola, poiché ogni parola può essere
 etichettata in diversi modi, potendo essa appartenere a diverse categorie lessicali in base al contesto in cui compare 
 Gli algoritmi utilizzati per il Part of Speech Tagging sono principalmente di due
 categorie:
@@ -166,12 +158,12 @@ categorie:
 per le parole ambigue e successivamente applicano una serie di trasformazioni
 apprese da un dataset etichettato per raffinarne i risultati 
 \item \textbf{Stocastici} la maggior parte basati su Hidden Markov Model,
-che, dopo aver etichettato le parole certe, massimizzano la probabilità che unasequenza di parole abbia una determinata sequenza di etichette utilizzando l'algoritmo di Viterbi \cite{Ryan:1993:VA:901051}.
+che, dopo aver etichettato le parole certe, massimizzano la probabilità che una sequenza di parole abbia una determinata sequenza di etichette utilizzando l'algoritmo di Viterbi \cite{Ryan:1993:VA:901051}.
 \end{enumerate}
 \begin{table}[]
 \centering
 \caption{esempio di pos Tags di Penn TreeBank}
-\label{tabPosTags}
+\label{tab:PosTags}
 \begin{tabular}{ll}
 \hline
  \textbf{Tag}& \textbf{Descrizione}\\ \hline
@@ -187,58 +179,122 @@ che, dopo aver etichettato le parole certe, massimizzano la probabilità che una
 \texttt{PRP}  & {Personal pronoun}  \\ \hline
 \end{tabular}
 \end{table}
-\subsubsection{Entity Linking} 
+\subsection*{ }
+Le prime tre fasi di estrazione di feature sintattiche (tokenizzazione, rimozione stopword e stemming) sono state implementate utilizzando le API di Apache Lucene \footnote{https://lucene.apache.org/core/}.
+
+In particolare, per la prima fase di \emph{Tokenization}  è stata adottata la classe \emph{StandardTokenizer}. Questa classe segmenta il testo in token, seguendo le regole dell'algoritmo Unicode Text Segmentation \footnote{http://unicode.org/reports/tr29/}. 
+Una volta ottenuti i token, questi vengono innanzitutto convertiti in minuscolo, e successivamente vengono filtrate le stopord.
+Per la riduzione dei token alla radice (Stemming), è stata utilizzata la classe \emph{KStemFilter} che implementa lo stemming descritto nel lavoro di Krovetz \cite{Krovetz:1993:VMI:160688.160718}.
+
+Per la fase di pos-tagging invece, è stato adottato il pos-tagger fornito da Stanford \cite{Toutanova:2000:EKS:1117794.1117802} che rientra nella categoria degli algoritmi stocastici. In particolare questo algoritmo è stato utilizzato in combinazione con un modello di training, costruito a partire da un dataset di tweets \cite{GateModelTagger} fornito dall'università di Sheffield.
 
 
- 
 
-
-
-Il testo del tweet verrà rappresentato con un boosted tf-idf vector utilizzando Apache-lucene\footnote{\href{https://lucene.apache.org/core/}{https://lucene.apache.org/core/}}. 
-A partire dal testo dei tweet ripulito, sono state effettuati ulteriori step di nlp come :
-\begin{itemize}
-\item stop word removal
-\item pos tagging (tramite lo stanford pos tagger addestrato su un modello  creato a partire da tweet
-\item stemming (o lemmtization)
-\end{itemize}
-Poich\`e si analizza uno stream di tweet in maniera incrementale è necessario che anche lo schema di pesatura tf-idf sia incrementale ovvero le document-frequencies per una word $w$ variano nel tempo. 
-
-Il peso di una word $w$ di un tweet avente tempo $t$ è dato da:
+A partire da queste feature-sintattiche, saranno definiti i pesi di ciascun token all'interno di un tweet.
+In particolare, il peso di un termine $t$ di un tweet sarà dato da:
 \begin{equation}
-tf-idf_w=tf(w)\ log\frac{N_t}{df_t(w)}boost(w)
+tf-idf_t=tf(t)\ log\frac{N_t}{df(w)}boost(w)
 \end{equation}
-Dove $N_t$ è il numero di tweet al tempo $t$.
-Risulta fondamentale assegnare un boost a determinate word poiché, a causa della natura dei tweet (max 140 caratteri), il $tf$ di ciascuna keyword è solitamente pari a 1.  
-
-
+ Risulta fondamentale assegnare un boost ovvero un peso maggiore a determinati termini poiché, a causa del limite dei 140 caratteri, il $tf$ di ciascuna keyword è solitamente pari a 1. 
 \begin{equation*}
-boost(w):=\begin{cases}
-2.0 & \text{se $w$ è un hashtag, on un Proper Nooun}\\
+boost(t):=\begin{cases}
+2.0 & \text{se $t$ è un hashtag, on un Proper Nooun}\\
 1& \text{altrimenti.}
 \end{cases}
 \end{equation*}
-Solitamente uh hashtag ha un alto potere informativo all’interno di un tweet, nel lavoro di  Phuvipadawat \cite{Phuvipadawat:2010:BND:1913791.1913911}  il boost maggiore per i poper-noun ha prodotto risultati migliori.
+Solitamente uh hashtag ha un alto potere informativo all'interno di un tweet inoltre nel lavoro di  Phuvipadawat \cite{Phuvipadawat:2010:BND:1913791.1913911}  il boost maggiore per i poper-noun ha prodotto risultati migliori.
 
-\newpage
-\section{Semantic Annotation}
-Tramite Dbpedia-Spootlight \cite{isem2013daiber} è possibile annotare automaticamente il testo dei tweet con DBpedia URIs.  Ciò permette di arricchire la rappresentazione testuale andando a lenire i classici problemi di ambiguità del linguaggio naturale come polisemia e sinonimia.  
-Annotare il testo con DBpedia URis permette di sfruttare la base di conoscenza di DBpedia per poter determinare la correlazione semantica fra due termini. 
-Il progetto DBpedia \cite{DBLP:conf/semweb/AuerBKLCI07} oltre a organizzare in maniera strutturata le informazioni di Wikipedia, le collega ad ulteriori open-datasets come: US Census, Geonames, MusicBrainz, the DBLP bibliography, WordNet, Cyc, tramite RDF links come mostrato in figura \ref{fig:dbpedia}  
+
+
+
+
+\subsection{Feature Semantiche}
+\subsubsection{Entity Linking} 
+Nell'elaborazione del linguaggio naturale, l'attività di Entity Linking (detta anche Named Entity Disambiguation NED, o named entity recognition and disambiguation (NERD)), ha l'obiettivo di identificare delle entità menzionate nel testo. Ad esempio, dato il testo \emph{\lq\lq Paris is the capital of France \rq \rq} l'obiettivo è quello di stabilire che   "Paris" si riferisce alla città piuttosto che a Paris Hilton o a qualsiasi altra entità.
+Questa attività differisce dal Named Entity Recognition, poiché in quest'ultima vengono soltanto identificate le occorrenze o menzioni ad entità ma non viene stabilito quali siano.
+L'attività di Entity Linking richiede necessariamente una base di conoscenza (Knowledge Base) contenente tutte le possibili entità che possono essere menzionate. La basi di conoscenza più utilizzate a tal fine sono  Wikipedia, o la versione come linked open data: DBpedia.
+
+Generalmente questo task consiste può essere suddiviso in tre step:
+\begin{enumerate}
+\item \textbf{Spotting} a partire dal testo del documento viene identificato un insieme di possibili citazioni, e per ciascuna di queste viene ritrovata una lista di tutte le possibili entità.
+\item \textbf{Disambiguation} nel caso in cui ad una sotto stringa siano state associate più di un'entità, verrà scelta una sola.
+\item \textbf{Ranking}: solitamente tutte  le entità annotate sono ordinate in base ad un qualche criterio come ad esempio il grado di confidenza di ciascuna annotazione.
+\end{enumerate}
+
+\subsubsection{Dbpedia Spootlight}
+Spotlight è un progetto di ricerca nato nel giugno del 2010 all'interno della Freie Universität Berlin . Il gruppo di sviluppatori è costituito da Pablo Mendes, Max Jakob e Jo Daiber ed è supervisionato da Chris Bizer, il fondatore del progetto DBpedia, nonché figura di grande rilievo a livello internazionale nel campo del Semantic Web. Spotlight è finanziato dalla Commissione Europea at-
+traverso il progetto LOD2 – Creating Knowledge out of Linked Data \footnote{www.semantic-web.at/lod2-creating-knowledge-out-interlinked-data} .
+DBpedia Spotlight \cite{isem2013daiber}  si propone come uno strumento per annotare automaticamente le
+menzioni di entità di DBpedia all'interno di testi e quindi per collegare dati non strutturati ai repository della Linked Open Data Cloud.
+Una delle più grandi sfide di questo task è dato dall'ambiguità del linguaggio naturale, spesso uno stesso nome di entità può riferirsi a più di una risorsa DBpedia. (es: \emph{Washington} può riferirsi alla città  , allo stato o al presidente).
+Pone grande rilevo al problema della WSD, cercando di offrire all'utente una soluzione molto parametrizzabile che incontri le sue esigenze a livello sia di precisione che di recall.
+Utilizzando DBpedia come base di conoscenza, questo tool ha un ampio bacino di applicabilità, a differenza di altri sistemi esistenti dove le annotazioni sono ristrette ad un numero  limitato di tipologie \'E però possibile anche restringere il range di annotazioni ad
+ un dominio più ristretto di tipologie di entità, indicando solo alcune classi  l'ontologia DBpedia di cui si desiderano delle annotazioni. O in alternativa si può fornire una query SPARQL, per estrarre annotazioni che soddisfino dei vincoli particolari, ad esempio, solo annotazioni che si riferiscono a politici in carica dal 2010 al 2012 di una data città.  (Persone,organizzazioni luoghi).
+ 
+
+
+Uno dei maggiori punti di forza di questo tool è dato dalla sua flessibilità: è possibile fornire dei parametri al sistema in modo tale da soddisfare al meglio i propri requisiti.
+In particolare è possibile specificare come parametri addizionali\footnote{oltre al testo}:
+\begin{itemize}
+\item \textbf{Tipologie di risorse} è possibile fornire un insieme di classi DBpedia di cui si desiderano annotazioni, es:
+si desiderano solo annotazioni  geografiche si può fornire la classe \emph{dbpedia:Place}.  alternativa è possibile fornire nuna query SPARQL per esprimere dei vincoli più sofisticati (es  tutte le chiese di Roma) .
+\item \textbf{Importanza della risorsa-supporto}: In molti casi è desiderabile che molto rare o molto specifiche non siano restituite affatto. Un indicazione dell'importanza di una risorsa è data dal numeri di \emph{in-link}. \'E possibile specificare il numero minimo di in-link di una risorsa da annotare.
+\item \textbf{Confidenza}: si può fornire un fattore di confidenza che varia nell'intervallo $[0,1]$  che indica il grado di sicurezza dell'annotazione, tenendo conto sia della similarità del testo rispetto all'annotazione
+\end{itemize}
+ 
+
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.6\textwidth]{dbpedia}
-    \caption{Datsets interconnessi a DBpedia.}
-    \label{fig:dbpedia}
-\end{figure}  
+    \includegraphics[width=0.8\textwidth]{annDBPEDIA.pdf}
+    \caption{Esempio di output del processo di annotazione di DBpedia Spootlight}
+    \label{fig:dbpediaAnn}
+\end{figure}   
+DBpedia Spootlight è reso disponibile sia come Web Service sia RESTful che SOAP su un server pubblico. Se si desiderano dei bassi tempi di latenza ed un servizio con maggiore affidabilità è anche possibile lanciare il web-service su un proprio server.
 
-Avendo due risorse DBpedia è possibile definire una funzione di distanza, che sfrutti la base di conoscenza di DBpedia. \`E stata definita  una funzione di distanza \emph{Dbpedia Semantic Distance DSD}, che impiega sia DBpedia che il dataset geografico Geonames per risorse di tipo geografico, come segue:
-\begin{equation} \label{eq:dbpedia_semantic_distance}
-DSD(a,b):=\begin{cases}
-GeoDist(a,b) & \text{se $type(a)=location \land type(b)=location$  ,}\\
-NDD(a,b) & \text{altrimenti}\\
-\end{cases}
-\end{equation}
-Dove $DSD(a,b) \in [0,1]$,
+La figura \ref{fig:dbpediaAnn} mostra un esempio di risposta in formato JSON del web-serice: le annotazioni sono sono restituite sotto forma di array di oggetti \emph{Resources}.
+Ciascun oggetto di tale array costituisce una singola annotazione di cui viene indicato :
+\begin{itemize}
+\item \textbf{@URI}: URI della risorsa DBpedia associata
+\item \textbf{@support}: numero di inLink della risorsa DBpedia
+\item \textbf{@types}: classificazione della risorsa 
+\item \textbf{@surfaceForm}: sottostringa del testo cui si riferisce l'annotazione
+\item \textbf{@similarityScore}: rilevanza della risorsa rispetto alla surfaceForm, e varia fra 0 e 1.
+\item \textbf{@percentageOfSecondRank}: nel caso in cui ad una surfaceForm siano state associate più di un'entità, queste vengono ordinate in base alla rilevanza.
+Il fattore \emph{percentageOfSecondRank}  indica il rapporto di  della similarità  fra la risorsa classificata come seconda e la prima. Più è alto maggiore è l'ambiguità dell'annotazione.
+\end{itemize}
+
+
+Poiché questo task di annotazione è stato svolto su posti di Twitter  ulteriori problematiche dovute alle caratteristiche dei tweets.
+Molto spesso nei tweets quando si condivide un immagine, o un video vi sono riferimenti ad altre social network es: Facebook, Instangram, Youtube.
+Questi social network sono correttamente identificati  da DbpediaSpootlight all'interno del testo, ma in questo contesto non hanno nessuna valenza semantica.  A tal fine è stata definita una lista di quelle risorse dpbedia non desiderate, una sorta di black-list per filtrare queste annotazioni.
+
+
+Inoltre è stato riscontrato in maniera empirica che il tool DBepdai Spootlight tende ad annotare  sotto stringhe anche quando queste sono utilizzate come aggettivi (es Russian   Russia).
+Il risultato della fase di pos-tagging è stato quindi utilizzato per filtrare solo quelle annotazioni che contengono almeno un nome. 
+
+
+
+
+
+ Ciò permette di arricchire la rappresentazione testuale andando a lenire i classici problemi di ambiguità del linguaggio naturale come polisemia e sinonimia.  
+
+
+
+
+
+Annotare il testo con DBpedia URIs permette di sfruttare la base di conoscenza di DBpedia per poter determinare la correlazione semantica fra due termini. 
+
+
+ 
+ 
+
+\section{Semantic Annotation}
+
+
+
+
+
+Avendo due risorse DBpedia è possibile definire una funzione di distanza, che sfrutti la base di conoscenza di DBpedia.  
 Milne e Witten \cite{Milne08aneffective} hanno utilizzato gli hyperlink delle pagine Wikipedia per poter definire la correlazione fra due articoli wikipedia (e quindi due risorse dbpedia): date due risorse $a,b$, possiamo definire una \emph{Normalized DBpedia Distance (NDD)} come segue:
 \begin{equation} \label{eq:normalized_dbpedia_distance}
 NDD(a,b):=\begin{cases}
@@ -248,8 +304,21 @@ NDD(a,b):=\begin{cases}
 \end{equation}
  $A$ e $B$  sono gli insiemi delle risorse DBpedia che hanno un link rispettivamente verso $a$ e $b$, mentre $N$ è il numero totale di risorse in DBpedia. Questa distanza varia nell'intervallo [0,1] dove 1 sta ad indicare che non vi è nessuna correlazione fra i due concetti, mentre 0 indica che i due concetti hanno lo stesso significato. L'idea alla base, è che due risorse saranno simili se esiste una terza che ha un link verso entrambe.
  
+
+
+ sono necessari ulteriori steps per filtrare 
+ 
  
 \section{Clustering}
+
+ \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{clusteringWithSpark.pdf}
+    \caption{esecuzione distribuita}
+    \label{fig:clusteringWithSpark}
+\end{figure}  
+
+
 L'algoritmo di clustering utilizzato è  Dbscan poiché può gestire bene il rumore e non necessita di parametri come il numero di cluster a priori. La distanza utilizzata si basa sia sulla rappresentazione tf-idf del tweet sia sui DBpedia URIs estratti :
 \begin{equation}
 dist(a,b)=1- timeSim(a,b)\,\frac{textSim(a,b)+semanticSim(a,b)}{2}

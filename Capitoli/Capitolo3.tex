@@ -11,23 +11,19 @@ Inserire un'incipit sul problema del clustering
 
 Il Clustering o analisi dei gruppi (dal termine inglese cluster analysis introdotto da Robert
 Tryon nel 1939) è un insieme di tecniche di analisi dei dati volte alla selezione e raggruppamento di elementi omogenei in un insieme di dati. Le tecniche di clustering si basano
-su misure relative alla somiglianza tra gli elementi. In molti approcci questa similarità, o meglio, dissimilarità, è concepita in termini di distanza in uno spazio multidimensionale. La bontà delle analisi ottenute dagli algoritmi di clustering dipende molto dalla scelta
-della metrica, e quindi da come è calcolata la distanza. Nel Clustering density-based, il
-raggruppamento avviene analizzando l'intorno di ogni punto dello spazio. In particolare,
-viene considerata la densità
-a di punti in un intorno di raggio fissato. DBSCAN (Density-
-Based Spatial Clustering of Applications with Noise) è un metodo di clustering proposto
-nel 1996 da Martin Ester, Hans-Peter Kriegel, Jrg Sander and Xiaowei Xu. `e basato sulla
-densità petche connette regioni di punti con densità sufficientemente alta. A differenza
-degli altri algoritmi di clustering basati su centroide, gli elementi che appartengono ad uno
-stesso clustrer possono anche non essere vicini fra loro, ma appartengono allo stesso cluster
-perché sono raggiungibili attraverso altri elementi. 
+su misure relative alla somiglianza tra gli elementi. In molti approcci questa similarità, o meglio, dissimilarità, è concepita in termini di distanza in uno spazio multidimensionale. La bontà delle analisi ottenute dagli algoritmi di clustering dipende fortemente dalla scelta
+della metrica, e quindi da come è definita la distanza fra gli oggetti.
+
+Negli algoritmi di clustering basati su densità, i cluster vengono definiti come aree aventi una densità maggiore rispetto al resto del dataset.
+
+Gli algoritmi di clustering density-based   
+riesco 
+ Density-based methods are fast and high quality algorithms that have been developed for clustering spatial data. They provide advantages such as removing noise and creating arbitrarily shaped clusters that are interesting for environments like the web, since the web may have the largest proportion of noisy data among all real data sets.
+
+ Uno degli algoritmi più noti in questa categoria è DBSCAN.  
 \section{DBSCAN}
 DBSCAN\cite{Ester96adensity}(Density-Based Spatial Clustering of Applications with Noise) è un algoritmo di clustering proposto da Martin Ester et. al nel 1996, basato su densità. 
-L'idea di questo algoritmo è che ciascun elemento di un cluster debba avere un vicinato entro un certo raggio $\epsilon$ (anche chiamato $Eps$)  che contenga almeno un numero minimo di punti (MinPts). Questo algoritmo, in altre parole, stima la \emph{densità} di ciascun punto  enumerando gli elementi che ricadono entro un dato raggio $\epsilon$ dal punto. Quei punti con una densità superiore ad una certa soglia, $MinPts$, sono classificati come \textit{core objects} .I punti rimanenti invece, saranno etichettati come \emph{noise} se nel loro intorno, entro il raggio stabilito, non contengono nessun core-point, \emph{border} altrimenti.
- 
- 
-A partire da questi punti core, vengono definite delle proprietà di connettività verso  tutti quei punti che appartengono al eps-vicinato.
+L'idea di questo algoritmo è che ciascun elemento di un cluster debba avere un vicinato entro un certo raggio $\epsilon$ (anche chiamato $Eps$)  che contenga almeno un numero minimo di punti (MinPts). Questo algoritmo, in altre parole, stima la \emph{densità} di ciascun punto  enumerando gli elementi che ricadono entro un dato raggio $\epsilon$ dal punto. Quei punti con una densità superiore ad una certa soglia, $MinPts$, sono classificati come \textit{core objects} .I punti rimanenti invece, saranno etichettati come \emph{noise} se nel loro intorno, entro il raggio stabilito, non contengono nessun core-point, \emph{border} altrimenti. A partire da questi punti core, vengono definite delle proprietà di connettività verso  tutti quei punti che appartengono al eps-vicinato.
 In seguito verranno date le definizioni formali delle proprietà di connettività fra i punti, che verranno utilizzate per generare i possibili cluster.
  %defizioni di DBSCAN
 \begin{definizione}[directly density-reachable]
