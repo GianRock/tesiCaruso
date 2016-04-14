@@ -6,28 +6,6 @@
 %************************************************
 
 %************************************************
-\color{red}
-Il sistema
-
--Componenti:
-
-1. Data Cleaning;
-
-2. NLP;
-
-3. Information extraction and entity linking;
-
-4. Clustering:
-
-	- Similarità semantica;
-	
-    - Similarità sintatica;
-   
-    - Composizione;
- 			
-
-\color{black}
-
 Dato uno stream  di tweet (ordinato temporalmente), l'obiettivo  è quello di individuare dei "topic” o “event”. In letteratura, come già descritto nel capitolo \ref{cap:capitolo2}, esistono due principali metodologie : document-pivot e feature-pivot.
 In questo lavoro di tesi, è stata adottata la prima metodologia, l'obiettivo è quindi suddividere lo stream in cluster, tali che ciascuno di essi corrisponda a tutti i tweet relativi ad un \lq\lq evento\rq\rq.  
 La definizione di evento utilizzata è quella utilizzata per il Topic Detection and Tracking (TDT) \cite{Allan:2002:TDT:772260} :
@@ -40,9 +18,9 @@ In seguito sono descritte in maniera più dettagliata tutte le fasi eseguite.
 \end{figure} 
 
 
-\section{Data Cleaning: Preprocessing}
+\section{Data Cleaning}
 
-Il preprocessing è uno step essenziale per qualunque task di text-mining, quando si ha a che fare con testo derivante dai social media come twitter, tale step diviene di vitale importanza a causa delle caratteristiche dei tweet. In Twitter gli utenti spesso usano slang, abbreviazione e talvolta coniano nuovi termini mai usati 
+Il pre-processing è uno step essenziale per qualunque task di text-mining, quando si ha a che fare con testo derivante dai social media come twitter, tale step diviene di vitale importanza a causa delle caratteristiche dei tweet. In Twitter gli utenti spesso usano slang, abbreviazione e talvolta coniano nuovi termini mai usati 
 \`E dunque necessaria una fase accurata di preprocessing per il testo dei tweet prima di poter eseguire qualsiasi modellazione su di essi. 
 
 Il primo passo in questa fase è la rimozione di quelle feature testuali legate ai tweet come:
@@ -269,18 +247,9 @@ Molto spesso nei tweets quando si condivide un immagine, o un video vi sono rife
 Questi social network sono correttamente identificati  da DbpediaSpootlight all'interno del testo, ma in questo contesto non hanno nessuna valenza semantica.  A tal fine è stata definita una lista di quelle risorse dpbedia non desiderate, una sorta di black-list per filtrare queste annotazioni.
 
 
-Inoltre è stato riscontrato in maniera empirica che il tool DBepdai Spootlight tende ad annotare  sotto stringhe anche quando queste sono utilizzate come aggettivi (es Russian   Russia).
+Inoltre è stato riscontrato in maniera empirica che il tool DBpedia Spootlight tende ad annotare  sotto stringhe anche quando queste sono utilizzate come aggettivi (es Russian   Russia).
 Il risultato della fase di pos-tagging è stato quindi utilizzato per filtrare solo quelle annotazioni che contengono almeno un nome. 
-
-
-
-
-
- Ciò permette di arricchire la rappresentazione testuale andando a lenire i classici problemi di ambiguità del linguaggio naturale come polisemia e sinonimia.  
-
-
-
-
+Ciò permette di arricchire la rappresentazione testuale andando a lenire i classici problemi di ambiguità del linguaggio naturale come polisemia e sinonimia.  
 
 Annotare il testo con DBpedia URIs permette di sfruttare la base di conoscenza di DBpedia per poter determinare la correlazione semantica fra due termini. 
 
@@ -288,28 +257,27 @@ Annotare il testo con DBpedia URIs permette di sfruttare la base di conoscenza d
  
  
 
-\section{Semantic Annotation}
-
-
-
-
-
-Avendo due risorse DBpedia è possibile definire una funzione di distanza, che sfrutti la base di conoscenza di DBpedia.  
-Milne e Witten \cite{Milne08aneffective} hanno utilizzato gli hyperlink delle pagine Wikipedia per poter definire la correlazione fra due articoli wikipedia (e quindi due risorse dbpedia): date due risorse $a,b$, possiamo definire una \emph{Normalized DBpedia Distance (NDD)} come segue:
-\begin{equation} \label{eq:normalized_dbpedia_distance}
-NDD(a,b):=\begin{cases}
-\frac{\log(max\{|A|,|B|\})-log( |A \cap B|\})}{log(N)-\log(min\{|A|,|B|\})} & \text{se $A \cap B \neq \emptyset $  ,}\\
-1 & \text{altrimenti}\\
-\end{cases}
-\end{equation}
- $A$ e $B$  sono gli insiemi delle risorse DBpedia che hanno un link rispettivamente verso $a$ e $b$, mentre $N$ è il numero totale di risorse in DBpedia. Questa distanza varia nell'intervallo [0,1] dove 1 sta ad indicare che non vi è nessuna correlazione fra i due concetti, mentre 0 indica che i due concetti hanno lo stesso significato. L'idea alla base, è che due risorse saranno simili se esiste una terza che ha un link verso entrambe.
  
 
 
- sono necessari ulteriori steps per filtrare 
  
+
+
+  
  
 \section{Clustering}
+Per poter effettuare il clustering dei tweets, `e anzitutto necessario definire
+una qualche funzione di similarità`a (o distanza) fra di essi. Questa funzione
+dovr`a tener conto sia delle feature sintattiche (vettori tf-idf) che delle fea-
+ture semantiche (URIs DBpedia). Nelle sezioni \ref{sec:simtext} \ref{sec:simSem} queste funzioni vengono descritte in dettaglio. 
+Dati due tweet $tw_a$ , $tw_b$ la distanza sarà cosi
+definita:
+\begin{equation}
+\label{eq:distanceTweet}
+d(tw_a,tw_b)=1-Sim_{time}(tw_a,tw_b)\left(\frac{Sim_{text}(tw_a,tw_b)+Sim_{sem}(tw_a,tw_b)}{2}\right)
+\end{equation}
+
+Questa distanza varia nell'intervallo $[0, 1]$ dove 1 sta ad indicare che non vi è alcuna correlazione fra due tweet, 0 invece sta ad indicare che i due tweet sono identici.
 
  \begin{figure}[h]
     \centering
@@ -318,44 +286,101 @@ NDD(a,b):=\begin{cases}
     \label{fig:clusteringWithSpark}
 \end{figure}  
 
-
-L'algoritmo di clustering utilizzato è  Dbscan poiché può gestire bene il rumore e non necessita di parametri come il numero di cluster a priori. La distanza utilizzata si basa sia sulla rappresentazione tf-idf del tweet sia sui DBpedia URIs estratti :
-\begin{equation}
-dist(a,b)=1- timeSim(a,b)\,\frac{textSim(a,b)+semanticSim(a,b)}{2}
-\end{equation}
-La similarità testuale è data dalla similarità del coseno fra i vettori tf-idf dei due tweet:
-\begin{equation*}
-textSim(a,b)=\frac{v_a \cdot  v_b}{||v_a||\:||v_b||}
-\end{equation*}
- Anche il tempo di creazione dei tweet verrà preso in considerazione per valutarne la distanza, poiché anche se due tweet avessero un testo molto simile es \emph{“tonight  flashmob in central park”}, ma fossero pubblicati ad un mese di distanza, è molto inverosimile che si riferiscano al medesimo evento. Per tale ragione, è stata definita una similarità temporale  \footnote{d$_a$=\#days from the epoch of tweet $a$}
-\begin{equation*} 
+ 
+ Anche il tempo di creazione dei tweet verrà preso in considerazione per valutarne la distanza, poiché anche se due tweet avessero un testo molto simile es \emph{“tonight  flashmob in central park”}, ma fossero pubblicati ad un mese di distanza, è molto inverosimile che si riferiscano al medesimo evento. Per tale ragione, è stata definita una similarità temporale come segue:
+\begin{equation} 
+\label{eq:timeSim}
 timeSim(a,b):=\begin{cases}
-1-\frac{|d_a-d_b|}{31} & \text{se $|d_a-d_b|<31 $  ,}\\
+1-\frac{|h_a-h_b|}{72} & \text{se $|h_a-h_b|<72 $  ,}\\
 0 & \text{altrimenti}\\
 \end{cases}
-\end{equation*}
-Ad un tweet, tramite il processo di annotazione semantica, possono essere associate una nessuna o più risorse DBpedia,la distanza semantica sarà data dalla distanza degli insiemi di risorse associati ai due tweet valutata secondo la distanza definita in precedenza per le risorse DBpedia\ref{eq:dbpedia_semantic_distance}. La similarità fra un elemento $x$ e un insieme $Y$ è data da:
-\begin{equation*}
-	sim(x,Y)=sup\{1-DSD(x,y)\:| y\in Y \}
-\end{equation*}
+\end{equation}
+Dove $h_a$, $h_b$ indicano rispettivamente il numero di ore rispetto al time-epoch del tweet $tw_a$ e del tweet $tw_b$.
 
-Dati due insiemi di risorse DBpedia $D_a,D_b$ la similarità fra i due insiemi sarà definita come: 
+Si può notare che nella funzione \ref{eq:distanceTweet} la similarità  temporale, in realtà, non  è
+utilizzata non come indicazione di correlazione fra due tweet, ma è utilizzata
+in senso opposto, ovvero due tweet che sono hanno delle date di creazione molto distanti avranno una bassa correlazione
+
+Dopo aver definito la funzione di distanza fra i tweet, la fase successiva `e
+stata la generazione dei cluster utilizzando l’algoritmo DBSCAN. Data la
+numerosit`a dei tweet e la loro alta dimensionalit`a `e stato necessario utilizzare 
+a tecnica dell’LSH come modello di approssimazione della similarit`a
+del coseno tra coppie di tweet. Questa tecnica consente sia di ridurre la di-
+mensionalit`a dei dati, che il numero di confronti da effettuare. La figura 4.4
+mostra il flusso di operazioni eseguite. A partire dai vettori tf-idf sono stati
+applicate le funzioni di hashing, facendo si che i dati della stessa hash-table
+siano mappati sulla stessa partizione definita da Spark. In questo modo sar`a
+pi`
+u semplice trovare le coppie di tweet simili (candidate-neighbors ) che il
+modello lsh avr`a associato al medesimo bucket.
+
+Dalla collezione di candidate-neighbors verranno rimosse tutte quelle coppie
+la cui distanza `e maggiore di quella definita in input. In questo modo sar`a
+possibile rimuovere i false positive, ossia quelle coppie di tweet considerate
+simili dal modello lsh, ma che in realt`a non lo sono.
+Le coppie filtrate saranno infine date in input all’algoritmo di clustering.
+L’algoritmo restituir`a cluster di tweet, sintatticamente e semanticamente
+simili, dove i tweet appartenenti allo stesso cluster descriveranno lo stesso
+evento.
+Nelle sezioni 4.3.1 e 4.3.2 saranno illustrati con maggior dettaglio come sono stati implementati gli algoritmi di LSH e DBSCAN in maniera distribuita su
+SPARK.
+
+\subsection{Similarità Testuale}
+\label{sec:simtext}
+I tweet sono stati rappresentati mediante vettori tf-idf. L'assunzione alla base
+del Vector Space Model `e che la similarità fra vettori (quindi documenti) possa essere approssimata dalla vicinanza spaziale. Una delle funzioni di similarità tra vettori più nota è quella del coseno cosi definita:
 \begin{equation}
-sim(D_a,D_b)=\frac{\sum\limits_{x \in D_a} sim(x,D_b)  }{|D_a|} 
+\label{eq:cosSim}
+textSim(a,b)=\frac{v_a \cdot  v_b}{||v_a||\:||v_b||}
 \end{equation}
 
-Questa funzione di similarità non è simmetrica,\footnote{se $D_a\subseteq D_b\Rightarrow sim(D_a,D_b)\neq sim(D_b,D_a) $}
-Per ottenere una funzione simmetrica è sufficiente definirla come: 
-\begin{equation*} 
-semanticSim(a,b):= 
-\begin{cases}
-\frac{sim(D_a,D_b)+sim(D_b,D_a)}{2} & \text{se $D_a,D_b\neq \emptyset$ }\\
-1& \text{altrimenti.}
+Questa funzione calcola il coseno dell'angolo compreso fra due vettori, dunque
+quanto più piccolo sarà l'angolo compreso fra due vettori tantopiù alta sarà
+la loro similarità. Se due vettori sono identici il loro angolo sar`a 0, e dunque
+la similarit`a sar`a massima ovvero pari a 1, mentre quando i documenti sono
+ortogonali, ovvero non hanno termini in comune, il valore assunto dal coseno
+sar`a 0. Bisogna sottolineare che, sebbene la funzione coseno vari nell’interval-
+lo $[−1, 1]$, la funzione di similarità \ref{eq:cosSim}  varia nell'intervallo $[0, 1]$ poiché tutte
+le componenti dei vettori sono maggiori di zero
 
+\subsection{Similarità Semantica}
+\label{sec:simSem}
+
+Annotare il testo con DBpedia URIs permette di sfruttare la base di conoscenza di DBpedia per poter determinare la correlazione semantica fra due termini. Ciò permette di arricchire la rappresentazione testuale andando a lenire
+i classici problemi di ambiguità del linguaggio naturale come polisemia e
+sinonimia. Avendo due risorse DBpedia è possibile definire una funzione di
+distanza, che sfrutti la base di conoscenza di DBpedia.
+
+ 
+
+ \begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{wikiLinksSim}
+    \caption{Utilizzare gli InLinks per valutare la correlazione semantica fra Automobile e Global Warning}
+  \label{fig:wikiLinkSim}
+  \end{figure}  
+
+Avendo due risorse DBpedia è possibile definire una funzione di
+distanza, che sfrutti la base di conoscenza di DBpedia. 
+Milne e Witten \cite{Milne08aneffective} hanno utilizzato gli hyperlink delle pagine Wikipedia per poter definire la correlazione fra due articoli wikipedia (e quindi due risorse dbpedia): date due risorse $a,b$, possiamo definire una \emph{Normalized DBpedia Distance (NDD)} come segue:
+
+\begin{equation} \label{eq:normalized_dbpedia_distance}
+NDD(a,b):=\begin{cases}
+\frac{\log(max\{|A|,|B|\})-log( |A \cap B|\})}{log(N)-\log(min\{|A|,|B|\})} & \text{se $A \cap B \neq \emptyset $  ,}\\
+1 & \text{altrimenti}\\
 \end{cases}
-\end{equation*}
-Se ad uno dei due tweet non è associata nessuna risorsa, la similarità semantica sarà pari ad uno, quindi la loro similarità sarà valutata  solo in base alla loro rappresentazione testuale.
-Utilizzare una similarità semantica serve ad attenuare il problema della “fragmentation” di cui sono affetti i metodi document-pivot, ovvero utilizzando solo la similarità testuale molti eventi possono essere erroneamente suddivisi in più cluster.  Inoltre Petkos e Papadopoulus \cite{DBLP:conf/www/PetkosPK14}  hanno constato che se due tweet condividono uno stesso URL, o  un tweet e in reply all’altro, allora si riferiscono allo stesso topic/evento.
+\end{equation}
+Dove $A$ e $B$  sono gli insiemi delle risorse DBpedia che hanno un link rispettivamente verso $a$ e $b$, mentre $N$ è il numero totale di risorse in DBpedia. Questa distanza varia nell'intervallo [0,1] dove 1 sta ad indicare che non vi è nessuna correlazione fra i due concetti, mentre 0 indica che i due concetti hanno lo stesso significato. L'idea alla base, è che due risorse saranno simili se esiste una terza che ha un link verso entrambe.
+ 
+ Per calcolare la similarità semantica fra due tweet bisognerà modificare la
+funzione di distanza \ref{eq:normalized_dbpedia_distance}  poiché ad un tweet possono essere associate nessuna,una o più risorse DBpedia, mentre la distanza è definite su coppie.
+
+\begin{equation}
+Sim_{sem}(tw_a,tw_b)=1-NDD(A,B)
+\end{equation}
+Dove $A$ ,$B$ in questo caso sono gli insiemi delle risorse DBpedia che hanno un link rispettivamente verso le risorse associate ai $tw_a$, $tw_b$. Se ad uno dei due tweet non è associata nessuna risorsa, la similarità semantica sarà pari a zero.
+ 
+
  
 \begin{figure}
     \centering
@@ -380,52 +405,22 @@ Utilizzare una similarità semantica serve ad attenuare il problema della “fra
 Si considerino i tweet $a,b$ in figura \ref{fig:twotweets}:
 
 \begin{itemize}
-\item $textSim(a,b)=0.46$ 
-\item $timeSim(a,b)=1.0$ i tweet sono stati pubblicati entrambi il 4/8/2015
-\item $semanticSim(a,b):=\frac{sim(D_a,D_b)+sim(D_b,D_a)}{2} $
-
+\item $Sim_{text}(a,b)=0.46$ 
+\item $Sim_{time}(a,b)=1.0$ i tweet sono stati pubblicati entrambi il 4/8/2015
+\item $Sim_{sem}(a,b):=1-NDD(InLinks{D_a},InLinks{D_b}) $
 
 
   $D_a=$\{ \textless\href{http://dbpedia.org/resource/Melbourne}{Melbourne}\textgreater, \textless\href{http://dbpedia.org/resource/Adam_Goodes}{Adam Goodes}\textgreater\}
   
   $D_b=$\{ \textless\href{http://dbpedia.org/resource/Adam_Goodes}{Adam Goodes}\textgreater, \textless\href{http://dbpedia.org/resource/Federation_Square}{Federation Square}\textgreater\}
-  
-\begin{align*}
- NSD(Melbourne,Adam Goodes)&=NDD(Melbourne,Adam Goodes)\\
- &= \frac{\log(max\{|A|,|B|\})-log(|A \cap B|)}{N-\log(min\{|A|,|B|\})}\\
- &= \frac{\log(643)-log(10)}{N-\log(138)}=0.367  
-\end{align*} 
-\begin{align*}
- NSD(Melbourne,Federation Square)&=\\
- =GeoDist(Melbourne,Federation Square)&=\\
- =CoordDist(Melbourne,Federation Square) &=0 \: \text{(poichè la distanza in km è 0.8)}
-\end{align*}  
-\begin{align*}
- NSD(Adam Goodes,Federation Square)=&\\
- NDD(Adam Goodes,Federation Square)&=1 \: \text{poichè} \: A \cap B=\emptyset
-\end{align*} 
-
-\begin{align*}
- sim(Melbourne,D_b)&=sup\{1-DSD(Melbourne,y)\:| y\in D_b \}\\
-	&=sup\{(1-DSD(Melbourne,Adam Goodes)),\\
-	&\:\:\:\:(1-DSD(Melbourne,Federation Square))\}\\
-	&=sup\{(1-0.367),(1-0)\}=1	\\	  
- sim(Adam Goodes,D_b)&=sup\{1-DSD(Adam Goodes,y)\:| y\in D_b \}\\
-	&=sup\{(1-DSD(Adam Goodes,Adam Goodes)),\\
-	&\:\:\:\:(1-DSD(Adam Goodes,Federation Square))\}\\
-	&=sup\{(1-0),(1-1)\}=1\\		 
-sim(D_a,D_b) &=\frac{1+1}{2}=1 ,\: sim(D_b,D_a) :=\frac{1+1}{2}=1\\
-&\implies semanticSim(a,b)=1
-\end{align*}
-\end{itemize} 
+ 
  \begin{align*}
-dist(a,b)&=1- timeSim(a,b)\,\frac{textSim(a,b)+semanticSim(a,b)}{2}\\
-&=1-\frac{0.46+1}{2}=0.269
+d(a,b)&=1- Sim_{time}(a,b)\,\frac{Sim_{text}(a,b)+Sim_{sem}(a,b)}{2}\\
+&=1-\frac{0.46+0.84}{2}=0.35
 \end{align*}
+  
+\end{itemize}
 
-Se invece, $SemanticSim$ fosse definita come la media delle distanze fra tutte le possibili coppie fra i due insiemi avremmo: 
+\subsection{LSH-SPARK}
+\subsection{DBSCAN-SPARK}
 
-\begin{align*}
-	semanticSim(a,b)&=\frac{\sum\limits_{x \in D_a} \sum\limits_{x \in D_b}  (1-NSD(x,y))}{|D_a||D_b|}=\\
-	&=\frac{(1-0.36)+(1-0)+(1-0)+(1-1)}{4}=0.73
-\end{align*}
