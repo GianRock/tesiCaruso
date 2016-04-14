@@ -4,38 +4,35 @@
 % !TEX spellcheck = it-IT
 
 %************************************************
-Il \emph{Micro-blogging} è un nuovo mezzo di comunicazione che permette agli utenti di pubblicare costantemente e "real time" brevi contenuti digitali, come testo, link, immagini o video. Questi contenuti vengono pubblicati in una rete sociale, in cui ogni utente può generare nuove informazioni, aggiornare informazioni esistenti e condividere o commentare informazioni pubblicate da altri utenti \cite{} (Java et. al 2007 \url{http://eprints.qut.edu.au/68159/1/Cher%20Han_Lau_Thesis.pdf}).  
-
-Spesso questo nuovo strumento di comunicazione viene inteso come una versione \emph{micro} di un \emph{blog}. Tuttavia questi media risultano profondamente differenti \cite{export:69500}. 
-
-I blog, similmente ai micro-blog, sono collezioni di contenuti multimediali pubblicamente accessibili. 
-Tuttavia differentemente da questi ultimi, i contenuti pubblicati in un blog sono redatti da esperti, che ne garantiscono la qualità e veridicità. All'interno dei micro-blog non esiste una netta separazione tra autori e lettori. Gli utenti di tali sistemi di comunicazione svolgono il duplice ruolo di produttori e consumatori. Questa peculiarità riduce sensibilmente la qualità e veridicità delle informazioni pubblicate nei micro-blog. 
-
-Un'altra peculiarità 
-dei micro-blog è data dalla brevità dei contenuti testuali, che garantisce un'immediata comunicazione. Questo rende i micro-blog 
-Questo sebbene da un lato rende i micro-blog delle sorgenti informative di grandi dimensioni, dall'altro contribuisce a ridurr 
-   
-   
-   Info aggiornate + facilità accesso + utenti consumatori/ produttori -> OTTIMO STRUMENTO PER ESTRARRE EVENTI
-   
-   tWEETER
-   
-
-   
-\color{red} 
-Scoprire nuovi eventi o topics da Twitter, non è affatto un task banale sia 
-sia la mole dei dati (oltre 400 milioni di tweet giornalmente), che per la natura stessa dei tweets. Se da un lato il limite a 140 caratteri ne rende più semplice la diffusione on-line, dall'altro complica ulteriormente il task, poiché gli utenti spesso,proprio a causa di tale limite,ricorrono a slang, vocaboli OOV\footnote{Out Of Vocabolary} o emoticons. Solitamente per evento si intende qualcosa che accade in un luogo e tempo specifico. Rientrano in questa definizione disastri naturali come uragani e terremoti o elezioni politiche. In questi casi Twitter si è rilevato una  fonte molto valida di informazioni, poiché chiunque era coinvolto poteva \lq\lq twittare\rq\rq uno status a riguardo.
-La grande maggioranza dei sistemi di event-detection, si basa sulla similarità testuale dei tweets al fine di scoprire nuovi eventi. In questo lavoro di tesi oltre ad utilizzare una similarità sintattica è stata adottata una similarità semantica che utilizza la  base di conoscenza di DBpedia.
-A causa della mole di dati da  processare, questa attività di event-detection può essere considerata un task di \lq\lq Big Data\rq\rq.
-\section{Twitter}
 
 
-Twitter è ad oggi il servizio di "micro-blogging" più diffuso e con il più alto tasso di crescita. 
 
-Negli anni la sua popolarità crescente ha attirato l'attenzione di un gran numero di ricercatori. I dati generati da Twitter costituiscono una ricca sorgente che può essere usata per estrarre qualsiasi tipo di informazione per qualsiasi ambito di ricerca. Questi dati possono ad esempio essere usati per estrazione di trend, sentiment analysis e opinion mining.
+Il \emph{Micro-blogging} è un nuovo mezzo di comunicazione che permette agli utenti di pubblicare in broadcast  costantemente e in  "real time" brevi contenuti digitali, come testo, link, immagini o video. 
+Questi contenuti vengono pubblicati in una rete sociale, in cui ogni utente può generare nuove informazioni, aggiornare informazioni esistenti e condividere o commentare informazioni pubblicate da altri utenti \cite{} (Java et. al 2007 \url{http://eprints.qut.edu.au/68159/1/Cher%20Han_Lau_Thesis.pdf}).  
 
-%Negli anni la sua popolarità crescente ha anche attirato anche un alto numero di ricercatori, come si può notare dall'alto numero di articoli riguardanti Twitter che sono stati pubblicati in numerosi campi di ricerca.
-Sebbene il termine  “microblog” spesso possa indurre a intendere tale servizio come una versione "micro" di un blog, sono due media molto diversi fra loro \cite{export:69500}. I blog infatti sono progettati, principalmente per permettere ad utenti, di fornire commenti e opinioni su topic di cui sono esperti, gli autori devono anche garantire una certa validità dei contenuti. Dall'altra parte, i microblog, come Twitter, sono invece pensati per permettere di condividere opinioni, news, ma in maniera molto concisa (max 140 caratteri) proprio per far sì che si abbia una  diffusione tempestiva delle informazioni. Proprio grazie a questa caratteristica, i tweets possono essere pubblicati mediante dispositivi mobili, consentendo a chiunque sia testimone di un qualsiasi evento di diffondere la notizia in real-time. Twitter inoltre è anche un servizio di social networking, ogni utente può ricevere gli aggiornamenti ("follow")  di altri utenti senza previa approvazione. Questa relazione è asimmetrica e può essere concettualizzata come una Directed social network o \emph{follower network} 
+Negli ultimi anni, questo mezzo di comunicazione ha attirato l'attenzione di una vasta  comunità  di ricercatori e aziende che operano in diversi ambiti.
+La popolarità crescente di questi servizi di micro-blogging è dovuta alla loro portabilità, immediatezza e facilità d'uso. Queste caratteristiche consentono agli utenti di interagire istantaneamente e diffondere informazioni.
+
+Virtualmente qualsiasi persona che assiste o è coinvolta in un qualsiasi evento è capace, grazie a questi micro-blog, di diffondere informazioni durante l'accaduto stesso. Ad esempio, durante i recenti conflitti, crisi sociali e manifestazioni\footnote{e.g.: primavera araba, proteste iraniane del 2009, elezioni presidenziali, etc.}, milioni di persone hanno utilizzato sistemi di micro-blogging come Twitter sia per diffondere notizie che per ricevere aggiornamenti sugli ultimi accadimenti.
+
+Twitter è ad oggi il servizio di micro-blogging più utilizzato in assoluto. Con circa 284 milioni di utenti attivi al mese, ogni giorno vengono prodotti oltre 500 milioni di tweets al giorno. Gli utenti di Twitter, possono inviare in broadcast brevi status (\emph{tweets}), non  più lunghi di 140 caratteri,
+ ad una rete di utenti (\emph{follower}) attraverso diversi dispositivi (e.g. smartphones, web-app, email, etc.).
+ 
+Se da un lato la dimensionalità dei tweet rappresenta per alcuni utenti un forte limite, dall'altro rappresenta una delle caratteristiche fondamentali di Twitter: \emph{l'immediatezza}. Questo vincolo costringe gli utenti a produrre messaggi molto sintetici, quasi come slogan, che quindi sono più facili da diffondere.
+
+%Inoltre, sebbene  i tweet siano caratterizzati da un contenuto molto ristretto, bisogna considerare che milioni di persone  \emph{twittano}\footnote{http://www.garzantilinguistica.it/ricerca/?q=twittare}  da ogni parte del mondo, a proposito di argomenti più disparati da manifestazioni sportive a crisi globali.
+Monitorare e analizzare questo flusso di  contenuti generati degli utenti può portare a scoprire informazioni molto utili. Per esempio, molte aziende utilizzano Twitter sia per pubblicizzare e raccomandare i loro prodotti, che comprendere  le opinioni dei loro clienti riguardo i loro prodotti (o dei loro competitor) .
+Inoltre i tweet sono stati analizzati per predire i risultati delle votazioni presidenziali, crimini \cite{Wang2012}, attività terroristiche o eventi. In generale, un evento può essere definito \emph{qualcosa che accade in un luogo e tempo specifico}. 
+
+Diversi lavori in letteratura si sono focalizzati sul problema di estrazione automatica di eventi, dimostrando l'importanza di Twitter come mezzo di comunicazione. Infatti in diverse occasioni si è osservato come le notizie relative ad eventi si diffondano prima e più velocemente delle notizie diffuse sui media tradizionali (come la morte di Micheal Jackson \footnote{ttp://www.dailymail.co.uk/sciencetech/article-1195651/How-Michael-Jacksons-death-shut- Twitter-overwhelmed-Google–killed-Jeff-Goldblum.html}).
+
+Scoprire eventi da Twitter non è un task banale. Infatti, tweet associati ad  eventi, rappresentano solo una piccola percentuale di tutti i tweet prodotti. La maggior parte infatti, è costituita da status personali, messaggi anche privi di senso, opinioni, spam, etc..   
+La maggior parte degli approcci esistenti per l'estrazione automatica di eventi, utilizza la similarità sintattica dei contenuti testuali dei tweets. Queste soluzioni non considerano né il problema della dimensionalità (mole di dati da processare) né tanto meno sfruttano informazioni contestuali quali tempo, luogo o entità coinvolte (e.g. persone o organizzazioni).
+
+La mole dei dati da analizzare e la necessità di estrarre efficientemente risultati rendono il problema dell'estrazione di eventi un problema assimilabile come  "Big Data Analytics".  
+Obiettivo di questa tesi, è quello di proporre un sistema scalabile per il task di event detection a partire da twitter, utilizzando un'architettura di calcolo distribuita. Nella soluzione proposta oltre alla classica rappresentazione sintattica dei tweet, sarà adottata una rappresentazione semantica utilizzando la base di conoscenza di DBpedia.
+
+
 \subsection{Twitter come fonte di informazione}
 Molte notizie sono state diffuse su Twitter anche prima della diffusione sui media classici. Uno degli esempi più significati è stato rappresentato dalla notizia della di Michael Jackson del 2009. Alle 2:26pm
 del 24 Giungo 2009, la notizia trapelò su Twitter e fu diffusa in una maniera così virale che che Google la identificò come un attacco hacker. La validità della notizia fù verificata da Google solo 25 minuti dopo,   solo allora i media mainstream iniziarono a far diffondere la notizia \footnote{ttp://www.dailymail.co.uk/sciencetech/article-1195651/How-Michael-Jacksons-death-shut-
