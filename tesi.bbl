@@ -10,14 +10,6 @@ James Allan, editor.
   Organization}.
 \newblock Kluwer Academic Publishers, Norwell, MA, USA, 2002.
 
-\bibitem{DBLP:conf/semweb/AuerBKLCI07}
-S{\"{o}}ren Auer, Christian Bizer, Georgi Kobilarov, Jens Lehmann, Richard
-  Cyganiak, and Zachary~G. Ives.
-\newblock Dbpedia: {A} nucleus for a web of open data.
-\newblock In {\em The Semantic Web, 6th International Semantic Web Conference,
-  2nd Asian Semantic Web Conference, {ISWC} 2007 + {ASWC} 2007, Busan, Korea,
-  November 11-15, 2007.}, pages 722--735, 2007.
-
 \bibitem{DBLP:conf/icwsm/BeckerNG11}
 Hila Becker, Mor Naaman, and Luis Gravano.
 \newblock Beyond trending topics: Real-world event identification on twitter.
@@ -70,13 +62,6 @@ Martin Ester.
   Large Data Bases, August 24-27, 1998, New York City, New York, USA}, pages
   226--231. AAAI Press, 1996.
 
-\bibitem{export:69500}
-Michael Gamon, Sumit Basu, Dmitriy Belenko, Danyel Fisher, Matthew Hurst, and
-  Arnd~Christian K{\"o}nig.
-\newblock Blews: Using blogs to provide context for news articles.
-\newblock In {\em 2nd AAAI Conference on Weblogs and Social Media (ICWSM
-  2008)}. American Association for Artificial Intelligence, April 2008.
-
 \bibitem{Gionis:1999}
 Aristides Gionis, Piotr Indyk, and Rajeev Motwani.
 \newblock Similarity search in high dimensions via hashing.
@@ -102,6 +87,13 @@ Piotr Indyk and Rajeev Motwani.
   dimensionality.
 \newblock In {\em Proceedings of the Thirtieth Annual ACM Symposium on Theory
   of Computing}, STOC '98, pages 604--613, New York, NY, USA, 1998. ACM.
+
+\bibitem{Java:2007:WWT:1348549.1348556}
+Akshay Java, Xiaodan Song, Tim Finin, and Belle Tseng.
+\newblock Why we twitter: Understanding microblogging usage and communities.
+\newblock In {\em Proceedings of the 9th WebKDD and 1st SNA-KDD 2007 Workshop
+  on Web Mining and Social Network Analysis}, WebKDD/SNA-KDD '07, pages 56--65,
+  New York, NY, USA, 2007. ACM.
 
 \bibitem{Kleinberg:2002:BHS:775047.775061}
 Jon Kleinberg.
@@ -150,13 +142,6 @@ R.~Papka.
 \newblock On-line new event detection, clustering, and tracking title2:.
 \newblock Technical report, Amherst, MA, USA, 1999.
 
-\bibitem{DBLP:conf/www/PetkosPK14}
-Georgios Petkos, Symeon Papadopoulos, and Yiannis Kompatsiaris.
-\newblock Two-level message clustering for topic detection in twitter.
-\newblock In {\em Proceedings of the {SNOW} 2014 Data Challenge co-located with
-  23rd International World Wide Web Conference {(WWW} 2014), Seoul, Korea,
-  April 8, 2014.}, pages 49--56, 2014.
-
 \bibitem{Petrovic:2010:SFS:1857999.1858020}
 Sa\v{s}a Petrovi\'{c}, Miles Osborne, and Victor Lavrenko.
 \newblock Streaming first story detection with application to twitter.
@@ -201,6 +186,14 @@ Kristina Toutanova and Christopher~D. Manning.
   Linguistics - Volume 13}, EMNLP '00, pages 63--70, Stroudsburg, PA, USA,
   2000. Association for Computational Linguistics.
 
+\bibitem{Wang2012}
+Xiaofeng Wang, Matthew~S. Gerber, and Donald~E. Brown.
+\newblock {\em Social Computing, Behavioral - Cultural Modeling and Prediction:
+  5th International Conference, SBP 2012, College Park, MD, USA, April 3-5,
+  2012. Proceedings}, chapter Automatic Crime Prediction Using Events Extracted
+  from Twitter Posts, pages 231--238.
+\newblock Springer Berlin Heidelberg, Berlin, Heidelberg, 2012.
+
 \bibitem{Weber:1998:QAP:645924.671192}
 Roger Weber, Hans-J\"{o}rg Schek, and Stephen Blott.
 \newblock A quantitative analysis and performance study for similarity-search
@@ -230,5 +223,10 @@ Matei Zaharia, Mosharaf Chowdhury, Tathagata Das, Ankur Dave, Justin Ma, Murphy
 \newblock In {\em Proceedings of the 9th USENIX Conference on Networked Systems
   Design and Implementation}, NSDI'12, pages 2--2, Berkeley, CA, USA, 2012.
   USENIX Association.
+
+\bibitem{Zobel:1998:ESS:281250.281256}
+Justin Zobel and Alistair Moffat.
+\newblock Exploring the similarity space.
+\newblock {\em SIGIR Forum}, 32(1):18--34, April 1998.
 
 \end{thebibliography}

@@ -8,7 +8,7 @@
 
 
 Il \emph{Micro-blogging} è un nuovo mezzo di comunicazione che permette agli utenti di pubblicare in broadcast  costantemente e in  "real time" brevi contenuti digitali, come testo, link, immagini o video. 
-Questi contenuti vengono pubblicati in una rete sociale, in cui ogni utente può generare nuove informazioni, aggiornare informazioni esistenti e condividere o commentare informazioni pubblicate da altri utenti \cite{} (Java et. al 2007 \url{http://eprints.qut.edu.au/68159/1/Cher%20Han_Lau_Thesis.pdf}).  
+Questi contenuti vengono pubblicati in una rete sociale, in cui ogni utente può generare nuove informazioni, aggiornare informazioni esistenti e condividere o commentare informazioni pubblicate da altri utenti \cite{Java:2007:WWT:1348549.1348556}.  
 
 Negli ultimi anni, questo mezzo di comunicazione ha attirato l'attenzione di una vasta  comunità  di ricercatori e aziende che operano in diversi ambiti.
 La popolarità crescente di questi servizi di micro-blogging è dovuta alla loro portabilità, immediatezza e facilità d'uso. Queste caratteristiche consentono agli utenti di interagire istantaneamente e diffondere informazioni.
@@ -29,11 +29,11 @@ Diversi lavori in letteratura si sono focalizzati sul problema di estrazione aut
 Scoprire eventi da Twitter non è un task banale. Infatti, tweet associati ad  eventi, rappresentano solo una piccola percentuale di tutti i tweet prodotti. La maggior parte infatti, è costituita da status personali, messaggi anche privi di senso, opinioni, spam, etc..   
 La maggior parte degli approcci esistenti per l'estrazione automatica di eventi, utilizza la similarità sintattica dei contenuti testuali dei tweets. Queste soluzioni non considerano né il problema della dimensionalità (mole di dati da processare) né tanto meno sfruttano informazioni contestuali quali tempo, luogo o entità coinvolte (e.g. persone o organizzazioni).
 
-La mole dei dati da analizzare e la necessità di estrarre efficientemente risultati rendono il problema dell'estrazione di eventi un problema assimilabile come  "Big Data Analytics".  
+La mole dei dati da analizzare e la necessità di estrarre efficientemente risultati rendono il problema dell'estrazione di eventi assimilabile ad un problema  come  "Big Data Analytics".  
 Obiettivo di questa tesi, è quello di proporre un sistema scalabile per il task di event detection a partire da twitter, utilizzando un'architettura di calcolo distribuita. Nella soluzione proposta oltre alla classica rappresentazione sintattica dei tweet, sarà adottata una rappresentazione semantica utilizzando la base di conoscenza di DBpedia.
 
 
-\subsection{Twitter come fonte di informazione}
+\section{Twitter}
 Molte notizie sono state diffuse su Twitter anche prima della diffusione sui media classici. Uno degli esempi più significati è stato rappresentato dalla notizia della di Michael Jackson del 2009. Alle 2:26pm
 del 24 Giungo 2009, la notizia trapelò su Twitter e fu diffusa in una maniera così virale che che Google la identificò come un attacco hacker. La validità della notizia fù verificata da Google solo 25 minuti dopo,   solo allora i media mainstream iniziarono a far diffondere la notizia \footnote{ttp://www.dailymail.co.uk/sciencetech/article-1195651/How-Michael-Jacksons-death-shut-
 Twitter-overwhelmed-Google–killed-Jeff-Goldblum.html}.Anche nel caso del terremoto in Abruzzo del 6 aprile 2009, gli utenti Twitter hanno segnalato la notizia prima dei media tradizionali. 
@@ -46,7 +46,7 @@ In aggiunta a queste tre V, talvolta viene aggiunta una quarta alla definizione:
 La veridicità è un indicazione dell'integrità di questi dati e si riferisce al livello di trust in questi dati stessi, affinché si possano utilizzare nei processi decisionali
 Analizzare questi big-data può permettere  di prendere decisioni in maniera più oculata e molto più velocemente, usando dati che in passato erano inaccessibili o inutilizzabili.
 Per tali ragioni, i classici database relazionali non riescono a gestire facilmente questi dati.
-\section{Hadoop}
+\subsection{Hadoop}
 Hadoop è stato uno dei primi sistemi open-source più popolari per processare i big data.
 \'E un sistema scalabile e fault-tolerant che consente di processare grandi dataset attraverso un cluster di server.  
 
@@ -64,7 +64,7 @@ Hadoop è composto da tre componenti principali: un cluster mananger (YARN), un 
 
 
  
- \subsection{Map Reduce}
+ \subsubsection{Map Reduce}
  MapReduce è il modello di computazione distribuita fornito da Hadoop. Mentre HDFS fornisce un file system distribuito per memorizzare grandi dataset, MapReduce fornisce un framework di computazione che consente di processare grandi dataset in parallelo attraverso un cluster di computer (nodi). Questo modello astrae la computazione distribuita fornendo dei costrutti ad alto livello che consentono di sviluppare facilmente applicazioni distribuite.
  Il framework MapReduce schedula in maniera automatica l'esecuzione di un applicazione su un insieme di macchine in un cluster, prendendosi carico  della gestione della comunicazione fra nodi, del bilanciamento del carico di esecuzione fra i nodi e dei possibili guasti dei nodi.
 In questo modo, gli sviluppatori possono concentrarsi sulla logica di processing dei dati tralasciando questi dettagli.
@@ -74,7 +74,7 @@ La funzione \emph{map} riceve in input una coppia chiave-valore e restituisce a 
 
 I dati possono essere sia semi strutturati o non strutturati affatto, non è richiesto che i dati siano conformi ad uno schema rigido predefinito. L'unico requisito è che sia possibile esprimere il dataset in input come una serie di coppie chiave valore.
 Il modello MapReduce ha rivoluzionato il modo di processare grandi datasets, offrendo un modello semplice che consente di scrivere programmi che possono essere eseguiti in parallelo su molte macchine. Grazie a questo, Map-Reduce consente di ottenere una scalabilità orizzontale: all'aumentare della dimensione dei dati è possibile aggiungere nuove macchine mantenendo quasi invariato il tempo di esecuzione.
-\section{Apache Spark}
+\subsection{Apache Spark}
 Apache Spark \cite{Zaharia:2010:SCC:1863103.1863113} è una framework open-source che consente di processare grandi dataset in maniera distribuita.
 Spark può essere considerato come il successore del modello MapReduce di Hadoop, entrambi i framwork sono progettati per poter processare i big data.  Spark mantiene inalterata la scalabilità di MapReduce e la tolleranza ai guasti, e inoltre aggiunge nuove caratteristiche, offrendo inoltre ulteriori vantaggi rispetto a MapReduce. Primo fra questi è la velocità: Spark riesce a processare i dati riducendo  di molto i tempi di latenza (fino a 100 volte), poiché  consente ai nodi di processing di immagazzinare in memoria centrale i risultati intermedi, a differenza di MapReduce, dove invece erano serializzati sul file system.  La velocità può essere talvolta un fattore determinante. Impiegare troppo tempo per processare i dati, rallenta tutto il processo decisionale riducendo il valore stesso dei dati.
 La principale astrazione fornita da SPARK sono i \textbf{R}esilent \textbf{D}istributed \textbf{D}ataset (RDD) \cite{Zaharia:2012:RDD:2228298.2228301}, che essenzialmente sono una collezione immutabile e distribuita di oggetti. Questi oggetti sono, suddivisi in più partizioni che  generalmente sono distribuite su più nodi.
@@ -146,8 +146,8 @@ Gli infobox sono tabelle di coppie attributo valore, che mostrano i dati più ri
 L'ontologia DBpedia consisite di 320 classi e descritte da 1650 proprietà. Le classi organizzate mediante una gerarchia sussuntiva dove \emph{owl:Thing} è la classe più generale. Poiché Il sistema di Wikipedia infobox si è evoluto in maniera decentrata, talvolta accade ad esempio che si usino diversi template per la stessa tipologia di entità (class) o si usino nomi diversi per descrive lo stesso attributo (es placeOfBirth o birthPlace). 
  L'allineamento tra i template infobox e l'ontologia a causa di queste eterogeneità presenti nella nomenclatura, non è quindi completamente automatico, ma si basa anche su mapping definiti manualmente, forniti dalla comunità di DBpedia. Ad esempio ‘date of birth’ and ‘birth
 date’ sono entrambi mappati con la proprietà birthDate. 
-\subsection{Accedere a DBpedia}
-La base di conoscenza DBpedia è disponibile sul web sotto GNU Free Documentation, e può essere consultata mediante varie modalità :
+ 
+ La base di conoscenza DBpedia è disponibile sul web sotto GNU Free Documentation, e può essere consultata mediante varie modalità :
 \begin{itemize}
 \item \textbf{Linked Data}: linked data è la metodologia di pubblicazione  dei dati RDF nel web, che utilizza gli URI http come identificativo delle risorse e il protocollo HTTP per ritrovare al descrizione rdf delle risorse. Quando si accedere ad un URI di una risorsa DBPedia mediante un semantic web agent si ottiene la descrizione rdf della risorsa mentre se si utilizza un semplice web-browser si otterrà una vista html della descrizione.
 \item \textbf{Sparql Endpoint } \'E fornito un endopoint mediante il quale si può interrogare la base di conoscenza tramite il protocollo SPARQL.

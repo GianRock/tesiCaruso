@@ -8,14 +8,17 @@
 %************************************************
 Dato uno stream  di tweet (ordinato temporalmente), l'obiettivo  è quello di individuare dei "topic” o “event”. In letteratura, come già descritto nel capitolo \ref{cap:capitolo2}, esistono due principali metodologie : document-pivot e feature-pivot.
 In questo lavoro di tesi, è stata adottata la prima metodologia, l'obiettivo è quindi suddividere lo stream in cluster, tali che ciascuno di essi corrisponda a tutti i tweet relativi ad un \lq\lq evento\rq\rq.  
-La definizione di evento utilizzata è quella utilizzata per il Topic Detection and Tracking (TDT) \cite{Allan:2002:TDT:772260} :
-In seguito sono descritte in maniera più dettagliata tutte le fasi eseguite.
+La definizione di evento utilizzata è quella utilizzata per il Topic Detection and Tracking (TDT) \cite{Allan:2002:TDT:772260}.
+
+
+La figura \ref{fig:diagrammaComponentiSistema} mostra le principali fasi di elaborazione implementate  nel sistema proposto.
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.6\textwidth]{diagrammaComponenti}
     \caption{Principali componenti del sistema}
     \label{fig:diagrammaComponentiSistema}
 \end{figure} 
+ In seguito sono descritte in maniera più dettagliata tutte le fasi eseguite.
 
 
 \section{Data Cleaning}
@@ -188,7 +191,7 @@ Solitamente uh hashtag ha un alto potere informativo all'interno di un tweet ino
 
 \subsection{Feature Semantiche}
 \subsubsection{Entity Linking} 
-Nell'elaborazione del linguaggio naturale, l'attività di Entity Linking (detta anche Named Entity Disambiguation NED, o named entity recognition and disambiguation (NERD)), ha l'obiettivo di identificare delle entità menzionate nel testo. Ad esempio, dato il testo \emph{\lq\lq Paris is the capital of France \rq \rq} l'obiettivo è quello di stabilire che   "Paris" si riferisce alla città piuttosto che a Paris Hilton o a qualsiasi altra entità.
+Nell'elaborazione del linguaggio naturale, l'attività di Entity Linking (detta anche Named Entity Disambiguation NED, o named entity recognition and disambiguation (NERD)), ha l'obiettivo di identificare delle entità menzionate nel testo. Ad esempio, dato il testo \emph{\lq\lq Paris is the capital of France \rq \rq} l'obiettivo è quello di stabilire che  \lq\lq Paris\rq\rq si riferisce alla città piuttosto che a \lq\lq Paris Hilton\rq\rq o a qualsiasi altra entità.
 Questa attività differisce dal Named Entity Recognition, poiché in quest'ultima vengono soltanto identificate le occorrenze o menzioni ad entità ma non viene stabilito quali siano.
 L'attività di Entity Linking richiede necessariamente una base di conoscenza (Knowledge Base) contenente tutte le possibili entità che possono essere menzionate. La basi di conoscenza più utilizzate a tal fine sono  Wikipedia, o la versione come linked open data: DBpedia.
 
@@ -266,10 +269,9 @@ Annotare il testo con DBpedia URIs permette di sfruttare la base di conoscenza d
   
  
 \section{Clustering}
-Per poter effettuare il clustering dei tweets, `e anzitutto necessario definire
-una qualche funzione di similarità`a (o distanza) fra di essi. Questa funzione
-dovr`a tener conto sia delle feature sintattiche (vettori tf-idf) che delle fea-
-ture semantiche (URIs DBpedia). Nelle sezioni \ref{sec:simtext} \ref{sec:simSem} queste funzioni vengono descritte in dettaglio. 
+Per poter effettuare il clustering dei tweets, è anzitutto necessario definire
+una qualche funzione di similarità` (o distanza) fra di essi. Questa funzione
+dovrà tener conto sia delle feature sintattiche (vettori tf-idf) che delle feature semantiche (URIs DBpedia). Nelle sezioni \ref{sec:simtext} \ref{sec:simSem} queste funzioni vengono descritte in dettaglio. 
 Dati due tweet $tw_a$ , $tw_b$ la distanza sarà cosi
 definita:
 \begin{equation}
@@ -302,42 +304,40 @@ utilizzata non come indicazione di correlazione fra due tweet, ma è utilizzata
 in senso opposto, ovvero due tweet che sono hanno delle date di creazione molto distanti avranno una bassa correlazione
 
 Dopo aver definito la funzione di distanza fra i tweet, la fase successiva `e
-stata la generazione dei cluster utilizzando l’algoritmo DBSCAN. Data la
-numerosit`a dei tweet e la loro alta dimensionalit`a `e stato necessario utilizzare 
-a tecnica dell’LSH come modello di approssimazione della similarit`a
+stata la generazione dei cluster utilizzando l'algoritmo DBSCAN. Data la
+numerosità dei tweet e la loro alta dimensionalità  è stato necessario utilizzare 
+a tecnica dell’LSH come modello di approssimazione della similarità
 del coseno tra coppie di tweet. Questa tecnica consente sia di ridurre la di-
-mensionalit`a dei dati, che il numero di confronti da effettuare. La figura 4.4
-mostra il flusso di operazioni eseguite. A partire dai vettori tf-idf sono stati
+dimensionalità dei dati, che il numero di confronti da effettuare. La figura \ref{fig:clusteringWithSpark}
+mostra il flusso di operazioni eseguite. A partire dai vettori tf-idf sono state
 applicate le funzioni di hashing, facendo si che i dati della stessa hash-table
-siano mappati sulla stessa partizione definita da Spark. In questo modo sar`a
-pi`
-u semplice trovare le coppie di tweet simili (candidate-neighbors ) che il
-modello lsh avr`a associato al medesimo bucket.
+siano mappati sulla stessa partizione definita da Spark. In questo modo sarà
+più semplice trovare le coppie di tweet simili (\emph{candidate-neighbors} ) che il
+modello lsh avrà associato al medesimo bucket.
 
 Dalla collezione di candidate-neighbors verranno rimosse tutte quelle coppie
-la cui distanza `e maggiore di quella definita in input. In questo modo sar`a
+la cui distanza è maggiore di quella definita in input. In questo modo sarà
 possibile rimuovere i false positive, ossia quelle coppie di tweet considerate
-simili dal modello lsh, ma che in realt`a non lo sono.
-Le coppie filtrate saranno infine date in input all’algoritmo di clustering.
-L’algoritmo restituir`a cluster di tweet, sintatticamente e semanticamente
+simili dal modello lsh, ma che in realtà non lo sono.
+Le coppie filtrate saranno infine date in input all'algoritmo di clustering.
+L'algoritmo restituirà cluster di tweet, sintatticamente e semanticamente
 simili, dove i tweet appartenenti allo stesso cluster descriveranno lo stesso
 evento.
-Nelle sezioni 4.3.1 e 4.3.2 saranno illustrati con maggior dettaglio come sono stati implementati gli algoritmi di LSH e DBSCAN in maniera distribuita su
-SPARK.
+Nelle sezioni \ref{sec:simSem} \ref{sec:simtext} saranno illustrati con maggior dettaglio come sono stati implementati gli algoritmi di LSH e DBSCAN in maniera distribuita su SPARK.
 
 \subsection{Similarità Testuale}
 \label{sec:simtext}
 I tweet sono stati rappresentati mediante vettori tf-idf. L'assunzione alla base
-del Vector Space Model `e che la similarità fra vettori (quindi documenti) possa essere approssimata dalla vicinanza spaziale. Una delle funzioni di similarità tra vettori più nota è quella del coseno cosi definita:
+del Vector Space Model `e che la similarità fra vettori (quindi documenti) possa essere approssimata dalla vicinanza spaziale. Una delle funzioni di similarità tra vettori più nota è quella del coseno \cite{Zobel:1998:ESS:281250.281256} cosi definita:
 \begin{equation}
 \label{eq:cosSim}
-textSim(a,b)=\frac{v_a \cdot  v_b}{||v_a||\:||v_b||}
+Sim_{text}(a,b)=cos(\theta)=\frac{a \cdot  b}{||a||\:||b||}=\frac{\sum_{i=1}^m a_i\cdot  b_i}{\sqrt{\sum_{i=1}^m a_i^2} \cdot \sqrt{\sum_{i=1}^m b_i^2}}
 \end{equation}
 
 Questa funzione calcola il coseno dell'angolo compreso fra due vettori, dunque
-quanto più piccolo sarà l'angolo compreso fra due vettori tantopiù alta sarà
+quanto più piccolo sarà l'angolo compreso fra due vettori tanto più alta sarà
 la loro similarità. Se due vettori sono identici il loro angolo sar`a 0, e dunque
-la similarit`a sar`a massima ovvero pari a 1, mentre quando i documenti sono
+la similarità sarà massima ovvero pari a 1, mentre quando i documenti sono
 ortogonali, ovvero non hanno termini in comune, il valore assunto dal coseno
 sar`a 0. Bisogna sottolineare che, sebbene la funzione coseno vari nell’interval-
 lo $[−1, 1]$, la funzione di similarità \ref{eq:cosSim}  varia nell'intervallo $[0, 1]$ poiché tutte
@@ -373,7 +373,7 @@ NDD(a,b):=\begin{cases}
 Dove $A$ e $B$  sono gli insiemi delle risorse DBpedia che hanno un link rispettivamente verso $a$ e $b$, mentre $N$ è il numero totale di risorse in DBpedia. Questa distanza varia nell'intervallo [0,1] dove 1 sta ad indicare che non vi è nessuna correlazione fra i due concetti, mentre 0 indica che i due concetti hanno lo stesso significato. L'idea alla base, è che due risorse saranno simili se esiste una terza che ha un link verso entrambe.
  
  Per calcolare la similarità semantica fra due tweet bisognerà modificare la
-funzione di distanza \ref{eq:normalized_dbpedia_distance}  poiché ad un tweet possono essere associate nessuna,una o più risorse DBpedia, mentre la distanza è definite su coppie.
+funzione di distanza \ref{eq:normalized_dbpedia_distance},  poiché ad un tweet possono essere associate nessuna,una o più risorse DBpedia, mentre la distanza è definite su coppie.
 
 \begin{equation}
 Sim_{sem}(tw_a,tw_b)=1-NDD(A,B)
@@ -422,5 +422,7 @@ d(a,b)&=1- Sim_{time}(a,b)\,\frac{Sim_{text}(a,b)+Sim_{sem}(a,b)}{2}\\
 \end{itemize}
 
 \subsection{LSH-SPARK}
+\ref{sec:lshSpark}
 \subsection{DBSCAN-SPARK}
+\ref{sec:dbscanSpark}
 
