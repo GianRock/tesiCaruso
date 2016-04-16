@@ -26,7 +26,7 @@ Inoltre i tweet sono stati analizzati per predire i risultati delle votazioni pr
 
 Diversi lavori in letteratura si sono focalizzati sul problema di estrazione automatica di eventi, dimostrando l'importanza di Twitter come mezzo di comunicazione. Infatti in diverse occasioni si è osservato come le notizie relative ad eventi si diffondano prima e più velocemente delle notizie diffuse sui media tradizionali (come la morte di Micheal Jackson \footnote{ttp://www.dailymail.co.uk/sciencetech/article-1195651/How-Michael-Jacksons-death-shut- Twitter-overwhelmed-Google–killed-Jeff-Goldblum.html}).
 
-Scoprire eventi da Twitter non è un task banale. Infatti, tweet associati ad  eventi, rappresentano solo una piccola percentuale di tutti i tweet prodotti. La maggior parte infatti, è costituita da status personali, messaggi anche privi di senso, opinioni, spam, etc..   
+Scoprire eventi da Twitter non è un task banale. Infatti, tweet associati ad  eventi, rappresentano solo una piccola percentuale di tutti i tweet prodotti. La maggior parte infatti, è costituita da status personali, messaggi anche privi di senso, spam, etc..   
 La maggior parte degli approcci esistenti per l'estrazione automatica di eventi, utilizza la similarità sintattica dei contenuti testuali dei tweets. Queste soluzioni non considerano né il problema della dimensionalità (mole di dati da processare) né tanto meno sfruttano informazioni contestuali quali tempo, luogo o entità coinvolte (e.g. persone o organizzazioni).
 
 La mole dei dati da analizzare e la necessità di estrarre efficientemente risultati rendono il problema dell'estrazione di eventi assimilabile ad un problema  come  "Big Data Analytics".  
@@ -34,19 +34,53 @@ Obiettivo di questa tesi, è quello di proporre un sistema scalabile per il task
 
 
 \section{Twitter}
+ 
+
+Come già detto in precendenza, Twitter è il servizio di micro-blogging più utilizzato in assoluto.
+
+Dalla sua creazione nel 2006, Twitter ottenne rapidamente una popolarità su larga scala 
+La funzione principale di Twitter è quella di permettere agli utenti di scrivere e leggere brevi messaggi (max 140 caratteri) noti come \emph{tweets}.
+
+Gli utenti possono \lq\lq twittare \rq\rq attraverso il sito di twitter o tramite applicazioni per smart-phones e persino tramite sms. 
+Twitter oltre ad essere un servizio di micro-blogging, è un social-network, ma ha una caratteristica che lo contraddistingue dai più noti come Facebook, Gooogle+ : è 
+asimmetrico. Un utente infatti, può seguire (\emph{follow}) lo stream dei tweet generati da un altro utente, senza che quest'ultimo approvi o faccia altrettanto. 
+Quando un utente scrive un tweet, questo viene automaticamente viene inviato in broadcast alla rete dei suoi \emph{followers}.
+
+A ciascun utente vengono mostrati i tweet degli utenti che deciso di seguire, sulla sua \emph{timeline}.
+La timeline è costituita dallo stream dei tweet ordinati cronologicamente.
+Generalmente tutti i tweet sono accessibili pubblicamente, a meno che un utente specifichi un livello di privacy  consentendo che i propri tweets siano visibili solo ai suoi follower.\\
+
+Twitter inoltre permette  varie forme di interazione fra gli utenti.
+\'E possibile creare delle vere e proprie conversazioni, grazie al fatto che un utente può scrivere un tweet, in risposta ad un tweet di un altro utente. 	Questa forma di interazione è nota come \emph{reply}.
+Un \emph{reply} inizia con il caratattere \emph{@} seguito dall'username dell'utente a cui si sta rispondendo.
+Inoltre all'interno di un tweet è possibile menzionare un altro utente facendo precedere il suo username dal carattere  \emph{@}. Questa interazione è anche nota come \emph{@-mention} e rappresenta un caso più generale del \emph{reply} 
+
+Twitter inoltre consente ad un utente di inoltrare o \emph{retwittare} il tweet di qualcun altro, ai propri followers il tweet di un altro utente.
+
+
+\subsection{Twitter come fonte di informazione}
 Molte notizie sono state diffuse su Twitter anche prima della diffusione sui media classici. Uno degli esempi più significati è stato rappresentato dalla notizia della di Michael Jackson del 2009. Alle 2:26pm
 del 24 Giungo 2009, la notizia trapelò su Twitter e fu diffusa in una maniera così virale che che Google la identificò come un attacco hacker. La validità della notizia fù verificata da Google solo 25 minuti dopo,   solo allora i media mainstream iniziarono a far diffondere la notizia \footnote{ttp://www.dailymail.co.uk/sciencetech/article-1195651/How-Michael-Jacksons-death-shut-
 Twitter-overwhelmed-Google–killed-Jeff-Goldblum.html}.Anche nel caso del terremoto in Abruzzo del 6 aprile 2009, gli utenti Twitter hanno segnalato la notizia prima dei media tradizionali. 
 \section{Big Data}
 Sebbene oggigiorno il termine \lq\lq big data\rq\rq sia molto in voga, la sua definizione è ancora piuttosto vaga. Alcuni definizioni fanno riferimento al volume dei dati, altre  invece fanno riferimento alla ricchezza dei dati. Per altri, i \lq\lq big data\rq\rq sono   quei dati troppo grandi per gli standard tradizionali, ovvero quando il volume dei dati supera petabytes o zettabytes. Altri ancora intendono per big data, quei dati che riescono ad esprimere più sfaccettature delle stesse entità che rappresentano, che se fossero memorizzati nei classici database relazionali (RDBMS) avrebbero migliaia di colonne. 
-L'aggettivo \lq\lq big\lq\lq non si riferisce soltanto al volume dei dati, ma anche alla loro complessità. Esistono infatti, molti piccoli datasets che  sono considerati big data che non richiedono molo spazio di memorizzazione, ma hanno una complessità intrinseca molto alta. Allo stesso tempo, datasets che richiedono molto spazio di memorizzazione possono non essere abbastanza complessi, da essere considerati Big data. Il solo volume dei dati, quindi non basta a definire questi big-data. Una definizione molto diffusa è quella delle tre \emph{V}, dove, oltre al volume dei dati, si considera anche la Velocità e la Varietà .
+
+L'aggettivo \lq\lq big\rq\rq non si riferisce soltanto al volume dei dati, ma anche alla loro complessità. Esistono infatti, molti   datasets che  sono considerati big data  pur non richiedendo  molto spazio di memorizzazione, poiché hanno una complessità intrinseca molto alta. Allo stesso tempo, datasets che richiedono molto spazio di memorizzazione possono non essere abbastanza complessi, da essere considerati Big data. Il solo volume dei dati, quindi non basta a definire questi big-data. Una definizione molto diffusa è quella delle tre \emph{V}, dove, oltre al volume dei dati, si considera anche la Velocità e la Varietà .
 Per Velocità si intende che i dati sono generati con un'elevata frequenza.
 La Varietà si riferisce al fatto che i dati possono essere  strutturati, semi strutturati o non strutturati affatto : dati transazionali, video, audio testo file di log.
 In aggiunta a queste tre V, talvolta viene aggiunta una quarta alla definizione: \emph{Veridicità}.
 La veridicità è un indicazione dell'integrità di questi dati e si riferisce al livello di trust in questi dati stessi, affinché si possano utilizzare nei processi decisionali
 Analizzare questi big-data può permettere  di prendere decisioni in maniera più oculata e molto più velocemente, usando dati che in passato erano inaccessibili o inutilizzabili.
 Per tali ragioni, i classici database relazionali non riescono a gestire facilmente questi dati.
-\subsection{Hadoop}
+
+ Generalmente per processare dataset di grandi dimensioni si possono adottare due strategie.
+La prima consiste nell'aumentare la potenza di calcolo della macchina su cui si dovrà elaborare il datasets. Questo strategia è comunemente noto come \emph{\lq\lq scalabilità  verticale\rq\rq}. La seconda strategia  piuttosto che incrementare la potenza di calcolo di una macchina, incrementa il \emph{numero} di macchine per processare il dataset, ed è nota come \emph{\lq\lq scalabilità  orizzontale\rq\rq}.
+Negli ultimi anni la seconda strategia ha avuto una forte crescita, divenendo una delle scelte più diffuse per elaborare grandi dataset. Aumentare la potenza di calcolo di una singola macchina è molto costoso, ed inoltre vi è un limite superiore che non è possibile valicare. D'altra parte, la diminuzione dei costi e all'aumento delle prestazioni di workstation, sono stati dei fattori trainanti nella crescita di soluzioni di calcolo distribuito scalabili orizzontalmente. Oggi è possibile raggiungere quasi la stessa potenza di calcolo di un server dedicato (molto costoso), attraverso molte workstation (poco costose). 
+Inoltre, distribuire la computazione su più nodi rende molto più difficile gestire l'allocazione dei task. Idealmente quello che si vorrebbe ottenere, è che ogni task di elaborazione sia suddiviso in parti uguali sui vari nodi, in pratica però questa caratteristica è difficile da ottenere.
+Questa difficoltà deriva dal fatto che non sempre i dati sono disponibili su tutti i nodi di elaborazione, ma soprattutto dal fatto che non tutte le computazioni sono facilmente suddivisibili in parti uguali.
+Bisogna però considerare che, passare ad una soluzione scalabile orizzontalmente pone nuove sfide. Innanzitutto, all'aumentare del numero di nodi ci calcolo, aumenta anche la probabilità che su uno un nodo qualsiasi si abbia un guasto, rendendo molto più difficile assicurare che l'elaborazione dei dati sia \emph{affidabile}.
+
+ \subsection{Hadoop}
 Hadoop è stato uno dei primi sistemi open-source più popolari per processare i big data.
 \'E un sistema scalabile e fault-tolerant che consente di processare grandi dataset attraverso un cluster di server.  
 
@@ -65,7 +99,7 @@ Hadoop è composto da tre componenti principali: un cluster mananger (YARN), un 
 
  
  \subsubsection{Map Reduce}
- MapReduce è il modello di computazione distribuita fornito da Hadoop. Mentre HDFS fornisce un file system distribuito per memorizzare grandi dataset, MapReduce fornisce un framework di computazione che consente di processare grandi dataset in parallelo attraverso un cluster di computer (nodi). Questo modello astrae la computazione distribuita fornendo dei costrutti ad alto livello che consentono di sviluppare facilmente applicazioni distribuite.
+ MapReduce \cite{Dean:2004:MSD:1251254.1251264} è il modello di computazione distribuita fornito da Hadoop. Mentre HDFS fornisce un file system distribuito per memorizzare grandi dataset, MapReduce fornisce un framework di computazione che consente di processare grandi dataset in parallelo attraverso un cluster di computer (nodi). Questo modello astrae la computazione distribuita fornendo dei costrutti ad alto livello che consentono di sviluppare facilmente applicazioni distribuite.
  Il framework MapReduce schedula in maniera automatica l'esecuzione di un applicazione su un insieme di macchine in un cluster, prendendosi carico  della gestione della comunicazione fra nodi, del bilanciamento del carico di esecuzione fra i nodi e dei possibili guasti dei nodi.
 In questo modo, gli sviluppatori possono concentrarsi sulla logica di processing dei dati tralasciando questi dettagli.
 
@@ -75,14 +109,16 @@ La funzione \emph{map} riceve in input una coppia chiave-valore e restituisce a 
 I dati possono essere sia semi strutturati o non strutturati affatto, non è richiesto che i dati siano conformi ad uno schema rigido predefinito. L'unico requisito è che sia possibile esprimere il dataset in input come una serie di coppie chiave valore.
 Il modello MapReduce ha rivoluzionato il modo di processare grandi datasets, offrendo un modello semplice che consente di scrivere programmi che possono essere eseguiti in parallelo su molte macchine. Grazie a questo, Map-Reduce consente di ottenere una scalabilità orizzontale: all'aumentare della dimensione dei dati è possibile aggiungere nuove macchine mantenendo quasi invariato il tempo di esecuzione.
 \subsection{Apache Spark}
-Apache Spark \cite{Zaharia:2010:SCC:1863103.1863113} è una framework open-source che consente di processare grandi dataset in maniera distribuita.
+Apache Spark \footnote{http://spark.apache.org/} è una framework open-source che consente di processare grandi dataset in maniera distribuita.
 Spark può essere considerato come il successore del modello MapReduce di Hadoop, entrambi i framwork sono progettati per poter processare i big data.  Spark mantiene inalterata la scalabilità di MapReduce e la tolleranza ai guasti, e inoltre aggiunge nuove caratteristiche, offrendo inoltre ulteriori vantaggi rispetto a MapReduce. Primo fra questi è la velocità: Spark riesce a processare i dati riducendo  di molto i tempi di latenza (fino a 100 volte), poiché  consente ai nodi di processing di immagazzinare in memoria centrale i risultati intermedi, a differenza di MapReduce, dove invece erano serializzati sul file system.  La velocità può essere talvolta un fattore determinante. Impiegare troppo tempo per processare i dati, rallenta tutto il processo decisionale riducendo il valore stesso dei dati.
 La principale astrazione fornita da SPARK sono i \textbf{R}esilent \textbf{D}istributed \textbf{D}ataset (RDD) \cite{Zaharia:2012:RDD:2228298.2228301}, che essenzialmente sono una collezione immutabile e distribuita di oggetti. Questi oggetti sono, suddivisi in più partizioni che  generalmente sono distribuite su più nodi.
-Questa astrazione permette agli sviluppatori di materializzare i risultati intermedi della computazione  nella memoria dei vari nodi di processing. Ciò signfica che i prossimi step che vogliono riconsultare questi dati, non li dovranno rielaborare o ricaricare da disco.
-Per tale ragione, Spark si presta bene per eseguire in parallelo sia algoritmi altamente iterativi che richiedono di scansionare un dataset di input più volte, come gli algoritmi di machine-leanring.
 
-Questi RDD possono essere creati in due modi: o a partire da dati in un sistema di memorizzazione stabile\footnote{per stabile si intende fault-tolerant} (HDFS, Hive, Cassandra, ) o a partire da altri RDD. Queste operazioni, che creano RDD, sono dette \emph{trasformazioni}.
-
+Questi RDD possono essere creati in due modi: o a partire da dati in un sistema di memorizzazione stabile\footnote{per stabile si intende fault-tolerant} (HDFS, Hive, Cassandra, ) o a partire da altri RDD, mediante un insieme di operatori messi a disposizione dal framework come map, reduce, groupByKey etc. 
+Questo tipo di  operazioni, che creano RDD, sono dette \emph{trasformazioni}. In particoalre Spark offre due tipologie di operazioni:
+\begin{itemize}
+\item \textbf{Trasformazioni} operazioni che producono nuovi RDD a partire dau un rdd come \emph{map,filter,join}
+\item \textbf{Azioni}
+\end{itemize}
 Spark non materializza gli RDD dopo ogni operazione, ma invece memorizza per ogni RDD intermedio il suo \emph{lineage} ovvero la sequenza di trasformazioni che lo ha prodotto, a partire da un altro RDD. In tal modo SPARK nel caso vi sia un failure, può rielaborare un RDD in maniera del tutto trasparente.
  
 Architetturalmente, Spark è progettato per essere altamente accessibile: offre API per Python, Java, Scala, SQL e R. Inoltre si integra alla perfezione con strumenti di Big Data quali Hadoop (e strumenti che dipendono da esso come HBase, Hive, etc.) e Cassandra.
