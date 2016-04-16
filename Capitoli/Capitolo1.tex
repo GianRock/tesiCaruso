@@ -103,24 +103,40 @@ Hadoop è composto da tre componenti principali: un cluster mananger (YARN), un 
  Il framework MapReduce schedula in maniera automatica l'esecuzione di un applicazione su un insieme di macchine in un cluster, prendendosi carico  della gestione della comunicazione fra nodi, del bilanciamento del carico di esecuzione fra i nodi e dei possibili guasti dei nodi.
 In questo modo, gli sviluppatori possono concentrarsi sulla logica di processing dei dati tralasciando questi dettagli.
 
-Come suggerisce il nome stesso, questo modello si basa su due funzioni :\emph{map}   e \emph{reduce}. Tutti i carichi di lavoro in un appplicazione MapReduce sono espressi implementando queste due funzioni.
+
+
+ 
+
+Come suggerisce il nome stesso, questo modello si basa su due funzioni : \emph{map} e
+\emph{reduce}. Tutti i carichi di lavoro in un applicazione MapReduce sono espressi implementando queste due funzioni. 
+
+
+Tutti i carichi di lavoro in un applicazione MapReduce sono espressi implementando queste due funzioni.  
 La funzione \emph{map} riceve in input una coppia chiave-valore e restituisce a sua volta una insieme di  coppie chiave valore intermedie. Il framework MapReduce esegue la funzione map per ogni coppia chiave valore presente nel dataset di input. L'output delle funzioni Map, è ordinato e raggruppato in base ai valori di chiave intermedi, e costituirà l'input della funzione Reduce. La funzione \emph{Reduce} aggrega i risultati della funzione map, in base al valore di chiave intermedio.
+Fra la fase \emph{map} e la fase \emph{reduce}, vi è una fase intermedia detta \emph{shuffle} che consiste nel partizionare i dati in base al loro valore di chiave e indirizzarli al nodo reducer, ovvero il nodo su cui si dovrà eseguire la funzione \emph{reduce}.
 
 I dati possono essere sia semi strutturati o non strutturati affatto, non è richiesto che i dati siano conformi ad uno schema rigido predefinito. L'unico requisito è che sia possibile esprimere il dataset in input come una serie di coppie chiave valore.
 Il modello MapReduce ha rivoluzionato il modo di processare grandi datasets, offrendo un modello semplice che consente di scrivere programmi che possono essere eseguiti in parallelo su molte macchine. Grazie a questo, Map-Reduce consente di ottenere una scalabilità orizzontale: all'aumentare della dimensione dei dati è possibile aggiungere nuove macchine mantenendo quasi invariato il tempo di esecuzione.
 \subsection{Apache Spark}
+%Uno dei punti di forza del paradigma MapReduce, come abbiamo visto,  è quello di consentire all utente    di effettuare elaborazioni su larga scala senza che quest'ultimo di debba preoccupare di come distribuire la computazione sui vari nodi o come gestire i fallimenti di un nodo. Uno dei principiali svantaggi però di questo paradigma è dato dal fatto che non consente di implementare algoritmi che devono eseguire più iterazioni sugli stessi dati in maniera efficiente.
+%Questa inefficienza è dovuta al fatto che i risultati intermedi della computazione vengono serializzati su filesystem.
+
+
 Apache Spark \footnote{http://spark.apache.org/} è una framework open-source che consente di processare grandi dataset in maniera distribuita.
-Spark può essere considerato come il successore del modello MapReduce di Hadoop, entrambi i framwork sono progettati per poter processare i big data.  Spark mantiene inalterata la scalabilità di MapReduce e la tolleranza ai guasti, e inoltre aggiunge nuove caratteristiche, offrendo inoltre ulteriori vantaggi rispetto a MapReduce. Primo fra questi è la velocità: Spark riesce a processare i dati riducendo  di molto i tempi di latenza (fino a 100 volte), poiché  consente ai nodi di processing di immagazzinare in memoria centrale i risultati intermedi, a differenza di MapReduce, dove invece erano serializzati sul file system.  La velocità può essere talvolta un fattore determinante. Impiegare troppo tempo per processare i dati, rallenta tutto il processo decisionale riducendo il valore stesso dei dati.
+Spark può essere considerato come il successore del modello MapReduce di Hadoop, entrambi i framwork sono progettati per poter processare i big data.  Spark mantiene inalterata la scalabilità di MapReduce e la tolleranza ai guasti, e inoltre aggiunge nuove caratteristiche, offrendo inoltre ulteriori vantaggi rispetto a MapReduce. Primo fra questi è la velocità: Spark riesce a processare i dati riducendo  di molto i tempi di latenza (fino a 100 volte), poiché  consente ai nodi di processing di immagazzinare in memoria centrale i risultati intermedi, a differenza di MapReduce, dove invece erano serializzati sul file system.  
+
+
+
+La velocità può essere talvolta un fattore determinante. Impiegare troppo tempo per processare i dati, rallenta tutto il processo decisionale riducendo il valore stesso dei dati.
 La principale astrazione fornita da SPARK sono i \textbf{R}esilent \textbf{D}istributed \textbf{D}ataset (RDD) \cite{Zaharia:2012:RDD:2228298.2228301}, che essenzialmente sono una collezione immutabile e distribuita di oggetti. Questi oggetti sono, suddivisi in più partizioni che  generalmente sono distribuite su più nodi.
 
-Questi RDD possono essere creati in due modi: o a partire da dati in un sistema di memorizzazione stabile\footnote{per stabile si intende fault-tolerant} (HDFS, Hive, Cassandra, ) o a partire da altri RDD, mediante un insieme di operatori messi a disposizione dal framework come map, reduce, groupByKey etc. 
-Questo tipo di  operazioni, che creano RDD, sono dette \emph{trasformazioni}. In particoalre Spark offre due tipologie di operazioni:
-\begin{itemize}
-\item \textbf{Trasformazioni} operazioni che producono nuovi RDD a partire dau un rdd come \emph{map,filter,join}
-\item \textbf{Azioni}
-\end{itemize}
-Spark non materializza gli RDD dopo ogni operazione, ma invece memorizza per ogni RDD intermedio il suo \emph{lineage} ovvero la sequenza di trasformazioni che lo ha prodotto, a partire da un altro RDD. In tal modo SPARK nel caso vi sia un failure, può rielaborare un RDD in maniera del tutto trasparente.
- 
+Questa astrazione permette agli sviluppatori di materializzare i risultati intermedi della computazione nella memoria dei vari nodi di processing. Ciò significa che i prossimi step che vogliono riconsultare questi dati, non li dovranno rielaborare o ricaricare da
+disco. Per tale ragione, Spark  si presta bene per eseguire in parallelo sia algoritmi altamente iterativi che richiedono di scansionare un dataset di input
+più volte, come gli algoritmi di machine-leanring.
+
+
+
+
 Architetturalmente, Spark è progettato per essere altamente accessibile: offre API per Python, Java, Scala, SQL e R. Inoltre si integra alla perfezione con strumenti di Big Data quali Hadoop (e strumenti che dipendono da esso come HBase, Hive, etc.) e Cassandra.
 
 
@@ -147,7 +163,32 @@ La figura \ref{fig:sparkstack} mostra le principali componenti di Apache Spark:
 \item \textbf{GraphX}: libreria per la manipolazione ed estrazione di conoscenza in grafi.
 \end{itemize}
 
-\subsection{Modello di esecuzione}
+\subsection{Resilent Distribuited Dataset}
+
+Questi RDD possono essere creati in due modi: o a partire da dati in un sistema di memorizzazione stabile\footnote{per stabile si intende fault-tolerant} (HDFS, Hive, Cassandra, ) o a partire da altri RDD, mediante un insieme di operatori messi a disposizione dal framework come map, reduce, groupByKey etc. 
+Questo tipo di  operazioni, che creano RDD, sono dette \emph{trasformazioni}. In particolare Spark offre due tipologie di operazioni:
+\begin{itemize}
+\item \textbf{Trasformazioni} operazioni che producono nuovi RDD a partire da un rdd come \emph{map,filter,join}
+\item \textbf{Azioni} queste operazioni invece restituiscono un valore al program-
+ma Driver, dopo aver valutato una o più trasformazioni su un RDD.
+\end{itemize}
+A differenza di altri approcci di distribuzione dei dati che replicano i dati su più nodi, in spark per ogni RDD viene memorizzato il suo \emph{lineage} ovvero la sequenza di trasformazioni che lo ha prodotto, a partire da un altro RDD. In tal modo SPARK nel caso vi sia un failure, può rielaborare un RDD in maniera del tutto trasparente.
+ 
+Gli RDD posssono contenere qualsiasi tipo di oggetti \footnote{poiche Spark `e eseguito su una JVM, questi elementi sono oggetti JAVA} , che sono suddivisi in
+partizioni in maniera automatica lungo il cluster. Questi oggetti una volta
+creati, sono immutabili e possono essere creati solo tramite gli operatori
+di Spark.
+Ad esempio dato un RDD di coppie \texttt{(visitID,URL)} contenente le visiste di
+alcuni siti internet, è possibile ottenere un nuovo RDD contenente per ciascun
+sito il numero di visite ricevute \texttt{(URL,count)}, applicando l’operatore map
+trasformando ogni coppia iniziale \texttt{(visitID,URL)} in una coppia \texttt{(URL,1)} e
+poi applicando l'operatore \emph{reduce} per ottenere il numero di visite per ciascun sito.
+
+In seguito è mostrato un frammento di codice in scala per ottenere tale
+risultato:\\
+\texttt{visits=spark.hadoopFile("hdfs://....")}\\
+\texttt{val counts=visit.map(v=>(v.url,1)).reduceByKey( + )}\\
+
 Una applicazione Spark consiste in un processo \textit{driver} e di un insieme di processi \textit{executors} distribuiti sui nodi del cluster (worker nodes) .
 
 Il processo (nodo)   driver dovrà gestire:
@@ -160,11 +201,11 @@ Il processo (nodo)   driver dovrà gestire:
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]{cluster-ov.png}
-\caption{componentiDiUnClusterSpark}
+\caption{componenti Di Un Cluster in Spark}
 \label{fig:sparkClusterComponents}
 \end{figure} 
  
-I processi \lq\lq executor\rq\rq sono responsabili dell'esecuzione dei work in forma di \textit{tasks} e di memorizzare qualsiasi tipo di dato che l'utente sceglie di mantenere in cache. 
+I processi \lq\lq executor\rq\rq sono responsabili dell'esecuzione dei work in forma di \textit{tasks} e di memorizzare qualsiasi tipo di dato che l'utente sceglie di materializzare. 
 
 In cima al modello di esecuzione vi sono i \textit{jobs}: l'invocazione di una azione all'interno di una applicazione Spark provoca l'esecuzione di uno Spark job in grado di soddisfare la richiesta. Spark esamina il grafo degli RDD dal quale l'zione dipende e produce un piano di esecuzione che inizia computando le risorse (gli RDD) in ordine di dipendenza, culminando con l'RDD che produrrà i risultati dell'azione.
  
