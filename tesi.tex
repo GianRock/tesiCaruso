@@ -23,9 +23,13 @@
 \usepackage{wrapfig}
 \usepackage{caption}
 \usepackage{subcaption}
+ \usepackage[inline]{enumitem}
 %\newcommand{\algorithmiccomment}[1]{  //\emph{\textcolor{Gray}{#1}}}
 
-
+\newlist{inlinelist}{enumerate*}{1}
+\setlist*[inlinelist,1]{%
+  label=(\roman*),
+}
 % Sistema i margini per lasciare più spazio nella zona di rilegatura
 \addtolength{\oddsidemargin}{+1,0cm} 
 \addtolength{\evensidemargin}{+1,0cm} 

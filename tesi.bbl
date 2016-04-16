@@ -51,6 +51,13 @@ Joachim Daiber, Max Jakob, Chris Hokamp, and Pablo~N. Mendes.
 \newblock In {\em Proceedings of the 9th International Conference on Semantic
   Systems (I-Semantics)}, 2013.
 
+\bibitem{Dean:2004:MSD:1251254.1251264}
+Jeffrey Dean and Sanjay Ghemawat.
+\newblock Mapreduce: Simplified data processing on large clusters.
+\newblock In {\em Proceedings of the 6th Conference on Symposium on Opearting
+  Systems Design \& Implementation - Volume 6}, OSDI'04, pages 10--10,
+  Berkeley, CA, USA, 2004. USENIX Association.
+
 \bibitem{GateModelTagger}
 Leon Derczynski, Alan Ritter, Sam Clark, and Kalina Bontcheva.
 \newblock Twitter part-of-speech tagging for all: Overcoming sparse and noisy

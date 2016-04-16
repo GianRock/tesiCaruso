@@ -41,7 +41,7 @@ Come già detto in precendenza, Twitter è il servizio di micro-blogging più ut
 Dalla sua creazione nel 2006, Twitter ottenne rapidamente una popolarità su larga scala 
 La funzione principale di Twitter è quella di permettere agli utenti di scrivere e leggere brevi messaggi (max 140 caratteri) noti come \emph{tweets}.
 
-Gli utenti possono \lq\lq twittare \rq\rq attraverso il sito di twitter o tramite applicazioni per smart-phones e persino tramite sms. 
+Gli utenti possono \lq\lq twittare\rq\rq attraverso il sito di twitter o tramite applicazioni per smart-phones e persino tramite sms. 
 Twitter oltre ad essere un servizio di micro-blogging, è un social-network, ma ha una caratteristica che lo contraddistingue dai più noti come Facebook, Gooogle+ : è 
 asimmetrico. Un utente infatti, può seguire (\emph{follow}) lo stream dei tweet generati da un altro utente, senza che quest'ultimo approvi o faccia altrettanto. 
 Quando un utente scrive un tweet, questo viene automaticamente viene inviato in broadcast alla rete dei suoi \emph{followers}.
@@ -122,6 +122,10 @@ Il modello MapReduce ha rivoluzionato il modo di processare grandi datasets, off
 %Questa inefficienza è dovuta al fatto che i risultati intermedi della computazione vengono serializzati su filesystem.
 
 
+
+
+
+
 Apache Spark \footnote{http://spark.apache.org/} è una framework open-source che consente di processare grandi dataset in maniera distribuita.
 Spark può essere considerato come il successore del modello MapReduce di Hadoop, entrambi i framwork sono progettati per poter processare i big data.  Spark mantiene inalterata la scalabilità di MapReduce e la tolleranza ai guasti, e inoltre aggiunge nuove caratteristiche, offrendo inoltre ulteriori vantaggi rispetto a MapReduce. Primo fra questi è la velocità: Spark riesce a processare i dati riducendo  di molto i tempi di latenza (fino a 100 volte), poiché  consente ai nodi di processing di immagazzinare in memoria centrale i risultati intermedi, a differenza di MapReduce, dove invece erano serializzati sul file system.  
 
@@ -132,7 +136,7 @@ La principale astrazione fornita da SPARK sono i \textbf{R}esilent \textbf{D}ist
 
 Questa astrazione permette agli sviluppatori di materializzare i risultati intermedi della computazione nella memoria dei vari nodi di processing. Ciò significa che i prossimi step che vogliono riconsultare questi dati, non li dovranno rielaborare o ricaricare da
 disco. Per tale ragione, Spark  si presta bene per eseguire in parallelo sia algoritmi altamente iterativi che richiedono di scansionare un dataset di input
-più volte, come gli algoritmi di machine-leanring.
+più volte, come gli algoritmi di machine-learning come   PageRank, K-means clustering, e logistic regression.
 
 
 
@@ -164,9 +168,19 @@ La figura \ref{fig:sparkstack} mostra le principali componenti di Apache Spark:
 \end{itemize}
 
 \subsection{Resilent Distribuited Dataset}
-
+Formalmente un RDD è una collezione di oggetti immutabile e partizionata.
 Questi RDD possono essere creati in due modi: o a partire da dati in un sistema di memorizzazione stabile\footnote{per stabile si intende fault-tolerant} (HDFS, Hive, Cassandra, ) o a partire da altri RDD, mediante un insieme di operatori messi a disposizione dal framework come map, reduce, groupByKey etc. 
-Questo tipo di  operazioni, che creano RDD, sono dette \emph{trasformazioni}. In particolare Spark offre due tipologie di operazioni:
+Questo tipo di  operazioni, che creano RDD, sono dette \emph{trasformazioni}.
+Un utente può controllare due aspetti fondamentali di un RDD: 
+\begin{inlinelist}
+  \item la loro persistenza,
+  \item e può controllare il loro partizionamento
+  
+\end{inlinelist}
+Se si ha intenzione di riutilizzare i dati in più step, l'utente può decidere di memorizzarlo nella cache dei nodi di processing, in modo tale che non venga  rielaborato. Inoltre è possibile che gli elementi di un RDD siano partizionati lungo le macchine nel cluster, in base al valore chiave di ciascun record.
+Come vedremo in seguito questo meccanismo è molto utile per diminuire lo spostamento dei dati lungo la rete.
+
+  Spark offre due tipologie di operazioni:
 \begin{itemize}
 \item \textbf{Trasformazioni} operazioni che producono nuovi RDD a partire da un rdd come \emph{map,filter,join}
 \item \textbf{Azioni} queste operazioni invece restituiscono un valore al program-
@@ -174,7 +188,7 @@ ma Driver, dopo aver valutato una o più trasformazioni su un RDD.
 \end{itemize}
 A differenza di altri approcci di distribuzione dei dati che replicano i dati su più nodi, in spark per ogni RDD viene memorizzato il suo \emph{lineage} ovvero la sequenza di trasformazioni che lo ha prodotto, a partire da un altro RDD. In tal modo SPARK nel caso vi sia un failure, può rielaborare un RDD in maniera del tutto trasparente.
  
-Gli RDD posssono contenere qualsiasi tipo di oggetti \footnote{poiche Spark `e eseguito su una JVM, questi elementi sono oggetti JAVA} , che sono suddivisi in
+Gli RDD posssono contenere qualsiasi tipo di oggetti \footnote{poiche Spark è eseguito su una JVM, questi elementi sono oggetti JAVA} , che sono suddivisi in
 partizioni in maniera automatica lungo il cluster. Questi oggetti una volta
 creati, sono immutabili e possono essere creati solo tramite gli operatori
 di Spark.
@@ -190,6 +204,19 @@ risultato:\\
 \texttt{val counts=visit.map(v=>(v.url,1)).reduceByKey( + )}\\
 
 Una applicazione Spark consiste in un processo \textit{driver} e di un insieme di processi \textit{executors} distribuiti sui nodi del cluster (worker nodes) .
+\begin{figure}[htbp]
+    \makebox[\textwidth]{
+        \includegraphics[width=0.7\textwidth]{sparkRDDexample.png}
+    }
+    \caption{Esempio di lineage Graph: Gli ovali rappresentano gli RDD, i pallini le partizioni}
+    \label{fig:lineageRDD}
+\end{figure}
+
+La figura \ref{fig:lineageRDD} mostra il lineage-graph degli rdd in esempio. Se
+viene persa una partizione dell'RDD \texttt{(URL,1)} sarà possibile ricalcolarla
+rieseguendo l'operatore map, sulla corrispondente partizione.
+
+
 
 Il processo (nodo)   driver dovrà gestire:
 \begin{itemize}
