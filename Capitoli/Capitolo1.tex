@@ -251,42 +251,30 @@ ogni partizione del RDD padre è usata al più da una partizione del RDD figlio 
  \item \textbf{wide}  dove ogni partizione del figlio può dipendere da ciascuna partizione del nodo padre. Ciò implica che i dati saranno inviati lungo la rete attraverso un'operazione di shuffle dei dati.(e.g:reduceByKey(), join(), groupByKey()), a meno chè i parent RDD siano stati partizionati in base al valore di chiave.(hash-partitioned)
 \end{itemize}
 
-  
-Questa distinzione è fondamentale in quanto le \emph{narrow} consetono a Spark di raggurppare le computazioni sui nodi worker.
-Mentre nel caso di dipendenze di tipo wide è necessario che tutte le partizioni del parent rdd siano state elaborate su tutti i nodi, e verranno inviate lungo la rete attraverso delle operazioni di shuffle.
-Inoltre per le dipendenze di tipo \emph{narrow} è molto più semplice rielaborare dei dati in caso di failure di un nodo, poichè verranno ricalcolate le sole partizioni del nodo dove è avvenuto il guasto; al contrario nel caso di \emph{wide-dependencies} bisognerà rielaborare tutte le partizioni.
- 
- 
- 
- \begin{figure}[h]
+   \begin{figure}[h]
 \centering
 \includegraphics[width=1.0\textwidth]{dipendenze.png}
 \caption{Esempi di dipendenze wide e narrow. ogni contenitore rappresenta un RDD, i rettangoli le partizioni}
+\label{fig:exPlanSPark}
+\end{figure} 
+Questa distinzione è fondamentale in quanto le \emph{narrow} consetono a Spark di raggruppare le computazioni sui nodi worker.
+Mentre nel caso di dipendenze di tipo wide è necessario che tutte le partizioni del parent rdd siano state elaborate su tutti i nodi, e verranno inviate lungo la rete attraverso delle operazioni di shuffle.
+Inoltre per le dipendenze di tipo \emph{narrow} è molto più semplice rielaborare dei dati in caso di failure di un nodo, poiché verranno ricalcolate le sole partizioni del nodo dove è avvenuto il guasto; al contrario nel caso di \emph{wide-dependencies} bisognerà rielaborare tutte le partizioni.
+Lo scheduler dei task di Spark si avvale di queste distinzioni per ottimizzare la computazione.
+Quando viene invocata una \emph{action} su un RDD, lo scheduler esamina il grafo delle dipendenze del RDD in questione per costruire un piano di esecuzione espresso come un grafo diretto aciclico di stage. Lo scheduler cerca di accorpare il maggior numero possibile di  dipendenze di tipo narrow in ciascuno stage.
+Ai bordi di ciascuno stage, come è possibile osservare in figura \ref{fig:exPlanSPark} vengono postele operazioni di \emph{shuffle} richieste per le dipendenze di tipo wide, o quelle partizioni che sono state poste in memoria cache. Lo scheduler cerca di allocare  \emph{task} seguendo il principio della \lq\lq località dei dati\rq\rq in modo tale ad minimizzare la comunicazione fra i vari nodi.
+
+
+ 
+ 
+    \begin{figure}[h]
+\centering
+\includegraphics[width=1.0\textwidth]{executionPlan.png}
+\caption{Esempio di un piano di esecuzione}
 \label{fig:sparkDependencies}
 \end{figure} 
 
-Un applicazione Spark si compone di un programma \textit{driver}
-Una applicazione Spark consiste in un processo \textit{driver} e di un insieme di processi \textit{executors} distribuiti sui nodi del cluster (worker nodes) .
-
-Il processo (nodo)   driver dovrà gestire:
-\begin{itemize}
-\item interazione con l'utente;
-\item coordinare e distribuire il flusso di controllo.
-\end{itemize}
-
-
  
-I processi \lq\lq executor\rq\rq sono responsabili dell'esecuzione dei work in forma di \textit{tasks} e di memorizzare qualsiasi tipo di dato che l'utente sceglie di materializzare. 
-
-In cima al modello di esecuzione vi sono i \textit{jobs}: l'invocazione di una azione all'interno di una applicazione Spark provoca l'esecuzione di uno Spark job in grado di soddisfare la richiesta. Spark esamina il grafo degli RDD dal quale l'zione dipende e produce un piano di esecuzione che inizia computando le risorse (gli RDD) in ordine di dipendenza, culminando con l'RDD che produrrà i risultati dell'azione.
- 
-
-Il piano di esecuzione consiste nell'assemblare trasformazioni di jobs in \textit{stages}. Uno stage corrisponde a una collezione di \textit{tasks} che eseguono simultaneamente lo stesso codice su una differenze partizione dei dati: ciascuno stage contiene una sequenza di trasformazioni che possono essere completati senza rimescolare i dati.
-
-Quest'ultimo aspetto inficia fortemente le performance dell'applicazione. Una partizione di dati subisce un processo denominato "shuffling"  quando vengono effettuate trasformazioni \textit{narrow}, ad esempio una \textit{map}.
-
-Il trasferimento dei dati fra i nodi del cluster avviene mediante un meccanismo di serializzazione: dopo questo processo, i dati vengono memorizzati in una cache e trasferiti in rete per uno shuffling. Spark prevede due meccanismi di serializzazione: l'approccio classico (utilizzando le API Java disponibile a partire dall'interfaccia \textit{java.io.Serializable}) e mediante la libreria \textit{Kryo}. Quest'ultima prevede un formato molto più compatto in grado di svolgere le operazioni in maniera più rapida.
-
 
 \section{DBpedia}
 Wikipedia \footnote{https://en.wikipedia.org/} è divenuta una delle maggiori risorse di conoscenza disponibili nel web, ed è manutenuta da migliaia di utenti (collaboratori). Gli articoli Wikipedia sebbene composti prevalentemente da testo, contengono informazioni semi-strutturate come: template infobox , informazioni sulla categorizzazione dell'articolo, immagini, geo-coordinate e link sia verso altre pagine web sia verso altre pagine wikipedia.
