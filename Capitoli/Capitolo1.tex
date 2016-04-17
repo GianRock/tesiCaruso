@@ -170,22 +170,30 @@ La figura \ref{fig:sparkstack} mostra le principali componenti di Apache Spark:
 \subsection{Resilent Distribuited Dataset}
 Formalmente un RDD è una collezione di oggetti immutabile e partizionata.
 Questi RDD possono essere creati in due modi: o a partire da dati in un sistema di memorizzazione stabile\footnote{per stabile si intende fault-tolerant} (HDFS, Hive, Cassandra, ) o a partire da altri RDD, mediante un insieme di operatori messi a disposizione dal framework come map, reduce, groupByKey etc. 
-Questo tipo di  operazioni, che creano RDD, sono dette \emph{trasformazioni}.
-Un utente può controllare due aspetti fondamentali di un RDD: 
-\begin{inlinelist}
-  \item la loro persistenza,
-  \item e può controllare il loro partizionamento
-  
-\end{inlinelist}
-Se si ha intenzione di riutilizzare i dati in più step, l'utente può decidere di memorizzarlo nella cache dei nodi di processing, in modo tale che non venga  rielaborato. Inoltre è possibile che gli elementi di un RDD siano partizionati lungo le macchine nel cluster, in base al valore chiave di ciascun record.
-Come vedremo in seguito questo meccanismo è molto utile per diminuire lo spostamento dei dati lungo la rete.
-
-  Spark offre due tipologie di operazioni:
+Questo tipo di  operazioni, che creano RDD, sono dette \emph{trasformazioni}. Spark offre due tipologie di operazioni:
 \begin{itemize}
 \item \textbf{Trasformazioni} operazioni che producono nuovi RDD a partire da un rdd come \emph{map,filter,join}
-\item \textbf{Azioni} queste operazioni invece restituiscono un valore al program-
-ma Driver, dopo aver valutato una o più trasformazioni su un RDD.
+\item \textbf{Azioni} queste operazioni invece restituiscono un valore all'applicazione o esportano i dati presenti nell'RDD in un sistema di memorizzazione.
+Alcuni esempi di \emph{action} sono \emph{count} (che restituisce il numero di elementi nel dataset), \emph{collect} (che restituisce tutti gli elementi stessi, e \emph{save} che  memorizza il dataset su un dispositivo di memorizzazione.
 \end{itemize}
+Bisogna sottolineare che in Spark gli RDD  sono valutati in maniera pigra \emph{(lazy evaluated)} ovvero sono computati solo la prima volta che sono utilizzati in una azione.
+ 
+
+I programmatori possono controllare inoltre due aspetti fondamentali di un RDD: 
+\begin{inlinelist}
+  \item caching,
+  \item partitioning.
+\end{inlinelist}
+ Un utente, se  ha intenzione di riutilizzare i dati in più step, può richiedere che un RDD sia conservato in memoria cache, in tal caso verranno memorizzate nella memoria dei nodi di processing le partizioni dell'RDD.  Se  non vi è memoria sufficiente per memorizzare una qualche partizione dell'RDD, questa verrà scritta su disco.
+Se si ha intenzione di riutilizzare i dati in più step, l'utente può decidere di memorizzarlo nella cache dei nodi di processing, in modo tale che non venga  rielaborato. 
+
+ 
+
+Inoltre è possibile che gli elementi di un RDD siano partizionati lungo le macchine nel cluster, in base al valore chiave di ciascun record. Ad esempio è possibile richiedere che due RDD siano (hash) partizionati nello stesso modo, facendo sì che i record con la stessa chiave siano sulla medesima macchina, in questo modo operazioni come un join fra due rdd 
+saranno molto più veloci poiché i dati non dovranno essere spostati lungo la rete.
+ 
+  
+  
 A differenza di altri approcci di distribuzione dei dati che replicano i dati su più nodi, in spark per ogni RDD viene memorizzato il suo \emph{lineage} ovvero la sequenza di trasformazioni che lo ha prodotto, a partire da un altro RDD. In tal modo SPARK nel caso vi sia un failure, può rielaborare un RDD in maniera del tutto trasparente.
  
 Gli RDD posssono contenere qualsiasi tipo di oggetti \footnote{poiche Spark è eseguito su una JVM, questi elementi sono oggetti JAVA} , che sono suddivisi in
@@ -203,7 +211,7 @@ risultato:\\
 \texttt{visits=spark.hadoopFile("hdfs://....")}\\
 \texttt{val counts=visit.map(v=>(v.url,1)).reduceByKey( + )}\\
 
-Una applicazione Spark consiste in un processo \textit{driver} e di un insieme di processi \textit{executors} distribuiti sui nodi del cluster (worker nodes) .
+
 \begin{figure}[htbp]
     \makebox[\textwidth]{
         \includegraphics[width=0.7\textwidth]{sparkRDDexample.png}
@@ -216,7 +224,49 @@ La figura \ref{fig:lineageRDD} mostra il lineage-graph degli rdd in esempio. Se
 viene persa una partizione dell'RDD \texttt{(URL,1)} sarà possibile ricalcolarla
 rieseguendo l'operatore map, sulla corrispondente partizione.
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{cluster-ov.png}
+\caption{componenti Di Un Cluster in Spark}
+\label{fig:sparkClusterComponents}
+\end{figure} 
 
+ Al fine di utilizzare le funzionalità di Spark, uno sviluppatore deve fornire un programma \emph{driver} che si connette ad un cluster di nodi \emph{worker} su cui verranno eseguiti i processi \emph{Executor}  come mostrato in figura \ref{fig:sparkClusterComponents}.
+ Nel programma driver saranno definiti uno o più RDD che saranno valutati solo alla prima occorrenza di \emph{action} su di essi. Su ciascun nodo worker sarà possibile memorizzare in memoria RAM le partizioni degli RDD, che sono rappresentate come oggetti JAVA.
+Gli   stessi RDD sono rappresentati come  oggetti tipizzati staticamente con un parametro di tipo ,ad esempio ,
+\texttt{RDD[Int]} rappresenta un dataset di interi.  
+
+In particolare   ogni RDD è descritto da  
+\begin{inlinelist}
+  \item un insieme di partizioni (componenti atomiche di un dataset);
+  \item un insieme di dipendenze (che definiscono il suo \emph{lineage};
+  \item dei metatdati riguardanti lo schema di partizionamento e il posizionamento dei dati lungo il cluster.
+\end{inlinelist}
+Ad esempio, un RDD generato a partire da un file HDFS, avrà una partizione  in corrispondenza di ciascun blocco del file, e i saprà su quale nodo è memorizzato ciascun blocco.
+Sebbene in Spark  cerca di eseguire il codice il più vicino possibile ai dati, per evitare spostamenti dei dati lungo la rete (\emph{shuffle}, talvolta questi spostamenti sono inevitabili.
+Le dipendenze in Spark  sono categorizzate in
+\begin{itemize}
+\item \textbf{narrow}  
+ogni partizione del RDD padre è usata al più da una partizione del RDD figlio \footnote{un RDD generato a partire da un altro RDD attraverso una trasformazione}. Ciò significa che le partizioni possono essere calcolate localmente su ogni nodo worker, senza generare shuffle dei dati. (e.g: map(), filter()..) 
+ \item \textbf{wide}  dove ogni partizione del figlio può dipendere da ciascuna partizione del nodo padre. Ciò implica che i dati saranno inviati lungo la rete attraverso un'operazione di shuffle dei dati.(e.g:reduceByKey(), join(), groupByKey()), a meno chè i parent RDD siano stati partizionati in base al valore di chiave.(hash-partitioned)
+\end{itemize}
+
+  
+Questa distinzione è fondamentale in quanto le \emph{narrow} consetono a Spark di raggurppare le computazioni sui nodi worker.
+Mentre nel caso di dipendenze di tipo wide è necessario che tutte le partizioni del parent rdd siano state elaborate su tutti i nodi, e verranno inviate lungo la rete attraverso delle operazioni di shuffle.
+Inoltre per le dipendenze di tipo \emph{narrow} è molto più semplice rielaborare dei dati in caso di failure di un nodo, poichè verranno ricalcolate le sole partizioni del nodo dove è avvenuto il guasto; al contrario nel caso di \emph{wide-dependencies} bisognerà rielaborare tutte le partizioni.
+ 
+ 
+ 
+ \begin{figure}[h]
+\centering
+\includegraphics[width=1.0\textwidth]{dipendenze.png}
+\caption{Esempi di dipendenze wide e narrow. ogni contenitore rappresenta un RDD, i rettangoli le partizioni}
+\label{fig:sparkDependencies}
+\end{figure} 
+
+Un applicazione Spark si compone di un programma \textit{driver}
+Una applicazione Spark consiste in un processo \textit{driver} e di un insieme di processi \textit{executors} distribuiti sui nodi del cluster (worker nodes) .
 
 Il processo (nodo)   driver dovrà gestire:
 \begin{itemize}
@@ -225,12 +275,6 @@ Il processo (nodo)   driver dovrà gestire:
 \end{itemize}
 
 
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.8\textwidth]{cluster-ov.png}
-\caption{componenti Di Un Cluster in Spark}
-\label{fig:sparkClusterComponents}
-\end{figure} 
  
 I processi \lq\lq executor\rq\rq sono responsabili dell'esecuzione dei work in forma di \textit{tasks} e di memorizzare qualsiasi tipo di dato che l'utente sceglie di materializzare. 
 
