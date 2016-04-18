@@ -167,7 +167,7 @@ La figura \ref{fig:sparkstack} mostra le principali componenti di Apache Spark:
 \item \textbf{GraphX}: libreria per la manipolazione ed estrazione di conoscenza in grafi.
 \end{itemize}
 
-\subsection{Resilent Distribuited Dataset}
+\subsubsection{Resilent Distribuited Dataset}
 Formalmente un RDD è una collezione di oggetti immutabile e partizionata.
 Questi RDD possono essere creati in due modi: o a partire da dati in un sistema di memorizzazione stabile\footnote{per stabile si intende fault-tolerant} (HDFS, Hive, Cassandra, ) o a partire da altri RDD, mediante un insieme di operatori messi a disposizione dal framework come map, reduce, groupByKey etc. 
 Questo tipo di  operazioni, che creano RDD, sono dette \emph{trasformazioni}. Spark offre due tipologie di operazioni:
